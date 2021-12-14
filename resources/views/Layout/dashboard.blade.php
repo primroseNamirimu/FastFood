@@ -22,11 +22,12 @@
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <link href="{{ url('plugins/bower_components/chartist/dist/chartist.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url('plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}">
 
     <!-- Custom CSS -->
-    <link href="css/style.min.css" rel="stylesheet">
+   
+    <link href="{{ url('css/style.min.css') }}" rel="stylesheet">
 
  
 </head>
@@ -64,13 +65,13 @@
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!-- Dark Logo icon -->
-                            <img src="plugins/images/logo-icon.png" alt="homepage" />
+                            <img src="{{ url ('plugins/images/logo-icon.png') }}" alt="homepage" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="plugins/images/logo-text.png" alt="homepage" />
+                            <img src="{{ url('plugins/images/logo-text.png') }}" alt="homepage" />
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -109,7 +110,7 @@
                         <li> 
                             <div>
                             <a class="profile-pic" href="{{ route('profile') }}">
-                                <img src="plugins/images/users/varun.jpg" alt="user-img" width="36"
+                                <img src="{{ url ('plugins/images/users/varun.jpg') }}" alt="user-img" width="36"
                                     class="img-circle"><span class="text-white font-medium">{{ Auth::user()->username }}
                             </a>
 
@@ -166,7 +167,7 @@
                         @endif
                         @if(Auth::user()->is_admin==1)
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('profile') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin-actions.index') }}"
                                 aria-expanded="false">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 <span class="hide-menu">User Profiles</span>
@@ -286,23 +287,23 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="{{ url ('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/app-style-switcher.js"></script>
-    <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <script src="{{ url ('bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url ('js/app-style-switcher.js') }}"></script>
+    <script src="{{ url ('plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
     <!--Wave Effects -->
-    <script src="js/waves.js"></script>
+    <script src="{{ url ('js/waves.js') }}"></script>
     <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
+    <script src="{{ url ('js/sidebarmenu.js') }}"></script>
     <!--Custom JavaScript -->
-    <script src="js/custom.js"></script>
+    <script src="{{ url ('js/custom.js') }}"></script>
     
     <!--This page JavaScript -->
     <!--chartis chart-->
-    <script src="plugins/bower_components/chartist/dist/chartist.min.js"></script>
-    <script src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="js/pages/dashboards/dashboard1.js"></script>
+    <script src="{{ url ('plugins/bower_components/chartist/dist/chartist.min.js') }}"></script>
+    <script src="{{ url ('plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
+    <script src="{{ url ('js/pages/dashboards/dashboard1.js') }}"></script>
 </body>
 
 </html>

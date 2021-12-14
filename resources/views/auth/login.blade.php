@@ -10,6 +10,8 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+                {{ Auth::logout() }}
+           
                         @if(Session::has('fail'))
                         <div class="alert alert-danger">{{Session::get('fail')}}
                         </div>

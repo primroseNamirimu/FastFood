@@ -30,8 +30,8 @@
         <table class="table table-bordered table-hover table-striped mt-4" id="table_id" >
           <thead>
             <tr>
-              <th>First NAME</th>
-                    
+              <th>NAME</th>
+         
               <th>TOTAL</th>             
               <th>DATE</th>
               <th>Action</th>
@@ -43,7 +43,8 @@
       
          <tr data-index={{ $item->order_id }} data-firstName={{ $item->firstname }}>
             
-          <td> {{ $item->firstname }}</td>
+          <td>{{ $item->firstname }}</td>
+       
           <td>{{ $item->total }}</td>
           <td>{{ $item->created_at }}</td>
           {{-- <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -52,14 +53,7 @@
           <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">More</button></td> 
       </tr>
       @endforeach
-              {{-- @foreach ($query as $item)
-              <tr>
-                <td>{{ $item->firstname }}</td> 
-                <td>{{ $item->order_id }}</td>               
-                <td>{{ $item->total }}</td>       
-                <td>{{ $item->created_at }}</td>
-             </tr>
-              @endforeach --}}
+            
           </tbody>
         </table>
       </div>
@@ -68,23 +62,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -130,7 +108,7 @@
 
 <script>
   $(document).ready(function() {
- 
+  $.noConflict();
      //DATA TABLES
      var reportTable = $('#table_id');
             var reportDataTable = $('#table_id').DataTable({
@@ -143,6 +121,7 @@
     // Date range picker
     var startDate = "";
     var endDate = "";
+    $('#date').daterangepicker();
     $('#date').on('apply.daterangepicker', function(ev, picker) {
       $(this).val(picker.startDate.format('YYYY-MM-DD ' ) + ' to ' + picker.endDate.format('YYYY-MM-DD '));
     });
@@ -206,6 +185,7 @@
    //  <!-- Order details button -->
 
    $(document).on( 'click', 'button', function () {
+  
         //var data = table.row( $(this).parents('tr') ).data();
         const orderID = $(this).closest('tr').attr('data-index')
         const firstname = $(this).closest('tr').attr('data-firstname')

@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+//namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\food;
@@ -8,6 +9,7 @@ use App\Models\food_order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
 use App\Models\order;
+
 
 class OrderController extends Controller
 {

@@ -84,7 +84,7 @@
                 {{-- datatables for the monthly orders taken --}}
            
             <!-- ============================================================== -->
-                <div class="sales-boxes">
+                {{-- <div class="sales-boxes">
                     <div class="recent-sales box">
                       <div class="row ">
                         <div class="col-md-6">
@@ -100,12 +100,12 @@
                          
                         <div class="col-md-6 pull-right">
                           {{-- <a href="{{ route('admin.currentMonthReport') }}"><button class="btn btn-success">RESET</button></a> --}}
-                          <a href=""><button class="btn btn-success">RESET</button></a>
+                          {{-- <a href=""><button class="btn btn-success">RESET</button></a>
                         </div>
-                      </div>
+                      </div>  --}}
               
               
-                      <table class="table table-bordered table-hover table-striped mt-4" id="table_id" >
+                      {{-- <table class="table table-bordered table-hover table-striped mt-4" id="table_id" >
                         <thead>
                           <tr>
                             <th>FIRST NAME</th>
@@ -128,7 +128,7 @@
                             <td>Sample data</td>
                             <td>Sample data</td>
                             <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">More</button></td>
-                          </tr>
+                          </tr> --}}
                           {{-- <tr>
                           @foreach ($query as $item)
                     
