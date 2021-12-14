@@ -20,33 +20,71 @@
                                 style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                         </div>
                     </li>
-                    <li class="ms-auto"><span class="counter text-success">659</span></li>
+                    <li class="ms-auto"><span class="counter text-success">
+                      @php
+                      use App\Models\User;
+                           $users = User::all();
+                           $usersCount = User::where('is_admin','=','0')->count();
+                           echo ($usersCount);
+                      @endphp  
+                    </span></li>
                 </ul>
             </div>
         </div>
         <div class="col-lg-4 col-md-12">
             <div class="white-box analytics-info">
-                <h3 class="box-title">Total monthly orders</h3>
+                <h3 class="box-title">Total orders this month</h3>
                 <ul class="list-inline two-part d-flex align-items-center mb-0">
                     <li>
                         <div id="sparklinedash2"><canvas width="67" height="30"
                                 style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                         </div>
                     </li>
-                    <li class="ms-auto"><span class="counter text-purple">869</span></li>
+                    <li class="ms-auto"><span class="counter text-purple">
+                      @php
+                          use App\Models\order;
+                          use App\Models\food;
+                           use App\Models\users;
+                           use App\Models\food_order;
+                               $query = DB::table('food_order')
+                               ->join('food','food.id','=','food_order.food_id')
+                               ->join('orders','orders.id','=','food_order.order_id')
+                              // ->join('users','users.id','=','orders.user_id')
+                               ->select('food_order.order_id', DB::raw('SUM(food.price) as total'),'orders.created_at','users.firstname')
+                              //  ->groupBy('order_id')
+                              ->whereMonth('food_order.created_at',date('m'))->count();
+
+                               echo ($query);
+                          @endphp  
+                    </span></li>
                 </ul>
             </div>
         </div>
         <div class="col-lg-4 col-md-12">
             <div class="white-box analytics-info">
-                <h3 class="box-title">Total expenditure</h3>
+                <h3 class="box-title">Total cost this month(so far)</h3>
                 <ul class="list-inline two-part d-flex align-items-center mb-0">
                     <li>
                         <div id="sparklinedash3"><canvas width="67" height="30"
                                 style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                         </div>
                     </li>
-                    <li class="ms-auto"><span class="counter text-info">911</span>
+                    <li class="ms-auto"><span class="counter text-info">
+                      @php
+                          
+                               $query = DB::table('food_order')
+                               ->join('food','food.id','=','food_order.food_id')
+                               ->join('orders','orders.id','=','food_order.order_id')
+                              // ->join('users','users.id','=','orders.user_id')
+                               ->select(DB::raw('SUM(food.price) as total'))
+                              //  ->groupBy('order_id')
+                              ->whereMonth('food_order.created_at',date('m'))->value('total');
+                            
+                              echo ($query);
+                            
+                               
+                          @endphp  
+                    </span>
                     </li>
                 </ul>
             </div>
@@ -59,7 +97,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">Monthly Sales</h3>
+                            <h3 class="box-title">Monthly expenditure</h3>
                             <div class="d-md-flex">
                                 <ul class="list-inline d-flex ms-auto">
                                     <li class="ps-3">
@@ -79,76 +117,7 @@
                     </div>
                 </div>
                 
-                <!-- ============================================================== -->
-
-                {{-- datatables for the monthly orders taken --}}
-           
-            <!-- ============================================================== -->
-                {{-- <div class="sales-boxes">
-                    <div class="recent-sales box">
-                      <div class="row ">
-                        <div class="col-md-6">
               
-                          <div class="input-group mb-3">
-                            <div class="input-group-addon">
-                              <span class="input-group-text bg-info text-white" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                            </div>
-                            <input type="text" class="form-control" id="date" placeholder="Date"/>
-                          </div><br/>
-                          
-                        </div>
-                         
-                        <div class="col-md-6 pull-right">
-                          {{-- <a href="{{ route('admin.currentMonthReport') }}"><button class="btn btn-success">RESET</button></a> --}}
-                          {{-- <a href=""><button class="btn btn-success">RESET</button></a>
-                        </div>
-                      </div>  --}}
-              
-              
-                      {{-- <table class="table table-bordered table-hover table-striped mt-4" id="table_id" >
-                        <thead>
-                          <tr>
-                            <th>FIRST NAME</th>
-                                  
-                            <th>TOTAL</th>             
-                            <th>DATE</th>
-                            <th>Action</th>
-              
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Sample data</td>
-                            <td>Sample data</td>
-                            <td>Sample data</td>
-                            <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">More</button></td>
-                          </tr>
-                          <tr>
-                            <td>Sample data</td>
-                            <td>Sample data</td>
-                            <td>Sample data</td>
-                            <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">More</button></td>
-                          </tr> --}}
-                          {{-- <tr>
-                          @foreach ($query as $item)
-                    
-                       <tr data-index={{ $item->order_id }} data-firstName={{ $item->firstname }}>
-                          
-                        <td> {{ $item->firstname }}</td>
-                        <td>{{ $item->total }}</td>
-                        <td>{{ $item->created_at }}</td>
-                        
-                        <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">More</button></td>
-                    </tr>
-                     @endforeach 
-                            @foreach ($query as $item)
-                            <tr>
-                              <td>{{ $item->firstname }}</td> 
-                              <td>{{ $item->order_id }}</td>               
-                              <td>{{ $item->total }}</td>       
-                              <td>{{ $item->created_at }}</td>
-                           </tr>
-                            @endforeach  --}}
                         </tbody>
                       </table>
                     </div>
@@ -320,8 +289,50 @@
                 });
                       //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
               
-              
+        
               </script>
+              <script>
+                
+$(function () {
+    //ct-visits
+    new Chartist.Line('#ct-visits', {
+        labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August','Sept','Oct','Nov','Dec'],
+        series: [
+            // ["$query"],
+            //[17, 55, 2, 6 25, 5, 102, 40]
+            [200, 500, 200, 600, 200, 500, 200, 400]
+        ]
+    }, 
+    
+    {
+        top: 0,
+        low: 1,
+        showPoint: true,
+        fullWidth: true,
+        plugins: [
+            Chartist.plugins.tooltip()
+        ],
+        axisY: {
+            labelInterpolationFnc: function (value) {
+               return (value / 1) + '000';
+             },
+             ticks: {
+    beginAtZero:true,
+    userCallback: function(value, index, values) {
+        value = value.toString();
+        value = value.split(/(?=(?:...)*$)/);
+        value = value.join(',');
+        return value;
+      },
+            // labelInterpolationFnc: function (value) {
+            //     return (value / 1) + 'k';
+            // }
+        },
+      
+        showArea: true
+    });
+  });
+    </script>
               
 
 

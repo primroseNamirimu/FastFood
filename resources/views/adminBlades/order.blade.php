@@ -34,22 +34,26 @@
   </div>
 @endif
 
-
-@if ($message = Session::get('danger'))
-<div class="alert alert-danger">
-  <p>{{ $message }}</p>
+@if(Session::has('fail'))
+<div class="alert alert-danger">{{Session::get('fail')}}
 </div>
+
 @endif
 
 <div class="col-lg-12 margin-tb">
   <div class="float-start">
       <h2>The Menu</h2>
   </div>
-  <div class="float-end">
-    {{-- <h2><a class="btn btn-success" href="{{ route('food.index') }}">Edit Menu</a></h2> --}}
-    <h2><a class="btn btn-success" href="">Edit Menu</a></h2>
+     <div class="float-end">
+    <h2><a class="btn btn-success" href="{{ route('showMenuItems') }}">Edit Menu</a></h2> 
+     
     
   </div>
+  {{-- <div class="form-group mb-4">
+    <div class="col-sm-12 float-end"> 
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Update Menu</button>
+    </div>
+</div> --}}
   
 </div>
 <form role="search"  class="app-search d-none d-md-block me-3">
@@ -59,14 +63,6 @@
     </a> --}}
 </form>
 
-  {{-- <div class="input-group">
-    <input type="text" id="Input" onkeyup="myFunction()" placeholder="Search for food item..." class="form-control">
-    <span class="basic-addon1">
-      <button class="btn btn-primary" type="button">
-          <i class="fas fa-search fa-sm"></i>
-      </button>
-    </span>
-  </div> --}}
  
   <table class="table table-striped table-hover table-sm"  style =width: 60% id="myTable">
       <tr>
@@ -117,6 +113,9 @@
     </div>
   </div>
   </div>
+  
+
+
 
     
     {{-- {!! $users->links() !!} --}}

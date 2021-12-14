@@ -121,7 +121,7 @@
     // Date range picker
     var startDate = "";
     var endDate = "";
-    $('#date').daterangepicker();
+ 
     $('#date').on('apply.daterangepicker', function(ev, picker) {
       $(this).val(picker.startDate.format('YYYY-MM-DD ' ) + ' to ' + picker.endDate.format('YYYY-MM-DD '));
     });

@@ -13,10 +13,10 @@
     <meta name="robots" content="noindex,nofollow">
     <title>FastFood</title>
 
-    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    {{-- <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" /> --}}
     
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png">
+    {{-- <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png"> --}}
 
    <!-- box icon -->
     <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="{{ url('plugins/images/logo-text.png') }}" alt="homepage" />
+                      <img src="{{ url('plugins/images/logo-text.png') }}" alt="homepage" /> 
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -218,10 +218,11 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('logout') }}"
                                 aria-expanded="false"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> 
-                                 {{ __(' Log out') }}
-                                 <i class="fa fa-columns" aria-hidden="true"></i>
+                                <i class="fa fa-power-off" aria-hidden="true"></i> <span class="hide-menu">Log Out</span>
+                                 
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                       @csrf
@@ -303,7 +304,7 @@
     <!--chartis chart-->
     <script src="{{ url ('plugins/bower_components/chartist/dist/chartist.min.js') }}"></script>
     <script src="{{ url ('plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
-    <script src="{{ url ('js/pages/dashboards/dashboard1.js') }}"></script>
+ {{-- <script src="{{ url ('js/pages/dashboards/dashboard1.js') }}"></script> --}}
 </body>
 
 </html>

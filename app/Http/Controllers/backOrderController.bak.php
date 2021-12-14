@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+//namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\food;
@@ -9,9 +10,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
 use App\Models\order;
 
-class Ordercontroller extends Controller
+
+class OrderController extends Controller
 {
-   
+
     public function index()
     {
         $menuTable = food::all();
@@ -24,35 +26,10 @@ class Ordercontroller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-     //
-
+    //
     }
-
-    public function createMenuItem(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required', 'unique:food',
-        ]);
-        try {
-            food::create($request->all());
-            return redirect()->route('order.index')
-    ->with('success','food added successfully.');
-    
-        } catch (\Throwable $th) {
-            return redirect()->route('order.index')
-    ->with('fail','Food already exists!! Search first before opting to create');
-        }
- 
-
-
-   
-   
-    }
-
-    
 
     /**
      * Store a newly created resource in storage.
@@ -104,12 +81,6 @@ class Ordercontroller extends Controller
        
     }
 
-    public function showMenuItems(){
-        $menuTable = food::all();
-
-        return view('adminBlades.menuDisplay', ['menuTable' => $menuTable]);
-    }
-
     /**
      * Display the specified resource.
      *
@@ -118,7 +89,7 @@ class Ordercontroller extends Controller
      */
     public function show($id)
     {
-        echo("i reach here");
+    //
     }
 
     /**
@@ -141,21 +112,7 @@ class Ordercontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-    
-        $foodItem = food::find($id);
-        $foodItem->price = request('price');
-        $foodItem->name = request('name');
-     
-        $foodItem->save();
-                $request->validate([
-                'price' => 'required',
-                'name' => 'required',
-                
-         ]);
-        $foodItem ->update($request->all());
-  
-        return redirect()->route('order.index')
-                        ->with('success','Menu updated successfully');
+    //
     }
 
     /**
@@ -166,9 +123,6 @@ class Ordercontroller extends Controller
      */
     public function destroy($id)
     {
-        food::find($id)->delete();
-  
-        return redirect()->route('order.index')
-                        ->with('success','Food item deleted successfully');
+    //
     }
 }

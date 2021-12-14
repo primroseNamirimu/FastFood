@@ -193,7 +193,7 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="{{ url('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    {{-- <script src="{{ url('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{ url('bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ url('js/app-style-switcher.js') }}"></script>
@@ -202,7 +202,7 @@
     <!--Menu sidebar -->
     <script src="{{ url('js/sidebarmenu.js') }}"></script>
     <!--Custom JavaScript -->
-    <script src="{{ url('js/custom.js') }}"></script>
+    <script src="{{ url('js/custom.js') }}"></script> --}}
 
     <script>
 
