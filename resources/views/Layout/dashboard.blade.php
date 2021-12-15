@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ url('plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css') }}">
 
     <!-- Custom CSS -->
+    <link href="{{ url('css/myCustom.css') }}" rel="stylesheet">
    
     <link href="{{ url('css/style.min.css') }}" rel="stylesheet">
 
@@ -181,7 +182,22 @@
                                 <span class="hide-menu">Profile</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('order.index') }}"
+                                aria-expanded="false">
+                                <i class='bx bxs-dish' aria-hidden="true"></i> 
+                                <span class="hide-menu">Order Now </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('adminReport') }}"
+                                aria-expanded="false">
+                                <i class="fa fa-table" aria-hidden="true"></i>
+                                <span class="hide-menu">My Expenditure</span>
+                            </a>
+                        </li>
                         @endif
+                        @if(Auth::user()->is_admin==1)
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('order.index') }}"
                                 aria-expanded="false">
@@ -196,6 +212,16 @@
                                 <span class="hide-menu">Reports</span>
                             </a>
                         </li>
+                        @else
+                        {{-- <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('order.index') }}"
+                                aria-expanded="false">
+                                <i class='bx bxs-dish' aria-hidden="true"></i> 
+                                <span class="hide-menu">Order Now</span>
+                            </a>
+                        </li> --}}
+                        @endif
+                      
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="fontawesome.html"
                                 aria-expanded="false">
@@ -299,7 +325,12 @@
     <script src="{{ url ('js/sidebarmenu.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ url ('js/custom.js') }}"></script>
-    
+
+    <script>
+        $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+     });
+    </script>
     <!--This page JavaScript -->
     <!--chartis chart-->
     <script src="{{ url ('plugins/bower_components/chartist/dist/chartist.min.js') }}"></script>

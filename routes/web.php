@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\App;
 use App\Http\Controllers\adminReportController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Ordercontroller;
 
 
@@ -30,8 +31,9 @@ use App\Http\Controllers\Ordercontroller;
 
 //Auth routes
 Route::get('/',function(){
-    return view('auth.login');
+    return view('welcome');
 });
+
 
 // Route::get('/register',function(){
 //     return view('auth.register');
@@ -59,7 +61,7 @@ Route::post('/create-menu-item', [Ordercontroller::class , 'createMenuItem'])->n
 
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/admin', [HomeController::class, 'admin'])->name('admin.home')->middleware('is_admin');
 
 //Auth::routes();
@@ -70,3 +72,5 @@ Route::get('/report', [adminReportController::class , 'currentMonth'])->name('ad
 Route::get('/foodItemsAdmin',[adminReportController::class,'foodItems'])->name('admin.foodItems');
 
 Route::get('/delete', [adminController::class , 'deleteMultiple'])->name('multiple_delete');
+
+Route::get('/expenditure', [adminReportController::class , 'index'])->name('admin-report');

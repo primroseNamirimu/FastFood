@@ -6,13 +6,7 @@
     <div class="float-start">
       <h2>The Menu</h2>
   </div>     
-    <div class="float-end">
-      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Add New Item</button>
-        <a class="btn btn-success" href="{{ route('showMenuItems') }}">Edit Menu</a>
-      
-    </div>
-    <br/>
-    
+ 
 </div>
 <form role="search"  class="app-search d-none d-md-block me-3">
     <input type="text" id="myInput" placeholder="Search for food item..." onkeyup="myFunction()"class="form-control mt-0">
@@ -73,60 +67,12 @@
       </tr><br />
       <tr>
         <td colspan="4">
-          <button type = "submit" class="btn btn-success btn-lg order-btn" id="order-btn">Order Now</button>
+          <button type = "submit" class="btn btn-success btn-lg order-btn" id="order-btn">Order now Now</button>
         </td>
       </tr>
      
   </table>
 </form>
-  
-     <!-- Modal for adding a new item -->
-
-     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="createModalLabel">Fill the form!</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              
-    <!-- Start Create form  -->
-    <form class="form-horizontal form-material" method="POST" action="{{ route('createMenuItem') }}">
-     @csrf
-      
-      <div class="form-group mb-4">
-          <label class="col-md-12 p-0">Item Name</label>
-          <div class="col-md-12 border-bottom p-0">
-              <input type="text" class="form-control p-0 border-0" name="name" > 
-          </div>
-      </div>
-      <div class="form-group mb-4">
-          <label class="col-md-12 p-0">Item Price</label>
-          <div class="col-md-12 border-bottom p-0">
-              <input type="text" class="form-control p-0 border-0" name="price"> 
-          </div>
-      </div>
-      <div class="form-group mb-4">
-          <div class="col-sm-12">
-              <button class="btn btn-success" >Create</button>
-          </div>
-      </div>
-    </form>
-    <!-- End Create form  -->
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-           
-          </div>
-        </div>
-      </div>
-    </div> 
-    
-    <!-- End of New food item Modal -->
   
   </div>
   

@@ -138,14 +138,14 @@ class adminController extends Controller
 
     public function destroyMultiple($id)
     {
-        $IDs = [];
-        $IDs->request($ids);
-        foreach ($IDs as $id) {
-            User::find($id)->delete();
-        }
+        // $IDs = [];
+        // $IDs->request($id);
+        // foreach ($IDs as $id) {
+        //     User::find($id)->delete();
+        // }
        
   
-        return redirect()->route('admin-actions.index')
-                        ->with('success','Users deleted successfully');
+        // return redirect()->route('admin-actions.index')
+        //                 ->with('success','Users deleted successfully');
     }
 }

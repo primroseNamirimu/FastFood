@@ -1,1 +1,3 @@
-<h1>User blade</h1>
+@extends('Layout.dashboard')
+@section('content')
+@endsection

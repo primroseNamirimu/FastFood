@@ -15,8 +15,14 @@ class Ordercontroller extends Controller
     public function index()
     {
         $menuTable = food::all();
+        if (auth::user()->is_admin == 1) {
+           
 
-        return view('adminBlades.order', ['menuTable' => $menuTable]);
+            return view('adminBlades.order', ['menuTable' => $menuTable]);
+        }else{
+
+            return view('userBlades.order', ['menuTable' => $menuTable]);
+        }
     }
 
     /**
@@ -114,11 +120,12 @@ class Ordercontroller extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+    // * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        echo("i reach here");
+        $foodItem= food::find($id);
+        return view('adminblades.editMenu',compact('foodItem'),["foodItem"=>$foodItem]);
     }
 
     /**

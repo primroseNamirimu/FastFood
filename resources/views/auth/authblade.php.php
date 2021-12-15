@@ -1,58 +1,55 @@
-{{-- @extends('layouts.app2') --}}
-@extends('layouts.app2')
+@extends('layouts.app')
 
 @section('content')
-<link href="{{ url('css/form.css') }}" rel="stylesheet">
-<div class="main">
-    <!-- Sing in  Form -->
-    <section class="sign-in">
-        <div class="container">
-            <div class="signin-content">
-                <div class="signin-image">
-                    {{-- <figure><img src="public/images/signin-image.jpg" alt="food image"></figure> --}}
-                    <figure><img src="{{ url('plugins/images/signin-image.jpg') }}" alt="food image"></figure>
-                    <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
-                </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="signin-form">
-                    <h2 class="form-title">Log in</h2>
-     
-                    <form method="POST" action="{{ route('login') }}">
-                       @if(Session::has('fail'))
-                        <div class="alert alert-danger">{{Session::get('fail')}}
+                <div class="card-body">
+                    <div class="signin-image">
+                        {{-- <figure><img src="public/images/signin-image.jpg" alt="food image"></figure> --}}
+                        <figure><img src="{{ url('plugins/images/signin-image.jpg') }}" alt="food image"></figure>
+                        <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
                     </div>
-                    @endif
-			 @csrf
-                      
-                        <div class="form-group">
-                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                {{ Auth::logout() }}
+           
+                        @if(Session::has('fail'))
+                        <div class="alert alert-danger">{{Session::get('fail')}}
+                        </div>
+                        @endif
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                           
-                                <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Your email" required autocomplete="email" autofocus>
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            
-                        </div> 
+                            </div>
+                        </div>
 
-                        <div class="form-group">
-                            <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                        <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                        
-                                <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" placeholder="Your Password" required autocomplete="current-password">
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                           
+                            </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -64,7 +61,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
@@ -72,7 +69,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('Forgotten Your Password?') }}
                                     </a>
                                 @endif
                             </div>

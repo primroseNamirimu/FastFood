@@ -1,10 +1,10 @@
 @extends('Layout.dashboard')
 @section('content')
-<div class="home-cntent" >
 
 
-  <div class="sales-boxes">
-    <div class="recent-sales box">
+
+  <div class="sals-boxes">
+  
 
    
   @if ($message = Session::get('success'))
@@ -26,18 +26,18 @@
         <a class="btn btn-danger" href="{{ route('multiple_delete') }}">Delete Selected</a>
       
     </div>
+    <br/>
     
-</div>
+</div><br/>
 
-  
-</div>
+
 <form role="search"  class="app-search d-none d-md-block me-3">
     <input type="text" id="myInput" placeholder="Search for food item..." onkeyup="myFunction()"class="form-control mt-0">
 
 </form>
 
  
-  <table class="table table-striped table-hover table-sm" id="myTable">
+  <table class="table table-striped table-hover table-sm" width="60%" id="myTable">
       <tr>
 
           <th>Food</th>
@@ -56,13 +56,12 @@
           <td> {{ $menu->name }}</td>
           <td>{{ $menu->price }}</td>
           <td> 
-            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><span><i class="far fa-address-card" aria-hidden="true"></i></span></button>
+           
             <form action="{{ route('order.destroy',$menu->id) }}" method="POST">
-                   
-                {{-- <a class="btn" href="{{ route('order.show',$menu->id) }}"><span><i class="far fa-address-card" aria-hidden="true"></i></a> --}}
-                   
-                
-                {{ csrf_field() }}
+      
+                @csrf
+                <a class="button" href="{{ route('order.show', $menu->id) }}"><span><i class="far fa-address-card" aria-hidden="true"></i></span></a>
+
                 {{ method_field('DELETE') }}                 
   
                 <button type="submit" class="btn delete" onclick="if (!confirm('{{ $menu->name }} will be permanently deleted, are you sure?')) { return false }">
@@ -77,63 +76,7 @@
      
      
      
-  </table>
-
-  {{-- <a class="btn btn-success" href="{{ route('order.show',$menu->id) }}">Past Orders</a> --}}
-  
-  </div>
-    </div>
-  </div>
-  </div>
-  
-                <!-- Modal for updating the menu -->
-
- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Fill in the details you wish to change</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-          
-<!-- Start Update form  -->
-<form class="form-horizontal form-material" method="POST" action="{{ route('order.update',$menu->id) }}">
- @csrf
-  {{ method_field('PATCH') }}
-  <div class="form-group mb-4">
-      <label class="col-md-12 p-0">Item Name</label>
-      <div class="col-md-12 border-bottom p-0">
-          <input type="text" class="form-control p-0 border-0" name="name" value="{{ $menu->name }}"> 
-      </div>
-  </div>
-  <div class="form-group mb-4">
-      <label class="col-md-12 p-0">Item Price</label>
-      <div class="col-md-12 border-bottom p-0">
-          <input type="text" class="form-control p-0 border-0" name="price" value="{{ $menu->price }}"> 
-      </div>
-  </div>
-  <div class="form-group mb-4">
-      <div class="col-sm-12">
-          <button class="btn btn-success" >Update Menu</button>
-      </div>
-  </div>
-</form>
-<!-- End Update form  -->
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-       
-      </div>
-    </div>
-  </div>
-</div> 
-
-<!-- End of Modal -->
-
+  </table>          
 
                 <!-- Modal for adding a new item -->
 
@@ -182,9 +125,7 @@
                   </div> 
                   
                   <!-- End of New food item Modal -->
-                  
-                  
-
+                </div>
 
 
     

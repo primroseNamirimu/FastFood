@@ -6,14 +6,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 <style>
-    .sals-boxes{
-        width: 100%;
-        background: #fff;
-        padding: 20px 30px;
-        margin: 0 20px;
-        border-radius: 12px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    }
+  
 
   #myInput {
   background-image: url('/css/searchicon.png'); /* Add a search icon to input */
@@ -28,15 +21,15 @@
 </style>
  
 
-    <div class="sals-boxes">
-      <div class="recent-sales box">
+<div class="sals-boxes">
+   
     <div class="row">
         
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
-    @endif
+        @endif
         <div class="col-lg-12 margin-tb">
             
             <div class="float-end">
@@ -163,6 +156,7 @@
     </div>
   </div>
 </div> 
+      </div>
 
 <!-- End of Modal -->
 

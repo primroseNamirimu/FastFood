@@ -10,21 +10,37 @@ use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Stmt\Foreach_;
 use Yajra\DataTables\DataTables;
 use phpDocumentor\Reflection\Types\True_;
+use Illuminate\Support\Facades\Auth;
 
 class adminReportController extends Controller
 {
     public function currentMonth(){
-        $query = DB::table('food_order')
-        ->join('food','food.id','=','food_order.food_id')
-        ->join('orders','orders.id','=','food_order.order_id')
-        ->join('users','users.id','=','orders.user_id')
-        ->select('food_order.order_id', DB::raw('SUM(food.price) as total'),'orders.created_at','users.firstname')
-        ->groupBy('order_id')
-        ->whereMonth('food_order.created_at',date('m'))->get();
-
-        return view('reports.adminReport',["query"=>$query]);
-        
+        if(Auth::user()->is_admin==1)
+        {
+            $query = DB::table('food_order')
+            ->join('food','food.id','=','food_order.food_id')
+            ->join('orders','orders.id','=','food_order.order_id')
+            ->join('users','users.id','=','orders.user_id')
+            ->select('food_order.order_id', DB::raw('SUM(food.price) as total'),'orders.created_at','users.firstname')
+            ->groupBy('order_id')
+            ->whereMonth('food_order.created_at',date('m'))->get();
+    
+            return view('reports.adminReport',["query"=>$query]);
+        } else{
+            $userID = Auth::user()->id;
+            $query = DB::table('food_order')
+            ->join('food','food.id','=','food_order.food_id')
+            ->join('orders','orders.id','=','food_order.order_id')
+            ->join('users','users.id','=','orders.user_id')
+            ->select('food_order.order_id', DB::raw('SUM(food.price) as total'),'orders.created_at','users.firstname','users.lastname')
+            ->groupBy('order_id')
+            ->where('users.id',$userID)
+            ->whereMonth('food_order.created_at',date('m'))->get();
+    
+            return view('reports.userReport',["query"=>$query]);
+        }
       
+        
         
     } 
 
@@ -48,10 +64,6 @@ class adminReportController extends Controller
 
                 return datatables($query)->make(true);
                 
-               
-        
-              
-           
                     }
     
             // } 
@@ -66,25 +78,25 @@ class adminReportController extends Controller
             //     return datatables($query)->make(true);
                 
             // }
-            $data = array();
-        $sub_array = array();
-        foreach ($query as $item){
-            $sub_array = $item->firstname;
-             $sub_array = $item->total;
+        //     $data = array();
+        // $sub_array = array();
+        // foreach ($query as $item){
+        //     $sub_array = $item->firstname;
+        //      $sub_array = $item->total;
            
-             $sub_array = $item->created_at;
-        }
+        //      $sub_array = $item->created_at;
+        //}
              
                 
-        $data[] = $sub_array;
-        $output = array(
+        // $data[] = $sub_array;
+        // $output = array(
          
-              "data"    => $data
-             );
-             array_multisort($output);
-             echo json_encode($output);
+        //       "data"    => $data
+        //      );
+        //      array_multisort($output);
+        //      echo json_encode($output);
     
-            return view ('user.adminReport');
+        //     return view ('user.adminReport');
            
         }
         
