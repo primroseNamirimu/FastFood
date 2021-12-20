@@ -72,7 +72,7 @@
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                      <img src="{{ url('plugins/images/logo-text.png') }}" alt="homepage" /> 
+                      {{-- <img src="{{ url('plugins/imaes/logo-text.png') }}" alt="homepage" />  --}}
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -111,8 +111,7 @@
                         <li> 
                             <div>
                             <a class="profile-pic" href="{{ route('profile') }}">
-                                <img src="{{ url ('plugins/images/users/varun.jpg') }}" alt="user-img" width="36"
-                                    class="img-circle"><span class="text-white font-medium">{{ Auth::user()->username }}
+                                <i class="fas fa-user" aria-hidden="true"></i> {{ Auth::user()->username }}
                             </a>
 
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -159,24 +158,25 @@
                         </li>
                         @else
                         <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('userhome') }}"
                                 aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
                                 <span class="hide-menu">Dashboard</span>
                             </a>
                         </li>
                         @endif
+
                         @if(Auth::user()->is_admin==1)
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin-actions.index') }}"
                                 aria-expanded="false">
                                 <i class="fa fa-user" aria-hidden="true"></i>
-                                <span class="hide-menu">User Profiles</span>
+                                <span class="hide-menu">User Profiles</span> 
                             </a>
                         </li>
                         @else
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('profile') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin-actions.show',Auth::user()->id) }}"
                                 aria-expanded="false">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                                 <span class="hide-menu">Profile</span>
@@ -221,7 +221,7 @@
                             </a>
                         </li> --}}
                         @endif
-                      
+{{--                       
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="fontawesome.html"
                                 aria-expanded="false">
@@ -242,7 +242,7 @@
                                 <i class="fa fa-columns" aria-hidden="true"></i>
                                 <span class="hide-menu">Blank Page</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="sidebar-item">
                             
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('logout') }}"

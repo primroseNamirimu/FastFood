@@ -5,36 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Html\Editor\Fields\Select;
+use Illuminate\Support\Facades\DB;
 
 class adminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-    // * @return \Illuminate\Http\Response
-     */
+  
     public function index()
-    {
-        
-        $users = User::all();
+    {  
+        $users = DB::select('select * from users where is_disabled = ?', [0]);
         //dd($users);
 
-        $usersCount = User::where('is_admin','=','0')->count();
-        //echo ($usersCount);
-
+       
         return view ('userBlades.team',["users"=>$users],['user.adminHome',["users"=>$users]]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function disabledUsers(){
+
+        $disabledUsers = DB::select('select * from users where is_disabled=?', [1]);
+        return view('userBlades.disabledUsers', ["disabledUsers" => $disabledUsers]);
     }
 
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -62,7 +55,7 @@ class adminController extends Controller
             'password' => Hash::make($request['password']),
         ]);
    
-        return redirect()->route('users.index')
+        return redirect()->route('admin-actions.index')
                         ->with('success','User created successfully.');
 
     }
@@ -71,25 +64,13 @@ class adminController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     //* @return \Illuminate\Http\Response
+   
      */
     public function show($id)
     {
         $user= User::find($id);
         return view('userBlades.profile',compact('user'),["user"=>$user]);
         //dd($users);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        
-        
     }
 
     /**
@@ -117,9 +98,14 @@ class adminController extends Controller
                 'email' => 'required',
          ]);
         $user ->update($request->all());
-  
-        return redirect()->route('admin-actions.index')
-                        ->with('success','Profile updated successfully');
+
+  if (Auth::user()->is_admin==1){
+
+    return redirect()->route('admin-actions.index')
+    ->with('success','Profile updated successfully');
+  }
+  return redirect()->route('admin-actions.show',Auth::user()->id)
+  ->with('success','Profile updated successfully'); 
     }
 
     /**
@@ -130,11 +116,42 @@ class adminController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
+        //User::find($id)->delete();
+       $disabledUser = User::find($id);
+       if($disabledUser->is_disabled==0){
+
+            $disabledUser->is_disabled = '1';
+            $disabledUser->save();
+            return redirect()->route('admin-actions.index')
+            ->with('success','User disabled successfully');
+
+       }
+       else{
+
+        $disabledUser->is_disabled = '0';
+        $disabledUser->save();
+        return redirect()->route('admin-actions.index')
+        ->with('success','User enabled successfully');
+       }
+
+  
+       
+    }
+
+    public function enableUser($id)
+    {
+        //User::find($id)->delete();
+       $enableUser = User::find($id);
+       if($enableUser){
+            $enableUser->is_disabled = '0';
+            $enableUser->save();
+       }
+
   
         return redirect()->route('admin-actions.index')
-                        ->with('success','User deleted successfully');
+                        ->with('success','User enabled successfully');
     }
+
 
     public function destroyMultiple($id)
     {

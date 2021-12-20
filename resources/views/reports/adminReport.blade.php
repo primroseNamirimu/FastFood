@@ -43,7 +43,7 @@
       
          <tr data-index={{ $item->order_id }} data-firstName={{ $item->firstname }}>
             
-          <td>{{ $item->firstname }}</td>
+          <td> {{ $item->lastname }} {{ $item->firstname }}</td>
        
           <td>{{ $item->total }}</td>
           <td>{{ $item->created_at }}</td>

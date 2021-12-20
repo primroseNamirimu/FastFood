@@ -4,27 +4,27 @@
 
             <!-- Container fluid  -->
             <!-- ============================================================== -->
-            <div class="container-fluid">
+            {{-- <div class="container-fluid"> --}}
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- Row -->
-                <div class="row">
+                {{-- <div class="row"> --}}
                     <!-- Start first frame Column -->
                     
-                    <div class="col-lg-4 col-xlg-3 col-md-12">
-                        <div class="white-box">
+                    {{-- <div class="col-lg-4 col-xlg-3 col-md-12"> --}}
+                        {{-- <div class="white-box">
                             <div class="user-bg"> <img width="100%" alt="user" src="{{ url('plugins/images/large/img1.jpg') }}">
                                 <div class="overlay-box">
                                     <div class="user-content">
-                                        <a href="javascript:void(0)"><img src="{{ url('plugins/images/users/genu.jpg') }}"
-                                                class="thumb-lg img-circle" alt="img"></a>
-                                               
+                                        {{-- <a href="javascript:void(0)"><img src="{{ url('plugins/images/users/genu.jpg') }}"
+                                                class="thumb-lg img-circle" alt="img"></a> --}}
+                                                {{-- <i width="100%" class="fas fa-user" aria-hidden="true"></i>   
                                         <h4 class="text-white mt-2">{{ $user->username }}</h4>
                                         <h5 class="text-white mt-2">{{ $user->email }}</h5>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}} 
                             {{-- <div class="user-btm-box mt-5 d-md-flex">
                                 <div class="col-md-4 col-sm-4 text-center">
                                     <h1>258</h1>
@@ -36,15 +36,21 @@
                                     <h1>556</h1>
                                 </div>
                             </div> --}}
-                        </div>
-                    </div>                    
+                        {{-- </div> --}}
+                    {{-- </div>                     --}}
                     
                     
                     <!-- End first frame Column -->
                     <!-- Start second frame Column -->
-                    <div class="col-lg-8 col-xlg-9 col-md-12">
+                    {{-- < class="col-lg-8 col-xlg-9 col-md-12"> --}}
+                        <div class="sals-boxes">
                         <div class="card">
                             <div class="card-body">
+                                @if ($message = Session::get('success'))
+                                        <div class="alert alert-success">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                        @endif
                                 <form class="form-horizontal form-material" action=" ">
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0">Full Name</label>
@@ -88,7 +94,7 @@
                         </div>
                     </div>
                     <!-- Column -->
-                </div>
+                
 
                 <!-- Modal for updating the profile -->
 

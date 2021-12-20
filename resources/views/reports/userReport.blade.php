@@ -6,8 +6,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-  <div class="sales-boxes">
-      <div class="recent-sales box">
+  <div class="sals-boxes">
+ 
         <div class="row ">
           <div class="col-md-6">
 
@@ -57,9 +57,7 @@
           </tbody>
         </table>
       </div>
-    </div>
-    </div>
-</div>
+
 
 <!-- Modal -->
 
@@ -73,15 +71,83 @@
         </button>
       </div>
       <div class="modal-body">
-        
+       
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button class="btn btn-primary"  id="wrong-btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Wrong Order</button>
        
       </div>
     </div>
   </div>
 </div> 
+<!-- Wrong order Modal -->
+<div class="modal fade" id="exampleModalToggle2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter the order you received</h5>
+        <button type="button" class="btn-close"  data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-bdy">
+        <div class="sals-boxes">
+              
+          <!-- Start Update form  -->
+          <form class="form-horizontal form-material" method="POST" action="">
+              @csrf
+               {{-- {{ method_field('PATCH') }} --}}
+               <div class="form-group mb-4">
+                   <label class="col-md-12 p-0">Item Name</label>
+                   <div class="col-md-12 border-bottom p-0">
+                       <input type="text" class="form-control p-0 border-0" name="name" placeholder="Enter food item"> 
+                   </div>
+               </div>
+               <div class="form-group mb-4">
+                   <label class="col-md-12 p-0">Item Name</label>
+                   <div class="col-md-12 border-bottom p-0">
+                       <input type="text" class="form-control p-0 border-0" name="name" placeholder="Enter food item"> 
+                   </div>
+               </div>
+               <div class="form-group mb-4">
+                <label class="col-md-12 p-0">Item Name</label>
+                <div class="col-md-12 border-bottom p-0">
+                    <input type="text" class="form-control p-0 border-0" name="name" placeholder="Enter food item"> 
+                </div>
+            </div>
+            <div class="form-group mb-4">
+              <label class="col-md-12 p-0">Item Name</label>
+              <div class="col-md-12 border-bottom p-0">
+                  <input type="text" class="form-control p-0 border-0" name="name" placeholder="Enter food item"> 
+              </div>
+          </div>
+          <div class="form-group mb-4">
+            <label class="col-md-12 p-0">Item Name</label>
+            <div class="col-md-12 border-bottom p-0">
+                <input type="text" class="form-control p-0 border-0" name="name" placeholder="Enter food item"> 
+            </div>
+        </div>
+               <div class="form-group mb-4">
+                   <div class="col-sm-12">
+                       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Update Menu Details</button>
+                   </div>
+               </div>
+             </form>
+             <!-- End update form  -->
+                     
+          
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
+  
+       
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- End Wrong order Modal -->
 
 <!-- End of Modal -->
 
@@ -209,21 +275,43 @@
              success:function(response){
                   const{ data } = response;
               console.log(response);
-            
+          
               let result = response.map(e => e.name);
+                console.log(result)
               let good = result.join(" , ")
-              $(".modal-body").html(good)
-              
-             }
-             });
-       }
 
+              result.forEach(function(name, index){
+                
+               return $(".modal-body").append(
+                '<li>' +name+'</li>'    
+              )
+              });
+           
+             }
+             
+       });
+      }
       
       // End of order details button
 
-  });
-        //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      //disable button after some time js
+const button = document.querySelector('#wrong-btn');
+//let buttonDisabled = false;
+let setTime = 500000
+window.onload = function(){
+   
+    setTimeout(function(){  
+ 
+        button.disabled = true;
+        button.textContent = 'Can not edit order';
 
+
+        
+    }, setTime);
+}
+
+  });
+       
 
 </script>
 

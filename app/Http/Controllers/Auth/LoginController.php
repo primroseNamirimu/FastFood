@@ -57,8 +57,7 @@ class LoginController extends Controller
                 return redirect()->route('admin.home');
             }
             else {
-                return view('userBlades.userHome');
-                //return redirect()->route('home');
+                return redirect()->route('userhome');
             }
         }
         else {

@@ -31,7 +31,7 @@ use App\Http\Controllers\Ordercontroller;
 
 //Auth routes
 Route::get('/',function(){
-    return view('welcome');
+    return view('auth.login');
 });
 
 
@@ -43,6 +43,7 @@ Route::get('/',function(){
 Route::get('/admin', function () {
     return view('adminBlades/adminHome');
 })->name('admin');
+
 
 /////// profile route //////
 Route::get('/profile', function () {
@@ -69,8 +70,17 @@ Route::get('/admin', [HomeController::class, 'admin'])->name('admin.home')->midd
 //Route::get('/report', [App\Http\Controllers\adminControllers\adminReportController::class, 'currentMonth'])->name('adminReport');
 Route::get('/report', [adminReportController::class , 'currentMonth'])->name('adminReport');
 
+
+
 Route::get('/foodItemsAdmin',[adminReportController::class,'foodItems'])->name('admin.foodItems');
 
 Route::get('/delete', [adminController::class , 'deleteMultiple'])->name('multiple_delete');
 
+Route::get('/userhome', [adminReportController::class , 'recentOrders'])->name('userhome');
+
 Route::get('/expenditure', [adminReportController::class , 'index'])->name('admin-report');
+
+//enabling and disabling users
+Route::get('/disabled users', [adminController::class , 'disabledUsers'])->name('disabled-users');
+
+Route::post('/enable-user', [adminController::class , 'enableUser'])->name('enable-user');

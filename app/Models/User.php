@@ -24,6 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'is_adim',
+        'is_disabled',
 
     ];
 

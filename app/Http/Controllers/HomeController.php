@@ -20,8 +20,8 @@ class HomeController extends Controller
 
         if(Auth::check()){
             auth::logout();
-            return redirect()->route('register')
-                         ->with('success','Succesfuly registered, You can login now');
+            return redirect()->route('login');
+                        //  ->with('success','Succesfuly registered, You can login now');
 
         }
         else{

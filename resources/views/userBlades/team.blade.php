@@ -34,8 +34,8 @@
             
             <div class="float-end">
               <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New User</button>
-                <a class="btn btn-danger" href="{{ route('multiple_delete') }}">Delete Selected</a>
-              
+               <a href="{{ route('disabled-users') }}" ><button class="btn btn-success">Disabled Users</button></a>
+               <a class="btn btn-danger" href="{{ route('multiple_delete') }}">Delete Selected</a>      
             </div>
             
         </div>
@@ -47,8 +47,9 @@
     <table class="table table-bordered" id="myTable">
         <tr>
             <th><input type ="checkbox" name ="checkbox[]" onchange="checkAll(this)" id="checkAll"></th>
+            <th>Username</th>
             <th>email</th>
-            <th>Phone Number</th>
+           
            
             <th>Action</th>
         </tr>
@@ -60,8 +61,9 @@
            
             
             <td ><input type="checkbox" class="checkboxes"  onchange='checkChange();' value="{{ $userData->id }}"></td>
+            <td>{{ $userData->username }}</td>
             <td>{{ $userData->email }}</td>
-            <td>{{ $userData->phone }}</td>
+            
            
             <td>
                 <form action="{{ route('admin-actions.destroy',$userData->id) }}" method="POST">
@@ -72,7 +74,7 @@
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}                 
       
-                    <button type="submit" class="btn delete" onclick="if (!confirm('{{ $userData->firstname }} will be permanently deleted, are you sure?')) { return false }">
+                    <button type="submit" data-bs-toggle="popover" data-bs-content="Click to disable user" class="btn delete" onclick="if (!confirm('{{ $userData->firstname }} will be permanently disabled, are you sure?')) { return false }">
                       <span><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
                     
                     
@@ -156,9 +158,80 @@
     </div>
   </div>
 </div> 
+<!--End create modal -->
+    
+<div class="modal fade" id="disabledUsers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Disabled users</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+          
+<!-- start table  -->
+<table class="table table-bordered" id="disabledUsersTable">
+  <tr>
+      <th><input type ="checkbox" name ="checkbox[]" onchange="checkAll(this)" id="checkAll"></th>
+      <th>Username</th>
+      <th>email</th>
+      <th>Action</th>
+  </tr>
+  
+  <input type="hidden" value="{{ $i = 0 }}">
 
-<!-- End of Modal -->
+  @foreach ($users as $userData)
+  <tr>
+     
+      
+      <td ><input type="checkbox" class="checkboxes"  onchange='checkChange();' value="{{ $userData->id }}"></td>
+      <td>{{ $userData->username }}</td>
+      <td>{{ $userData->email }}</td>
+      
+     
+      <td>
+    
+          <form action="{{ route('admin-actions.destroy',$userData->id) }}" method="POST">
+             
+              <a class="btn" href="{{ route('admin-actions.show',$userData->id) }}"><span><i class="far fa-address-card" aria-hidden="true"></i></a>
+
+              
+              {{ csrf_field() }}
+              {{ method_field('DELETE') }}                 
+
+              <button type="submit" class="btn delete" onclick="if (!confirm('{{ $userData->firstname }} will be permanently disabled, are you sure?')) { return false }">
+                <span><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+              
+              
+          </form>
+      </td>
+  </tr>
+  @endforeach
+</table>
+<!-- End table  -->
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div> 
+<!-- End of Disabled Users Modal -->
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script> 
+      <script>
+        $(document).ready(function(){
+          
+          $('[data-bs-toggle="popover"]').popover();
+        });
+        </script>
+        
+
 
     <script>
       // Set check or unchecked all checkboxes
