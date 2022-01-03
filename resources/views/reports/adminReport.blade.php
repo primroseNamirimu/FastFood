@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-  <div class="sales-boxes">
+  <div class="sals-boxes">
       <div class="recent-sales box">
         <div class="row ">
           <div class="col-md-6">

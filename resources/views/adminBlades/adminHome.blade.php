@@ -6,7 +6,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css"/>
 
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <div class="container-fluid">
+ 
     <!-- ============================================================== -->
     <!-- Three charts -->
     <!-- ============================================================== -->
@@ -90,7 +92,7 @@
             </div>
         </div>
     </div>
-
+{{-- 
     <!-- ============================================================== -->
                 <!-- PRODUCTS YEARLY SALES -->
                 <!-- ============================================================== -->
@@ -116,16 +118,39 @@
                         </div>
                     </div>
                 </div>
-                
-              
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                  </div>
-              </div>
-              
-              <!-- Modal -->
+                 --}}
+                 <div class="sals-boxes">
+
+                 Your Recent Orders
+                 <table class="table table-bordered table-hover table-striped mt-4 data-table" id="table_id" >
+                     <thead>
+                       <tr>
+                        <th>DATE</th>
+                         <th>Total</th>                        
+                       
+                         <th>Action</th>
+                   
+             
+                       </tr>
+                     </thead>
+                     <tbody>
+                         @foreach ($queryadmin as $item)
+                         <tr data-index={{ $item->id }}>
+                          
+                           {{-- <td>{{ $item->name }}</td>   --}}
+                           <td>{{ $item->created_at }}</td>
+                           <td>{{ $item->total }}</td>        
+                          
+                      
+                           <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">More</button></td>
+                        </tr> 
+                          @endforeach 
+                     </tbody>
+                   </table>
+                  </form>
+                 </div>
+               
+                    <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -147,6 +172,11 @@
               </div>
               
               <!-- End of Modal -->
+</div>
+
+                
+                
+              
             
 <!--popper js-->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -251,23 +281,26 @@
                  //  <!-- Order details button -->
               
                  $(document).on( 'click', 'button', function () {
-                      //var data = table.row( $(this).parents('tr') ).data();
+                
+                                         //var data = table.row( $(this).parents('tr') ).data();
                       const orderID = $(this).closest('tr').attr('data-index')
                       const firstname = $(this).closest('tr').attr('data-firstname')
                       if((orderID !=="")){
-                        foodItems(orderID,firstname);
+                        
+                        foodItems(orderID);
                       }
                      
                   });
-                 function foodItems(orderID,firstname){
+                 function foodItems(orderID){
                   $.ajax({
                            data:[],
                            type:'GET',
                            url:"{{ url('/foodItemsAdmin') }}",
                            dataType:"json",
                            data:{
+
                              orderID:orderID,
-                             firstname:firstname
+                           
                            },
                            dataSrc: "",
                            cache:false,

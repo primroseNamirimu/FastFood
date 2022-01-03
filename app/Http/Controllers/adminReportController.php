@@ -96,28 +96,30 @@ class adminReportController extends Controller
     }
     public function foodItems(Request $request)
     {
-        // $userID = Auth::user()->id;
-        if (Auth::user()->is_admin == 1) {
+        echo("annyeong");
+         if (Auth::user()->is_admin == 1) {
+             $userID = Auth::user()->id;
+
             if ($request->ajax()) {
 
                 if (!empty($_GET['orderID'])) {
-
+                       echo($_GET['orderID']);
                     $orderID = $_GET['orderID'];
                     $firstname = $_GET['firstname'];
-
+                    echo($firstname + $orderID);
                     $query = DB::table('food_order')
                         ->join('food', 'food.id', '=', 'food_order.food_id')
                         ->join('orders', 'orders.id', '=', 'food_order.order_id')
                         ->join('users', 'users.id', '=', 'orders.user_id')
                         ->select('food.name')
                         ->where('order_id', $orderID)
-                        ->where('users.firstname', $firstname)->get();
+                        ->where('users.id', $userID)->get();
                     return response()->json($query, 200);
-                // // echo ($data);
-                //  dd($query);
+        //         // echo ($data);
+        //          //dd($query);
 
                 }
-            }
+             }
         }
         else {
             $userID = Auth::user()->id;

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -16,19 +17,20 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index(){
+    public function index()
+    {
 
-        if(Auth::check()){
+        if (Auth::check()) {
             auth::logout();
             return redirect()->route('login');
-                        //  ->with('success','Succesfuly registered, You can login now');
+        //  ->with('success','Succesfuly registered, You can login now');
 
         }
-        else{
+        else {
             auth::logout();
             return view('auth.login');
         }
-       
+
     }
 
     /**
@@ -36,10 +38,27 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
- 
-    public function admin(){
-        return view('adminBlades.adminHome');
-    }
+
+    public function admin()
+    {
+
+        $userID = Auth::user()->id;
+        $queryadmin = DB::table('food_order')
+            ->join('food', 'food.id', '=', 'food_order.food_id')
+            ->join('orders', 'orders.id', '=', 'food_order.order_id')
+            ->join('users', 'users.id', '=', 'orders.user_id')
+            ->select('food_order.order_id', 'orders.id', DB::raw('SUM(food.price) as total'), 'orders.created_at', 'users.firstname')
+            ->groupBy('order_id')
+            ->where('users.id', $userID)
+
+            ->whereMonth('food_order.created_at', date('m'))
+
+            ->limit(10)->get();
+
+        return view('adminBlades.adminHome', ["queryadmin" => $queryadmin]);
+
+    
 }
 
 
+}
