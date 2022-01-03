@@ -17,7 +17,7 @@
                 <div class="signin-form">
                     <h2 class="form-title">Log in</h2>
      
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ url ('/login') }}">
                        @if(Session::has('fail'))
                         <div class="alert alert-danger">{{Session::get('fail')}}
                     </div>
