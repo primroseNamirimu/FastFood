@@ -71,8 +71,10 @@ Route::get('/admin', [HomeController::class, 'admin'])->name('admin.home')->midd
 Route::get('/report', [adminReportController::class , 'currentMonth'])->name('adminReport');
 
 
+//Route::get('/foodItemsAdmin',[adminReportController::class,'foodItems'])->name('admin.foodItems');
 
-Route::get('/foodItemsAdmin',[adminReportController::class,'foodItems'])->name('admin.foodItems');
+Route::get('/fooditems',[adminReportController::class,'foodItems'])->name('admin.foodItems');
+
 
 Route::get('/delete', [adminController::class , 'deleteMultiple'])->name('multiple_delete');
 

@@ -67,7 +67,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Food items on the order are:</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Food items sanity check on the order are:</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -185,24 +185,24 @@
    //  <!-- Order details button -->
 
    $(document).on( 'click', 'button', function () {
-  
-        //var data = table.row( $(this).parents('tr') ).data();
         const orderID = $(this).closest('tr').attr('data-index')
         const firstname = $(this).closest('tr').attr('data-firstname')
-        if((orderID !=="")){
-          foodItems(orderID,firstname);
+        if(orderID !==""){
+         
+          foodItems (orderID,firstname);
         }
        
     });
-   function foodItems(orderID,firstname){
+
+   function foodItems (orderID,firstname){
     $.ajax({
-             data:[],
              type:'GET',
-             url:"{{ url('/foodItemsAdmin') }}",
+             url:"{{ url('/fooditems') }}",
              dataType:"json",
              data:{
                orderID:orderID,
-               firstname:firstname
+               firstname:firstname,
+              
              },
              dataSrc: "",
              cache:false,
