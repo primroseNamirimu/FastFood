@@ -10,7 +10,7 @@ use PhpParser\Node\Stmt\Foreach_;
 use Yajra\DataTables\DataTables;
 
 
-class adminReportController extends Controller
+class AdminReportController extends Controller
 {
     public function currentMonth(){
         $query = DB::table('food_order')
