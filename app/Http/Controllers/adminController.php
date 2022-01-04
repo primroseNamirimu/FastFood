@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Html\Editor\Fields\Select;
 use Illuminate\Support\Facades\DB;
 
-class adminController extends Controller
+class AdminController extends Controller
 {
   
     public function index()

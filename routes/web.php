@@ -25,9 +25,6 @@ use App\Http\Controllers\Ordercontroller;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 //Auth routes
 Route::get('/',function(){

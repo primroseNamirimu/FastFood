@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
 use App\Models\order;
 
-class Ordercontroller extends Controller
+class OrderController extends Controller
 {
    
     public function index()

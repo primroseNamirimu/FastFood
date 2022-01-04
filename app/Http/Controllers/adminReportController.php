@@ -12,7 +12,7 @@ use Yajra\DataTables\DataTables;
 use phpDocumentor\Reflection\Types\True_;
 use Illuminate\Support\Facades\Auth;
 
-class adminReportController extends Controller
+class AdminReportController extends Controller
 {
     public function currentMonth()
     {
