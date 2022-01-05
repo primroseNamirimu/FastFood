@@ -13,7 +13,14 @@ class FoodOrder extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('food_order', function (Blueprint $table) {
+            $table->id();
+            $table->index('food_id');
+            $table->index('order_id');
+            $table->foreign('food_id')->references('id')->on('food')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**

@@ -13,7 +13,12 @@ class Food extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('food', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->interger('price');
+            $table->timestamps();
+        });
     }
 
     /**
