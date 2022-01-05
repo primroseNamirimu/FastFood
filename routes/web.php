@@ -75,7 +75,7 @@ Route::get('/fooditems',[adminReportController::class,'foodItems'])->name('admin
 
 Route::get('/delete', [adminController::class , 'deleteMultiple'])->name('multiple_delete');
 
-Route::get('/userhome', [adminReportController::class , 'recentOrders'])->name('userhome');
+Route::get('/userhome', [HomeController::class , 'userHome'])->name('userhome');
 
 Route::get('/expenditure', [adminReportController::class , 'index'])->name('admin-report');
 

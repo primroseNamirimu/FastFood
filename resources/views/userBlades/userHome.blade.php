@@ -23,6 +23,7 @@
     <div class="sals-boxes">
     <div class="recent-sales box">
       Your Recent Orders
+     
         <table class="table table-bordered table-hover table-striped mt-4 data-table" id="table_id" >
             <thead>
               <tr>
@@ -36,7 +37,7 @@
               </tr>
             </thead>
             <tbody>
-                @foreach ($query as $item)
+                @foreach ($queryuser as $item)
                 <tr data-index={{ $item->id }}>
                  
                   {{-- <td>{{ $item->name }}</td>   --}}

@@ -41,9 +41,9 @@ class HomeController extends Controller
 
     public function admin()
     {
-
         $userID = Auth::user()->id;
-        $queryadmin = DB::table('food_order')
+
+            $queryadmin = DB::table('food_order')
             ->join('food', 'food.id', '=', 'food_order.food_id')
             ->join('orders', 'orders.id', '=', 'food_order.order_id')
             ->join('users', 'users.id', '=', 'orders.user_id')
@@ -56,9 +56,25 @@ class HomeController extends Controller
             ->limit(10)->get();
 
         return view('adminBlades.adminHome', ["queryadmin" => $queryadmin]);
-
-    
+  
 }
 
+public function userHome(){
+    $userID = Auth::user()->id;
+    
+    $queryuser = DB::table('food_order')
+    ->join('food', 'food.id', '=', 'food_order.food_id')
+    ->join('orders', 'orders.id', '=', 'food_order.order_id')
+    ->join('users', 'users.id', '=', 'orders.user_id')
+    ->select('food_order.order_id', 'orders.id', DB::raw('SUM(food.price) as total'), 'orders.created_at', 'users.firstname')
+    ->groupBy('order_id')
+    ->where('users.id', $userID)
+
+    ->whereMonth('food_order.created_at', date('m'))
+
+    ->limit(10)->get();
+
+return view('userBlades.userHome', ["queryuser" => $queryuser]);
+}
 
 }

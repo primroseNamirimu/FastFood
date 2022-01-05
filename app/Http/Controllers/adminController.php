@@ -91,11 +91,11 @@ class AdminController extends Controller
         $user->email = request('email');
         $user->save();
                 $request->validate([
-                'firstname' => 'required',
-                'lastname' => 'required',
-                'username' => 'required',
-                'phone' => 'required',
-                'email' => 'required',
+                'firstname' => 'required', 'string', 'max:255',
+                'lastname' => 'required', 'string', 'max:255',
+                'username' => 'required', 'string', 'max:255',
+                'phone' => 'required','numeric','min:10',
+                'email' => 'required', 'string', 'email', 'max:255', 'unique:users',
          ]);
         $user ->update($request->all());
 

@@ -122,6 +122,7 @@
                  <div class="sals-boxes">
 
                  Your Recent Orders
+                 <button onclick="toastr.info('Are you the 6 fingered man?');">Click me</button>
                  <table class="table table-bordered table-hover table-striped mt-4 data-table" id="table_id" >
                      <thead>
                        <tr>

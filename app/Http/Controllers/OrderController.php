@@ -39,10 +39,11 @@ class OrderController extends Controller
     public function createMenuItem(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'price' => 'required', 'unique:food',
+            'name' => 'required', 'string', 'max:255', 'unique:food',
+            'price' => 'required', 'numeric',
         ]);
         try {
+
             food::create($request->all());
             return redirect()->route('order.index')
     ->with('success','food added successfully.');
@@ -152,13 +153,16 @@ class OrderController extends Controller
         $foodItem = food::find($id);
         $foodItem->price = request('price');
         $foodItem->name = request('name');
+
+        $request->validate([
+            'name' => 'required','string', 'max:255', 'unique:food',
+            'price' =>'required', 'numeric',
+            
+     ]);
      
         $foodItem->save();
-                $request->validate([
-                'price' => 'required',
-                'name' => 'required',
-                
-         ]);
+        
+
         $foodItem ->update($request->all());
   
         return redirect()->route('order.index')

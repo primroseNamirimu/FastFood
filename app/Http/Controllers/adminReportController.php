@@ -11,6 +11,7 @@ use Yajra\DataTables\DataTables;
 
 
 class AdminReportController extends Controller
+
 {
     public function currentMonth(){
         $query = DB::table('food_order')

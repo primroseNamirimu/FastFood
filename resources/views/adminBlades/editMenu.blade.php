@@ -15,12 +15,12 @@
      <div class="form-group mb-4">
          <label class="col-md-12 p-0">Item Price</label>
          <div class="col-md-12 border-bottom p-0">
-             <input type="text" class="form-control p-0 border-0" name="price" value="{{ $foodItem->price }}"> 
+             <input type="number" class="form-control p-0 border-0" name="price" value="{{ $foodItem->price }}"> 
          </div>
      </div>
      <div class="form-group mb-4">
          <div class="col-sm-12">
-             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Update Menu Item</button>
+             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" >Update Menu Item</button>
          </div>
      </div>
    </form>

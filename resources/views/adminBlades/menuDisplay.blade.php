@@ -23,7 +23,7 @@
             
     <div class="float-end">
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Add New Item</button>
-        <a class="btn btn-danger" href="{{ route('multiple_delete') }}">Delete Selected</a>
+        {{-- <a class="btn btn-danger" href="{{ route('multiple_delete') }}">Delete Selected</a> --}}
       
     </div>
     <br/>

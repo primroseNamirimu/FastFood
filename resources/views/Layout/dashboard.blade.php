@@ -30,6 +30,12 @@
    
     <link href="{{ url('css/style.min.css') }}" rel="stylesheet">
 
+    <!-- Toastr notifiations  -->
+    <link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
  
 </head>
 
@@ -298,7 +304,7 @@
             
             <!-- footer -->
             <!-- ============================================================== -->
-            <footer class="footer text-center"> 2021 © Digital Solutions 
+            <footer class="footer text-center"> <?php echo date("Y"); ?> © Digital Solutions 
             </footer>
             <!-- ============================================================== -->
             <!-- End footer -->
@@ -335,7 +341,7 @@
     <!--chartis chart-->
     <script src="{{ url ('plugins/bower_components/chartist/dist/chartist.min.js') }}"></script>
     <script src="{{ url ('plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
- {{-- <script src="{{ url ('js/pages/dashboards/dashboard1.js') }}"></script> --}}
+    <script src="{{ url ('js/toast.js') }}"></script> 
 </body>
 
 </html>

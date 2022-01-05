@@ -32,6 +32,7 @@
 
 @if(Session::has('fail'))
 <div class="alert alert-danger">{{Session::get('fail')}}
+  <p>{{ $message }}</p>
 </div>
 
 @endif
@@ -100,13 +101,13 @@
       <div class="form-group mb-4">
           <label class="col-md-12 p-0">Item Name</label>
           <div class="col-md-12 border-bottom p-0">
-              <input type="text" class="form-control p-0 border-0" name="name" > 
+              <input type="text" class="form-control p-0 border-0" name="name" required > 
           </div>
       </div>
       <div class="form-group mb-4">
           <label class="col-md-12 p-0">Item Price</label>
           <div class="col-md-12 border-bottom p-0">
-              <input type="text" class="form-control p-0 border-0" name="price"> 
+              <input type="text" class="form-control p-0 border-0" name="price" required> 
           </div>
       </div>
       <div class="form-group mb-4">
