@@ -15,10 +15,8 @@ class FoodOrder extends Migration
     {
         Schema::create('food_order', function (Blueprint $table) {
             $table->id();
-            $table->index('food_id');
-            $table->index('order_id');
-            $table->foreign('food_id')->references('id')->on('food')->onDelete('cascade');
-            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->foreignId('food_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
