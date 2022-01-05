@@ -15,11 +15,16 @@ class FoodOrder extends Migration
     {
         Schema::create('food_order', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('food_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('order_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('food_id')->constrained()
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            $table->foreignId('order_id')->constrained()
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -28,6 +33,6 @@ class FoodOrder extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('food_order');
     }
 }

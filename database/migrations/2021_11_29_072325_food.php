@@ -15,12 +15,11 @@ class Food extends Migration
     {
         Schema::create('food', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->interger('price');
+            $table->string('name')->unique();
+            $table->float('price')->default('0');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -28,6 +27,6 @@ class Food extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('food');
     }
 }
