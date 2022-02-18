@@ -8,7 +8,7 @@ use App\Http\Controllers\adminReportController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Ordercontroller;
+use App\Http\Controllers\OrderController;
 
 
 
@@ -51,11 +51,11 @@ Route::resource('/admin-actions',adminController::class);
 
 //route to the crud operations on orders
 
-Route::resource('/order',Ordercontroller::class);
+Route::resource('/order',OrderController::class);
 
-Route::get('/display-menu', [Ordercontroller::class , 'showMenuItems'])->name('showMenuItems');
+Route::get('/display-menu', [OrderController::class , 'showMenuItems'])->name('showMenuItems');
 
-Route::post('/create-menu-item', [Ordercontroller::class , 'createMenuItem'])->name('createMenuItem');
+Route::post('/create-menu-item', [OrderController::class , 'createMenuItem'])->name('createMenuItem');
 
 Auth::routes();
 
