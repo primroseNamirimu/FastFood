@@ -66,7 +66,7 @@ Route::get('/admin', [HomeController::class, 'admin'])->name('admin.home')->midd
 
 //Route::get('/report', [App\Http\Controllers\adminControllers\adminReportController::class, 'currentMonth'])->name('adminReport');
 Route::get('/report', [adminReportController::class , 'currentMonth'])->name('adminReport');
-
+Route::get('/user-report', [adminReportController::class , 'currentMonth_user'])->name('userReport');
 
 //Route::get('/foodItemsAdmin',[adminReportController::class,'foodItems'])->name('admin.foodItems');
 
