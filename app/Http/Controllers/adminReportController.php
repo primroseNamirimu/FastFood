@@ -18,7 +18,7 @@ class AdminReportController extends Controller
         ->join('orders','orders.id','=','food_order.order_id')
         ->join('users','users.id','=','orders.user_id')
         ->select('food_order.order_id', DB::raw('SUM(food.price) as total'),'orders.created_at','users.lastname','users.firstname')
-        ->groupBy('order_id')
+        ->groupBy('order_id','orders.created_at','users.lastname','users.firstname')
         ->whereMonth('food_order.created_at',date('m'))->get();
 
          return view('reports.adminReport',["query"=>$query]);

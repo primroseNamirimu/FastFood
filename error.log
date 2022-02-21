@@ -1,0 +1,1 @@
+2022/02/17 21:10:15 [crit] 8833#8833: *5 connect() to unix:/var/run/php/php7.4-fpm.sock failed (2: No such file or directory) while connecting to upstream, client: 41.210.155.212, server: food.dsmagic.com, request: "GET /login HTTP/2.0", upstream: "fastcgi://unix:/var/run/php/php7.4-fpm.sock:", host: "food.dsmagic.com"

@@ -48,7 +48,7 @@ class HomeController extends Controller
             ->join('orders', 'orders.id', '=', 'food_order.order_id')
             ->join('users', 'users.id', '=', 'orders.user_id')
             ->select('food_order.order_id', 'orders.id', DB::raw('SUM(food.price) as total'), 'orders.created_at', 'users.firstname')
-            ->groupBy('order_id')
+            ->groupBy('order_id','orders.id','food_order.order_id','orders.created_at','users.firstname')
             ->where('users.id', $userID)
 
             ->whereMonth('food_order.created_at', date('m'))
@@ -67,7 +67,7 @@ public function userHome(){
     ->join('orders', 'orders.id', '=', 'food_order.order_id')
     ->join('users', 'users.id', '=', 'orders.user_id')
     ->select('food_order.order_id', 'orders.id', DB::raw('SUM(food.price) as total'), 'orders.created_at', 'users.firstname')
-    ->groupBy('order_id')
+    ->groupBy('order_id','orders.id','orders.created_at','users.firstname')
     ->where('users.id', $userID)
 
     ->whereMonth('food_order.created_at', date('m'))
