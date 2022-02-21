@@ -42,33 +42,50 @@
             </tr>
           </thead>
           <tbody>
+           @php
+           $company_contrib = 2500;
+              $self_total = 0;
+              $company_total = 0;
+              $overall_total = 0;
+           @endphp
             @foreach ($query as $item)
       
          <tr data-index={{ $item->order_id }} data-firstName={{ $item->firstname }}>
             
           <td> {{ $item->lastname }} {{ $item->firstname }} </td>
-          <td>2500</td>
+          <td>{{ $company_contrib }}</td>
           <td>@php
             $price = 0;
             $self_contrib = 0;
             $self_contrib = intval($item->total) - 2500;
-            
-            // $total_val = 0;
-            // $total_val = $total_val + $self_contrib;
+        
+           $self_total  += $self_contrib;
+           $company_total += $company_contrib;
+           $overall_total += intval($item->total);
             
         @endphp
             {{ $self_contrib }}
           </td>
           <td>{{ $item->total }}</td>
           <td>{{ $item->created_at }}</td>
+          <td>{{ $item->name }}</td>
           {{-- <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Launch demo modal
           </button></td> --}}
-          <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">More</button></td> 
+          {{-- <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">More</button></td>  --}}
       </tr>
       @endforeach
             
           </tbody>
+          <tfoot>
+            <tr>
+            <td> </td>
+            <td><strong>Total: {{ $company_total }}</strong></td>
+            <td><strong> Total: {{ $self_total }}</strong></td>
+            <td><strong> Total: {{$overall_total }}</strong></td>
+            <td></td> <td></td> <td></td>
+            </tr>
+           </tfoot>
         </table>
       </div>
 
@@ -208,6 +225,7 @@
 
 <script>
   $(document).ready(function() {
+
   $.noConflict();
      //DATA TABLES
      var reportTable = $('#table_id');
@@ -345,7 +363,7 @@ window.onload = function(){
 }
 
   });
-       
+
 
 </script>
 

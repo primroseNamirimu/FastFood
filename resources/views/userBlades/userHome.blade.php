@@ -31,47 +31,54 @@
                 <th>Date</th>
                 <th>Company Contribution</th>  
                 <th>Self contribution</th>                      
-                <th>Action</th>
+                <th>Sauce</th>
           
     
               </tr>
             </thead>
             <tbody>
 
-              {{-- @foreach ($queryuser as $item)
+          
               @php
-              $self_contrib = 0;
-              $price = 0;
-              $price = intval($item->total);
-              $self_contrib = $price - 2500;
-              $food_array = ($item->name);
-              $food_string = explode(" ", $food_array);
+             $company_contrib = 2500;
+              $self_total = 0;
+              $company_total = 0;
+              $overall_total = 0;
           
               @endphp
                
-              @endforeach --}}
+             
 
                 @foreach ($queryuser as $item)
                 <tr data-index={{ $item->id }}>
                
                 <td>{{ $item->firstname }} {{ $item->lastname }} </td>
                 <td>{{ $item->created_at }}</td>
-                <td>2500</td>
+                <td>{{ $company_contrib }}</td>
                 <td> @php
                   $self_contrib = 0;
                   $price = 0;
                   $price = intval($item->total);
                   $self_contrib = $price - 2500;
-    
+                  $self_total += $self_contrib;
+                  $company_total +=$company_contrib
                   @endphp
                 {{ $self_contrib }}  
                 </td> 
-              
-                  <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">More</button></td>
+              <td>{{ $item->name }}</td>
+                  {{-- <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">More</button></td> --}}
                </tr> 
 
                  @endforeach 
             </tbody>
+            <tr>
+              <td>
+            </td>
+              <td></td>
+              <td>Total: {{ $company_total }}</td>
+              <td>Total: {{ $self_total }} </td>
+              <td></td>
+            </tr>
           </table>
       
         

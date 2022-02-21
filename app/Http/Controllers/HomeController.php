@@ -47,9 +47,10 @@ class HomeController extends Controller
             ->join('food', 'food.id', '=', 'food_order.food_id')
             ->join('orders', 'orders.id', '=', 'food_order.order_id')
             ->join('users', 'users.id', '=', 'orders.user_id')
-            ->select('food_order.order_id', 'orders.id', DB::raw('SUM(food.price) as total'), 'orders.created_at', 'users.firstname')
-            ->groupBy('order_id','orders.id','food_order.order_id','orders.created_at','users.firstname')
+            ->select('food_order.order_id', 'orders.id', DB::raw('SUM(food.price) as total'), 'orders.created_at', 'food.name','users.firstname')
+            ->groupBy('order_id','orders.id','food_order.order_id','orders.created_at','food.name','users.firstname')
             ->where('users.id', $userID)
+            ->where('food.price','>','0')
 
             ->whereMonth('food_order.created_at', date('m'))
 
@@ -66,10 +67,10 @@ public function userHome(){
     ->join('food', 'food.id', '=', 'food_order.food_id')
     ->join('orders', 'orders.id', '=', 'food_order.order_id')
     ->join('users', 'users.id', '=', 'orders.user_id')
-    ->select('food_order.order_id', 'orders.id', DB::raw('SUM(food.price) as total'),'orders.created_at', 'users.firstname','users.lastname')
-    ->groupBy('order_id','orders.id','orders.created_at','users.firstname','users.lastname')
+    ->select('food_order.order_id', 'orders.id', DB::raw('SUM(food.price) as total'),'orders.created_at', 'food.name','users.firstname','users.lastname')
+    ->groupBy('order_id','orders.id','orders.created_at','users.firstname','food.name','users.lastname')
     ->where('users.id', $userID)
-
+    ->where('food.price','>','0')
     ->whereMonth('food_order.created_at', date('m'))
 
     ->limit(10)->get();
