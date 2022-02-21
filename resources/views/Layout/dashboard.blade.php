@@ -198,7 +198,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('adminReport') }}"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('userReport') }}"
                                 aria-expanded="false">
                                 <i class="fa fa-table" aria-hidden="true"></i>
                                 <span class="hide-menu">My Expenditure</span>
