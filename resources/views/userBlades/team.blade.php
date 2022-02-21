@@ -35,7 +35,7 @@
             <div class="float-end">
               <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create New User</button>
                <a href="{{ route('disabled-users') }}" ><button class="btn btn-success">Disabled Users</button></a>
-               <a class="btn btn-danger" href="{{ route('multiple_delete') }}">Delete Selected</a>      
+               {{-- <a class="btn btn-danger" href="{{ route('multiple_delete') }}">Delete Selected</a>       --}}
             </div>
             
         </div>
