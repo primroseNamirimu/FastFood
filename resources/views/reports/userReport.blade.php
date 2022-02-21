@@ -35,7 +35,7 @@
              
               <th>Company Contribution  </th>
               <th>Self contribution</th>
-
+              <th>Total</th>
               <th>DATE</th>
               <th>Action</th>
 
@@ -47,7 +47,18 @@
          <tr data-index={{ $item->order_id }} data-firstName={{ $item->firstname }}>
             
           <td> {{ $item->lastname }} {{ $item->firstname }} </td>
-       
+          <td>2500</td>
+          <td>@php
+            $price = 0;
+            $self_contrib = 0;
+            $self_contrib = intval($item->total) - 2500;
+            
+            // $total_val = 0;
+            // $total_val = $total_val + $self_contrib;
+            
+        @endphp
+            {{ $self_contrib }}
+          </td>
           <td>{{ $item->total }}</td>
           <td>{{ $item->created_at }}</td>
           {{-- <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
