@@ -32,7 +32,10 @@
             <tr>
               <th>NAME</th>
          
-              <th>TOTAL</th>             
+             
+              <th>Company Contribution  </th>
+              <th>Self contribution</th>
+
               <th>DATE</th>
               <th>Action</th>
 

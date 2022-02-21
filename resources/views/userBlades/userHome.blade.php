@@ -27,25 +27,49 @@
         <table class="table table-bordered table-hover table-striped mt-4 data-table" id="table_id" >
             <thead>
               <tr>
-               
-               
-                <th>Total</th>                        
-                <th>DATE</th>
+               <th>Name</th>
+                <th>Date</th>
+                <th>Company Contribution</th>  
+                <th>Self contribution</th>                      
                 <th>Action</th>
           
     
               </tr>
             </thead>
             <tbody>
+
+              {{-- @foreach ($queryuser as $item)
+              @php
+              $self_contrib = 0;
+              $price = 0;
+              $price = intval($item->total);
+              $self_contrib = $price - 2500;
+              $food_array = ($item->name);
+              $food_string = explode(" ", $food_array);
+          
+              @endphp
+               
+              @endforeach --}}
+
                 @foreach ($queryuser as $item)
                 <tr data-index={{ $item->id }}>
-                 
-                  {{-- <td>{{ $item->name }}</td>   --}}
-                  <td>{{ $item->total }}</td>        
-                  <td>{{ $item->created_at }}</td>
-             
+               
+                <td>{{ $item->firstname }} {{ $item->lastname }} </td>
+                <td>{{ $item->created_at }}</td>
+                <td>2500</td>
+                <td> @php
+                  $self_contrib = 0;
+                  $price = 0;
+                  $price = intval($item->total);
+                  $self_contrib = $price - 2500;
+    
+                  @endphp
+                {{ $self_contrib }}  
+                </td> 
+              
                   <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">More</button></td>
                </tr> 
+
                  @endforeach 
             </tbody>
           </table>
@@ -80,6 +104,8 @@
 
 <script type="text/javascript">
 
+
+
     $(function () {
         $.noConflict();
       var table = $('.data-table').DataTable({
@@ -104,7 +130,7 @@
     $.ajax({
            
              type:'GET',
-             url:"{{ url ('/foodItemsAdmin') }}",
+             url:"{{ url('/fooditems') }}",
              dataType:"json",
              data:{
                orderID:orderID

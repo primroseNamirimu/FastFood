@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\True_;
 use PhpParser\Node\Stmt\Foreach_;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminReportController extends Controller
@@ -22,6 +23,23 @@ class AdminReportController extends Controller
         ->whereMonth('food_order.created_at',date('m'))->get();
 
          return view('reports.adminReport',["query"=>$query]);
+        
+      
+        
+    } 
+
+    public function currentMonth_user(){
+        $id = Auth::user()->id;
+        $query = DB::table('food_order')
+        ->join('food','food.id','=','food_order.food_id')
+        ->join('orders','orders.id','=','food_order.order_id')
+        ->join('users','users.id','=','orders.user_id')
+        ->select('food_order.order_id', DB::raw('SUM(food.price) as total'),'orders.created_at','users.lastname','users.firstname')
+        ->groupBy('order_id','orders.created_at','users.lastname','users.firstname')
+        ->where('id',$id)
+        ->whereMonth('food_order.created_at',date('m'))->get();
+
+         return view('reports.userReport',["query"=>$query]);
         
       
         
