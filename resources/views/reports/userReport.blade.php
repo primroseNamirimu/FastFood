@@ -87,11 +87,11 @@
       <div class="modal-body">
        
       </div>
-      <div class="modal-footer">
+      {{-- <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button class="btn btn-primary"  id="wrong-btn" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Wrong Order</button>
        
-      </div>
+      </div> --}}
     </div>
   </div>
 </div> 
