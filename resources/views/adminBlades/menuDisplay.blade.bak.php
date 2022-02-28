@@ -40,7 +40,7 @@
   <table class="table table-striped table-hover table-sm" width="60%" id="myTable">
       <tr>
 
-          <th>Food</th>
+          <th>Foodooooo</th>
           <th>Price</th>
           <th>Action</th>
       </tr>
@@ -54,7 +54,7 @@
          
 
           <td> {{ $menu->name }}</td>
-          <td>{{ $menu->price }}</td>
+          <td>{{ number_format($menu->prie) }}</td>
           <td> 
            
             <form action="{{ route('order.destroy',$menu->id) }}" method="POST">

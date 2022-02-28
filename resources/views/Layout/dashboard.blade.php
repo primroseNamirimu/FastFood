@@ -115,9 +115,8 @@
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
-                        <li> 
+                        <li > 
                             <div>
-                            {{-- <a class="profile-pic" href="{{ route('profile') }}"> --}}
                                 <a class="profile-pic" href ="{{ route('admin-actions.show',Auth::user()->id) }}">
                                 <i class="fas fa-user" aria-hidden="true"></i> {{ Auth::user()->username }}
                             </a>
@@ -134,7 +133,7 @@
                                           </form></a>
                                  
                                          </div> 
-                                        </div>
+                                        </div>            
                         </li>
                         <!-- ============================================================== -->
                         <!-- User profile and search -->

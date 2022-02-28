@@ -15,6 +15,7 @@ class OrderController extends Controller
     public function index()
     {
         $menuTable = food::all();
+        
         if (auth::user()->is_admin == 1) {
            
 

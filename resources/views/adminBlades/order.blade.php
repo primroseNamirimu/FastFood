@@ -43,6 +43,7 @@
           <th>Food</th>
           <th>Price</th>
           <th width="28px">Action</th>
+          <th>Staff</th>
       </tr>
     <input type="hidden" name="total" id="sum-price">
     <input type="hidden" name="food_ids" id="id-food_ids">
@@ -54,7 +55,11 @@
          
 
           <td> {{ $menu->name }}</td>
-          <td>{{ $menu->price }}</td>
+          <td>@php 
+          $num_price = number_format($menu->price)
+           @endphp
+           {{$num_price}}
+          </td>
           <td class="text-center"> 
             <input type="hidden" name="checkbox[]" class="check" value="0">  
             <input type="checkbox" class="check" name="checkbox[]" value="{{ $menu->price }} ">
@@ -64,7 +69,9 @@
               
               {{-- </form>  --}}
           {{-- </td> --}}
-      </tr>
+              <td><input type="checkbox" class="" name="" value="try">{{$menu->price}}</td>
+        </tr>
+     
       @endforeach 
      
       <tr style="font-size: x-large;">
@@ -153,7 +160,9 @@ $(document).ready(function() {
          foodIds.push(foodID)
         
          total += parseInt(foodPrice);
-         $("#total_amount").html(total)
+         $("#total_amount").html(total);
+        // num = (total).toLocaleString('en'); 
+        // console.log(total)
          $("#sum-price").val(total)
        } else {
    

@@ -47,7 +47,10 @@
          
 
           <td> {{ $menu->name }}</td>
-          <td>{{ $menu->price }}</td>
+          <td>@php
+          $num_price = number_format($menu->price)
+          @endphp
+          {{$num_price}}</td>
           <td class="text-center"> 
             <input type="hidden" name="checkbox[]" class="check" value="0">  
             <input type="checkbox" class="check" name="checkbox[]" value="{{ $menu->price }} ">
@@ -62,12 +65,12 @@
      
       <tr style="font-size: x-large;">
         <td colspan="2">TOTAL COST </td>
-        <td colspan="2"><strong id="total_amount"></strong></td>
+        <td colspan="2"><strong id="total_amount">{{ $total }}</strong></td>
         
       </tr><br />
       <tr>
         <td colspan="4">
-          <button type = "submit" class="btn btn-success btn-lg order-btn" id="order-btn">Order now Now</button>
+          <button type = "submit" class="btn btn-success btn-lg order-btn" id="order-btn">Order now </button>
         </td>
       </tr>
      

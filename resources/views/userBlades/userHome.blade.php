@@ -63,7 +63,7 @@
                   $self_total += $self_contrib;
                   $company_total +=$company_contrib
                   @endphp
-                {{ $self_contrib }}  
+                {{ number_format($self_contrib) }}  
                 </td> 
               <td>{{ $item->name }}</td>
                   {{-- <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">More</button></td> --}}

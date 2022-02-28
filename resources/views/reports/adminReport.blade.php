@@ -44,7 +44,9 @@
                 </thead>
                 <tbody>
                   @php
+                 
                     $company_contrib = 2500;
+                    $number_format_companycontrib = number_format($company_contrib);
                     $self_total = 0;
                     $company_total = 0;
                     $overall_total = 0;
@@ -54,13 +56,13 @@
                         <tr data-index={{ $item->order_id }} data-firstName={{ $item->firstname }}>
 
                             <td> {{ $item->lastname }} {{ $item->firstname }}</td>
-                            <td>{{ $company_contrib }}</td>
+                            <td>{{ $number_format_companycontrib }}</td>
                             <td>@php
                                 $price = 0;
                                 $self_contrib = 0;
-                                $self_contrib = intval($item->total) - $company_contrib;
+                                $self_contrib =intval($item->total- $company_contrib);
                                
-                   
+                                
                 
                                 $self_total  += $self_contrib;
                                 $company_total += $company_contrib;
@@ -72,7 +74,10 @@
                             @endphp
                                 {{ $self_contrib }}
                             </td>
-                            <td>{{ $item->total }}</td>
+                            <td>@php 
+                                $num_format = number_format($item->total);
+                                @endphp
+                                {{ $num_format }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>{{ $item->name }}</td>
                                 {{-- <td>@php

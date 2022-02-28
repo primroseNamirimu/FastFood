@@ -61,6 +61,18 @@
                     </span></li>
                 </ul>
             </div>
+            {{-- <div class="drowdown">
+              <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                      Dropdown button
+                    </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+              </div> --}}
         </div>
         <div class="col-lg-4 col-md-12">
             <div class="white-box analytics-info">
@@ -141,7 +153,10 @@
                           
                            {{-- <td>{{ $item->name }}</td>   --}}
                            <td>{{ $item->created_at }}</td>
-                           <td>{{ $item->total }}</td>        
+                           <td>@php
+                             $num_total = number_format($item->total);
+                           @endphp
+                           {{ $num_total}}</td>        
                           
                       
                            <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">More</button></td>
