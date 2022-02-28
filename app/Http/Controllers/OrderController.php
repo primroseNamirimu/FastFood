@@ -8,6 +8,8 @@ use App\Models\food_order;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
 use App\Models\order;
+use App\Models\User;
+
 
 class OrderController extends Controller
 {
@@ -15,11 +17,14 @@ class OrderController extends Controller
     public function index()
     {
         $menuTable = food::all();
+        $users = User::all();
+        $combined = $menuTable->merge($users);
+        
         
         if (auth::user()->is_admin == 1) {
            
 
-            return view('adminBlades.order', ['menuTable' => $menuTable]);
+            return view('adminBlades.order', ['menuTable' => $menuTable],['users' => $users]);
         }else{
 
             return view('userBlades.order', ['menuTable' => $menuTable]);
@@ -127,7 +132,7 @@ class OrderController extends Controller
     public function show($id)
     {
         $foodItem= food::find($id);
-        return view('adminblades.editMenu',compact('foodItem'),["foodItem"=>$foodItem]);
+        return view('adminBlades.editMenu',compact('foodItem'),["foodItem"=>$foodItem]);
     }
 
     /**

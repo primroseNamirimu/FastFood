@@ -5,15 +5,59 @@
   <div class="col-lg-12 margin-tb">
     <div class="float-start">
       <h2>The Menu</h2>
-  </div>     
+      
+      <small>Select staff to which order belogs</small>
+     
+    
+            
+      <div class="dropdown">
+        <button class="btn btn-primary"  data-bs-toggle="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+          Staff
+        </button>
+       
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+       
+          @foreach($users as $users)
+          <table>
+            <thead>
+              <tbody>
+                <div id="staff">
+                <tr data-id="{{$users->id}}">
+                  
+           <td> 
+             
+               <input type="checkbox" class="checks" name="checkbox[]" 
+            value="{{ $users->firstname }}"></td> 
+        
+          <td><a class="dropdown-item" href="#">{{$users->firstname}}</a></td>
+                </tr>
+                <div>
+              </tbody>
+            </thead>
+          </table>
+          @endforeach
+       
+        </div>
+   
+      </div>
+      
+  </div> 
+<br/>    
     <div class="float-end">
+   
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">Add New Item</button>
         <a class="btn btn-success" href="{{ route('showMenuItems') }}">Edit Menu</a>
       
     </div>
+    
+     
+      
+    
     <br/>
     
 </div>
+<br/>
+<br/>
 <form role="search"  class="app-search d-none d-md-block me-3">
     <input type="text" id="myInput" placeholder="Search for food item..." onkeyup="myFunction()"class="form-control mt-0">
  
@@ -43,13 +87,14 @@
           <th>Food</th>
           <th>Price</th>
           <th width="28px">Action</th>
-          <th>Staff</th>
+          
       </tr>
     <input type="hidden" name="total" id="sum-price">
     <input type="hidden" name="food_ids" id="id-food_ids">
     <input type="hidden" value="{{ $i = 0 }}">
 
-      @foreach ($menuTable as $menu)
+      @foreach ($menuTable as $menu) 
+       
       
      <tr data-foodPrice="{{ $menu->price }}" data-foodID = {{ $menu->id }}>
          
@@ -63,16 +108,11 @@
           <td class="text-center"> 
             <input type="hidden" name="checkbox[]" class="check" value="0">  
             <input type="checkbox" class="check" name="checkbox[]" value="{{ $menu->price }} ">
-               {{-- <form action="{{ route('order.destroy',$menu->id) }}" method="POST">
-               
-                @csrf
-              
-              {{-- </form>  --}}
-          {{-- </td> --}}
-              <td><input type="checkbox" class="" name="" value="try">{{$menu->price}}</td>
-        </tr>
+          
+            </tr>
      
       @endforeach 
+  
      
       <tr style="font-size: x-large;">
         <td colspan="2">TOTAL COST </td>
@@ -148,7 +188,7 @@
 <script>
 
 $(document).ready(function() {
-  
+
      let total = 0;
      let foodIds = [];
      $(document).on('click', 'input.check', function() {
@@ -183,7 +223,17 @@ $(document).ready(function() {
        console.log(formData)
      })
 
+
+$(document).on('click', 'input.checks', function() {
+  const all = $('.checks');
+    const userid = $(this).closest('tr').attr('data-id');
+    if ($this).is(":checked"){
+      all.attr('disabled','disabled')
+    }
+    console.log(userid);
+});
    });
+   
 
    //.....Search text area....//
    function myFunction() {
