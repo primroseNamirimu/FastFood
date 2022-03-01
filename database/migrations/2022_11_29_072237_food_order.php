@@ -15,12 +15,15 @@ class FoodOrder extends Migration
     {
         Schema::create('food_order', function (Blueprint $table) {
             $table->id();
+            $table->string('order_made_by');
+            $table->index('order_made_by');
             $table->foreignId('food_id')->constrained()
             ->onDelete('cascade')
             ->onUpdate('cascade');
             $table->foreignId('order_id')->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
+         $table->foreign('order_made_by')->references('made_by')->on('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

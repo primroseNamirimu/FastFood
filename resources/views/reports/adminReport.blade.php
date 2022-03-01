@@ -39,6 +39,7 @@
                         <th>Date</th>
 
                         <th>Sauce</th>
+                        <th>Ordered By</th>
 
                     </tr>
                 </thead>
@@ -50,6 +51,11 @@
                     $self_total = 0;
                     $company_total = 0;
                     $overall_total = 0;
+                    $price = 0;
+                                $self_contrib = 0;
+                                $money_self = 0;
+                                $money_company = 0;
+                                $money_overall = 0;
                   @endphp
                   
                     @foreach ($query as $item)
@@ -58,8 +64,8 @@
                             <td> {{ $item->lastname }} {{ $item->firstname }}</td>
                             <td>{{ $number_format_companycontrib }}</td>
                             <td>@php
-                                $price = 0;
-                                $self_contrib = 0;
+                                
+                               
                                 $self_contrib =intval($item->total- $company_contrib);
                                 // $self_string = strval($self_contrib);
                                 // $money_self = number_format($self_string);
@@ -82,7 +88,7 @@
                                 {{ $num_format }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>{{ $item->name }}</td>
-             
+                            <td>{{$item->order_made_by}}</td>
 
 
                                 {{-- <td>@php Carbon\Carbon::parse($item->created_at->format('F') )}}@endphp</td> --}}
@@ -98,7 +104,7 @@
                       <td><strong>Total: {{ $money_company }}</strong></td></td>
                       <td><strong>Total: {{ $money_self }}</strong></td>
                       <td><strong>Total: {{ $overall_total }}</strong></td>
-                      <td><strong></strong></td> <td></td>
+                      <td><strong></strong></td> <td></td><td></td>
                       </tr>
                      </tfoot>
                   

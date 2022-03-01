@@ -37,38 +37,57 @@
               <th>Self contribution</th>
               <th>Total</th>
               <th>DATE</th>
-              <th>Action</th>
+              <th>Sauce</th>
+              <th>ordered By</th>
 
             </tr>
           </thead>
           <tbody>
-           @php
-           $company_contrib = 2500;
-              $self_total = 0;
-              $company_total = 0;
-              $overall_total = 0;
-           @endphp
+            @php
+                 
+            $company_contrib = 2500;
+            $number_format_companycontrib = number_format($company_contrib);
+            $self_total = 0;
+            $company_total = 0;
+            $overall_total = 0;
+            $price = 0;
+                        $self_contrib = 0;
+                        $money_self = 0;
+                        $money_company = 0;
+                        $money_overall = 0;
+          @endphp
             @foreach ($query as $item)
       
          <tr data-index={{ $item->order_id }} data-firstName={{ $item->firstname }}>
             
           <td> {{ $item->lastname }} {{ $item->firstname }} </td>
-          <td>{{ $company_contrib }}</td>
+          <td>{{ $number_format_companycontrib }}</td>
           <td>@php
-            $price = 0;
-            $self_contrib = 0;
-            $self_contrib = intval($item->total) - 2500;
-        
-           $self_total  += $self_contrib;
-           $company_total += $company_contrib;
-           $overall_total += intval($item->total);
+                                
+                               
+            $self_contrib =intval($item->total- $company_contrib);
+            // $self_string = strval($self_contrib);
+            // $money_self = number_format($self_string);
+
+            $self_total  += $self_contrib;
+            $company_total += $company_contrib;
+            $overall_total += intval($item->total);
+
+            //money format for the totals
+            $money_self = number_format($self_total);
+            $money_company = number_format($company_total);
+            $money_overall = number_format($overall_total);
             
         @endphp
             {{ $self_contrib }}
           </td>
-          <td>{{ $item->total }}</td>
+          <td>@php 
+            $num_format = number_format($item->total);
+            @endphp
+            {{ $num_format }}</td>
           <td>{{ $item->created_at }}</td>
           <td>{{ $item->name }}</td>
+          <td>{{$item->order_made_by}}</td>
           {{-- <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Launch demo modal
           </button></td> --}}
@@ -80,9 +99,9 @@
           <tfoot>
             <tr>
             <td> </td>
-            <td><strong>Total: {{ $company_total }}</strong></td>
-            <td><strong> Total: {{ $self_total }}</strong></td>
-            <td><strong> Total: {{$overall_total }}</strong></td>
+            <td><strong>Total: {{ $money_company }}</strong></td></td>
+                      <td><strong>Total: {{ $money_self }}</strong></td>
+                      <td><strong>Total: {{ $overall_total }}</strong></td>
             <td></td> <td></td> <td></td>
             </tr>
            </tfoot>

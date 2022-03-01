@@ -12,6 +12,7 @@ class order extends Model
 
     protected $fillable = [
         'user_id',
+        'made_by',
         
     ];
 

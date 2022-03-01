@@ -77,11 +77,12 @@ class OrderController extends Controller
     {
         $total = $_POST['total'];
         $food_IDS = $_POST['food_ids'];
-        $staff_IDS = $_POST['staff_name'];
-        $staff_Name = $_POST['actual_staff_name'];
+     
        
-        if(Auth::user()->is_admin ==1 && $staff_IDS !== "" ){
-            $userID = $staff_IDS;
+        if(Auth::user()->is_admin ==1 ){
+            $staff_IDS = $_POST['staff_name'];
+            $staff_Name = $_POST['actual_staff_name'];
+           
             if ($total == null) {
     
                 return redirect()->route('order.index')
@@ -89,9 +90,13 @@ class OrderController extends Controller
     
             }
             else {
-                $orderRecord = order::create(['user_id' => $userID]);
+                $ordered_by_id = Auth::user()->lastname;
+                $userID = $staff_IDS;
+                $orderRecord = order::create(['user_id' => $userID ,'made_by'=>$ordered_by_id]);
     
                 $lastId = $orderRecord->id;
+                $lastMadeBy = $orderRecord->made_by;
+      
                 $food_ids_string = json_decode($food_IDS, true);
     
                 foreach ($food_ids_string as $value) {
@@ -99,7 +104,7 @@ class OrderController extends Controller
     
     
                     $orderDetailsRecord = food_order::create(['order_id' => $lastId,
-                        'food_id' => $value]);
+                        'food_id' => $value,'order_made_by'=>$lastMadeBy]);
     
                 }
     
@@ -120,8 +125,6 @@ class OrderController extends Controller
     
         }else{
 
-            $userID = Auth::user()->id;
-
             if ($total == null) {
     
                 return redirect()->route('order.index')
@@ -129,9 +132,12 @@ class OrderController extends Controller
     
             }
             else {
-                $orderRecord = order::create(['user_id' => $userID]);
+                $userID = Auth::user()->id;
+                $madeBy = Auth::user()->username;
+                $orderRecord = order::create(['user_id' => $userID,'made_by'=>$madeBy]);
     
                 $lastId = $orderRecord->id;
+                $lastMadeBy = $orderRecord->made_by;
                 $food_ids_string = json_decode($food_IDS, true);
     
                 foreach ($food_ids_string as $value) {
@@ -139,7 +145,7 @@ class OrderController extends Controller
     
     
                     $orderDetailsRecord = food_order::create(['order_id' => $lastId,
-                        'food_id' => $value]);
+                        'food_id' => $value, 'order_made_by'=>$lastMadeBy]);
     
                 }
     

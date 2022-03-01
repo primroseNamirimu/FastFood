@@ -65,7 +65,7 @@
      
       <tr style="font-size: x-large;">
         <td colspan="2">TOTAL COST </td>
-        <td colspan="2"><strong id="total_amount">{{ $total }}</strong></td>
+        <td colspan="2"><strong id="total_amount"></strong></td>
         
       </tr><br />
       <tr>
