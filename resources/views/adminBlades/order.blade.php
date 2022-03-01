@@ -5,42 +5,7 @@
   <div class="col-lg-12 margin-tb">
     <div class="float-start">
       <h2>The Menu</h2>
-      
-      <small>Select staff to which order belogs</small>
      
-    
-            
-      <div class="dropdown">
-        <button class="btn btn-primary"  data-bs-toggle="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-          Staff
-        </button>
-       
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-       
-          @foreach($users as $users)
-          <table>
-            <thead>
-              <tbody>
-                <div id="staff">
-                <tr data-id="{{$users->id}}">
-                  
-           <td> 
-             
-               <input type="checkbox" class="checks" name="checkbox[]" 
-            value="{{ $users->firstname }}"></td> 
-        
-          <td><a class="dropdown-item" href="#">{{$users->firstname}}</a></td>
-                </tr>
-                <div>
-              </tbody>
-            </thead>
-          </table>
-          @endforeach
-       
-        </div>
-   
-      </div>
-      
   </div> 
 <br/>    
     <div class="float-end">
@@ -49,10 +14,7 @@
         <a class="btn btn-success" href="{{ route('showMenuItems') }}">Edit Menu</a>
       
     </div>
-    
-     
-      
-    
+ 
     <br/>
     
 </div>
@@ -67,15 +29,46 @@
 <form id="order-form" method="POST" action="{{ route('order.store') }}">
     {{-- <form id="order-form" method="POST" action=""> --}}
 @csrf
+<small>Select staff to which order belogs</small>
+<div class="dropdown">
+  <button class="btn btn-primary"  data-bs-toggle="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+    Staff
+  </button>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+ 
+    @foreach($users as $users)
+    <table>
+      <thead>
+        <tbody>
+          <div id="staff">
+          <tr data-id="{{$users->id}}" data-name="{{$users->username}}">
+            
+     <td> 
+       
+         <input type="radio" class="radio" name="staff_names[]" 
+      value="{{ $users->firstname }}"></td> 
+  
+    <td><a class="dropdown-item" href="#">{{$users->firstname}}</a></td>
+          </tr>
+          <div>
+        </tbody>
+      </thead>
+    </table>
+    @endforeach
+ 
+  </div>
+
+</div>
 
   @if ($message = Session::get('success'))
-  <div class="alert alert-success">
+  <div class="alert alert-success " style="width:70%">
       <p>{{ $message }}</p>
   </div>
 @endif
 
-@if(Session::has('fail'))
-<div class="alert alert-danger">{{Session::get('fail')}}
+@if($message = Session::get('danger'))
+<div class="alert alert-danger" style="width: 70%">
   <p>{{ $message }}</p>
 </div>
 
@@ -91,6 +84,8 @@
       </tr>
     <input type="hidden" name="total" id="sum-price">
     <input type="hidden" name="food_ids" id="id-food_ids">
+    <input type="hidden" name="staff_name" id="staff_id">
+    <input type="hidden" name="actual_staff_name" id="staff_name">
     <input type="hidden" value="{{ $i = 0 }}">
 
       @foreach ($menuTable as $menu) 
@@ -201,8 +196,7 @@ $(document).ready(function() {
         
          total += parseInt(foodPrice);
          $("#total_amount").html(total);
-        // num = (total).toLocaleString('en'); 
-        // console.log(total)
+      
          $("#sum-price").val(total)
        } else {
    
@@ -214,24 +208,32 @@ $(document).ready(function() {
        }
 
      })
-     const form = $("#order-form")
+
+$(document).on('click', 'input.radio', function() {
+  const all = $('.radio');
+  let user_Ids = [];
+  const userid = $(this).closest('tr').attr('data-id');
+  const username = $(this).closest('tr').attr('data-name');
+    if ('$(input[type=radio]:checked)'){
+  
+  alert("You are making an order for "+ username)
+ 
+    }
+    const form = $("#order-form")
      form.on('submit', function (e) {
        const selectedFoods = JSON.stringify(foodIds)
-       console.log(selectedFoods)
+       const selected_staff = userid
+       const selected_staff_name = username
+
        $("#id-food_ids").val(selectedFoods)
+     $("#staff_id").val(selected_staff)
+     $("#staff_name").val(selected_staff_name)
        const formData = form.serializeArray()
-       console.log(formData)
+   
      })
-
-
-$(document).on('click', 'input.checks', function() {
-  const all = $('.checks');
-    const userid = $(this).closest('tr').attr('data-id');
-    if ($this).is(":checked"){
-      all.attr('disabled','disabled')
-    }
-    console.log(userid);
 });
+
+
    });
    
 

@@ -77,46 +77,90 @@ class OrderController extends Controller
     {
         $total = $_POST['total'];
         $food_IDS = $_POST['food_ids'];
-        //echo($food_IDS);
-
-        $userID = Auth::user()->id;
-
-        if ($total == null) {
-
-            return redirect()->route('order.index')
-                ->with('danger', 'Order can not be empty');
-
-        }
-        else {
-            $orderRecord = order::create(['user_id' => $userID]);
-
-            $lastId = $orderRecord->id;
-            $food_ids_string = json_decode($food_IDS, true);
-
-            foreach ($food_ids_string as $value) {
-                echo($value);
-
-
-                $orderDetailsRecord = food_order::create(['order_id' => $lastId,
-                    'food_id' => $value]);
-
-            }
-
-
-            if ($orderDetailsRecord) {
+        $staff_IDS = $_POST['staff_name'];
+        $staff_Name = $_POST['actual_staff_name'];
+       
+        if(Auth::user()->is_admin ==1 && $staff_IDS !== "" ){
+            $userID = $staff_IDS;
+            if ($total == null) {
+    
                 return redirect()->route('order.index')
-                    ->with('success', 'Your Order was successfully recorded');
-           
+                    ->with('danger', 'Order can not be empty');
+    
             }
             else {
+                $orderRecord = order::create(['user_id' => $userID]);
+    
+                $lastId = $orderRecord->id;
+                $food_ids_string = json_decode($food_IDS, true);
+    
+                foreach ($food_ids_string as $value) {
+                    echo($value);
+    
+    
+                    $orderDetailsRecord = food_order::create(['order_id' => $lastId,
+                        'food_id' => $value]);
+    
+                }
+    
+    
+                if ($orderDetailsRecord) {
+                    return redirect()->route('order.index')
+                        ->with('success','Order for ' . $staff_Name .' was successfully recorded');
+               
+                }
+                else {
+                    return redirect()->route('order.index')
+                        ->with('danger', 'Something went wrong');
+                }
+             }
+    
+           
+        
+    
+        }else{
+
+            $userID = Auth::user()->id;
+
+            if ($total == null) {
+    
                 return redirect()->route('order.index')
-                    ->with('danger', 'Something went wrong');
+                    ->with('danger', 'Order can not be empty');
+    
             }
-         }
+            else {
+                $orderRecord = order::create(['user_id' => $userID]);
+    
+                $lastId = $orderRecord->id;
+                $food_ids_string = json_decode($food_IDS, true);
+    
+                foreach ($food_ids_string as $value) {
+                    echo($value);
+    
+    
+                    $orderDetailsRecord = food_order::create(['order_id' => $lastId,
+                        'food_id' => $value]);
+    
+                }
+    
+    
+                if ($orderDetailsRecord) {
+                    return redirect()->route('order.index')
+                        ->with('success', 'Your Order was successfully recorded');
+               
+                }
+                else {
+                    return redirect()->route('order.index')
+                        ->with('danger', 'Something went wrong');
+                }
+             }
+    
+           
+        }
+    
+        }
 
-       
-    }
-
+      
     public function showMenuItems(){
         $menuTable = food::all();
 
@@ -170,7 +214,7 @@ class OrderController extends Controller
         
 
         $foodItem ->update($request->all());
-  
+       
         return redirect()->route('order.index')
                         ->with('success','Menu updated successfully');
     }

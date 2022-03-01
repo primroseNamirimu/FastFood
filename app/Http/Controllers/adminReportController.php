@@ -23,6 +23,7 @@ class AdminReportController extends Controller
         ->groupBy('order_id','orders.created_at','users.lastname','users.firstname','food.name')
        ->where('food.price','>','0')
         ->whereMonth('food_order.created_at',date('m'))->get();
+        // ->limit(5)->get();
         
          return view('reports.adminReport',["query"=>$query]);
         

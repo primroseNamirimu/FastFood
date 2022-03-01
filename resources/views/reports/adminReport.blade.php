@@ -61,15 +61,17 @@
                                 $price = 0;
                                 $self_contrib = 0;
                                 $self_contrib =intval($item->total- $company_contrib);
-                               
-                                
+                                // $self_string = strval($self_contrib);
+                                // $money_self = number_format($self_string);
                 
                                 $self_total  += $self_contrib;
                                 $company_total += $company_contrib;
                                 $overall_total += intval($item->total);
-             
-                                // $total_val = 0;
-                                // $total_val = $total_val + $self_contrib;
+
+                                //money format for the totals
+                                $money_self = number_format($self_total);
+                                $money_company = number_format($company_total);
+                                $money_overall = number_format($overall_total);
                                 
                             @endphp
                                 {{ $self_contrib }}
@@ -80,12 +82,7 @@
                                 {{ $num_format }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>{{ $item->name }}</td>
-                                {{-- <td>@php
-            $foods = implode(',', $item->name);
-            // print ($foods)
-          @endphp 
-          {{ $foods }}
-          </td> --}}
+             
 
 
                                 {{-- <td>@php Carbon\Carbon::parse($item->created_at->format('F') )}}@endphp</td> --}}
@@ -98,22 +95,13 @@
                     <tfoot>
                       <tr>
                       <td></td>
-                      <td><strong>Total: {{ $company_total }}</strong></td></td>
-                      <td><strong>Total: {{ $self_total }}</strong></td>
+                      <td><strong>Total: {{ $money_company }}</strong></td></td>
+                      <td><strong>Total: {{ $money_self }}</strong></td>
                       <td><strong>Total: {{ $overall_total }}</strong></td>
-                      <td><strong></strong></td> <td></td> <td></td>
+                      <td><strong></strong></td> <td></td>
                       </tr>
                      </tfoot>
-                    {{-- <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Total:
-                            {{-- {{ $total_val }} --
-                        </td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr> --}}
+                  
                     
                 </tbody>
             </table>
@@ -175,6 +163,7 @@
             var reportTable = $('#table_id');
             var reportDataTable = $('#table_id').DataTable({
                 dom: 'Bfrtip',
+                "bPaginate": true,
                 buttons: [
                     'copy', 'excel', 'pdf'
                 ]
