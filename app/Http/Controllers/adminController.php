@@ -152,6 +152,52 @@ class AdminController extends Controller
                         ->with('success','User enabled successfully');
     }
 
+    //changing password functionality
+
+
+/**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    
+    public function changePassword(Request $request){
+        $id = Auth::user()->id;
+        $user = User::find($id);
+    
+     
+  
+        if(isset($_GET['change'])){
+            $old_password = $_GET['old_password'];
+            if(Hash::check($old_password,$user->password)){
+                $new_password = Hash::make($_GET['password']);
+                $confirm_password = Hash::make($_GET['confirm_password']); 
+                echo("i reach here");
+                if($new_password == $confirm_password){
+                 $user->password = request('password');   
+                 $user->save();
+ 
+                 $request->validate([
+           
+                     'password' => Hash::make($request['password']),      
+              ]);
+              $user ->update($request->all());
+              
+                }
+                
+         return redirect()->route('change_password')
+                         ->with('success','password changed successfully');
+            }else{
+           
+                return redirect()->route('change_password')
+                ->with('danger','Wrong old password');
+              
+            }
+        }
+    }
+
 
     public function destroyMultiple($id)
     {

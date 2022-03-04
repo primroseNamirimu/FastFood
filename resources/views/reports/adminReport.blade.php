@@ -33,8 +33,8 @@
                     <tr>
                         <th>NAME</th>
 
-                        <th>Company Contribution</th>
-                        <th>Self Contribution</th>
+                        <th>Comp input</th>
+                        <th>Self input</th>
                         <th>Total</th>
                         <th>Date</th>
 
@@ -103,7 +103,7 @@
                       <td></td>
                       <td><strong>Total: {{ $money_company }}</strong></td></td>
                       <td><strong>Total: {{ $money_self }}</strong></td>
-                      <td><strong>Total: {{ $overall_total }}</strong></td>
+                      <td><strong>Total: {{ $money_overall }}</strong></td>
                       <td><strong></strong></td> <td></td><td></td>
                       </tr>
                      </tfoot>

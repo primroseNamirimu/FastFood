@@ -77,11 +77,16 @@ class OrderController extends Controller
     {
         $total = $_POST['total'];
         $food_IDS = $_POST['food_ids'];
-     
-       
+ 
         if(Auth::user()->is_admin ==1 ){
             $staff_IDS = $_POST['staff_name'];
             $staff_Name = $_POST['actual_staff_name'];
+
+            if($staff_IDS == ""){
+                return redirect()->route('order.index')
+                        ->with('danger', 'Select Staff member to whom the order belongs');
+            }
+            else{
            
             if ($total == null) {
     
@@ -119,11 +124,10 @@ class OrderController extends Controller
                         ->with('danger', 'Something went wrong');
                 }
              }
-    
-           
-        
-    
-        }else{
+
+        }
+    }
+        else{
 
             if ($total == null) {
     

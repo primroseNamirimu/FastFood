@@ -104,12 +104,13 @@
             </div>
         </div>
     </div>
-{{-- 
+
+    
     <!-- ============================================================== -->
                 <!-- PRODUCTS YEARLY SALES -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
                         <div class="white-box">
                             <h3 class="box-title">Monthly expenditure</h3>
                             <div class="d-md-flex">
@@ -129,13 +130,39 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                      <div class="white-box">
+                          <h3 class="box-title">Transaction Log</h3>
+                          <div class="d-md-flex">
+                              <ul class="list-inline d-flex ms-auto">
+                                  <li class="ps-3">
+                                      <h5><i class="fa fa-circle me-1 text-info"></i>Mac</h5>
+                                  </li>
+                                  <li class="ps-3">
+                                      <h5><i class="fa fa-circle me-1 text-inverse"></i>Windows</h5>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div id="ct-visits" style="height: 405px;">
+                              <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
+                                      class="chartist-tooltip-value">6</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                 </div>
-                 --}}
+                 
                  <div class="sals-boxes">
-
-                 Your Recent Orders
-                 {{-- <button onclick="toastr.info('Are you the 6 fingered man?');">Click me</button> --}}
-                 <table class="table table-bordered table-hover table-striped mt-4 data-table" id="table_id" >
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">Default file input example</label>
+                    <input class="form-control" style="width: 50%" type="file" id="formFile">
+                  </div>
+                 <div class="row">
+                  <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div class="white-box">
+                        <h3 class="box-title">Revenue</h3>
+                        <div class="d-md-flex">
+                            <table class="table table-bordered table-hover table-striped mt-4 data-table" id="table_id" > 
                      <thead>
                        <tr>
                         <th>DATE</th>
@@ -151,21 +178,33 @@
                          @foreach ($queryadmin as $item)
                          <tr data-index={{ $item->id }}>
                           
-                           {{-- <td>{{ $item->name }}</td>   --}}
-                           <td>{{ $item->created_at }}</td>
+                            <td>{{ $item->name }}</td>   
+                            <td>{{ $item->created_at }}</td>
                            <td>@php
                              $num_total = number_format($item->total);
                            @endphp
                            {{ $num_total}}</td>        
-                          
+                           
                       
-                           <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">More</button></td>
+                            <td><button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" id="button">More</button></td>
                         </tr> 
                           @endforeach 
                      </tbody>
                    </table>
-                  </form>
+                  </form>  
+                 
+                        </div>
+                        {{-- <div id="ct-visits" style="height: 405px;">
+                            <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
+                                    class="chartist-tooltip-value">6</span>
+                            </div>
+                        </div> --}}
+                    </div>
+                </div>
                  </div>
+                
+                 {{-- <button onclick="toastr.info('Are you the 6 fingered man?');">Click me</button> --}}
+               </div>
                
                     <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

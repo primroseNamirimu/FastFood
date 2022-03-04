@@ -29,7 +29,7 @@
 <form id="order-form" method="POST" action="{{ route('order.store') }}">
     {{-- <form id="order-form" method="POST" action=""> --}}
 @csrf
-<small>Select staff to which order belogs</small>
+<small>Select staff to whom the order belogs</small>
 <div class="dropdown">
   <button class="btn btn-primary"  data-bs-toggle="dropdown" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
     Staff

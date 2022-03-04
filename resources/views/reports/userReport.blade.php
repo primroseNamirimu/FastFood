@@ -101,7 +101,7 @@
             <td> </td>
             <td><strong>Total: {{ $money_company }}</strong></td></td>
                       <td><strong>Total: {{ $money_self }}</strong></td>
-                      <td><strong>Total: {{ $overall_total }}</strong></td>
+                      <td><strong>Total: {{ $money_overall }}</strong></td>
             <td></td> <td></td> <td></td>
             </tr>
            </tfoot>

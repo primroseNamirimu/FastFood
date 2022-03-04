@@ -83,3 +83,6 @@ Route::get('/expenditure', [adminReportController::class , 'index'])->name('admi
 Route::get('/disabled users', [adminController::class , 'disabledUsers'])->name('disabled-users');
 
 Route::post('/enable-user', [adminController::class , 'enableUser'])->name('enable-user');
+
+Route::post('/change-password',[adminController::class, 'changePassword'])->name('change-password');
+Route::get('/change-pass',[adminController::class,'changePassword'])->name('change_password'); 
