@@ -169,30 +169,42 @@ class AdminController extends Controller
     
      
   
-        if(isset($_GET['change'])){
+        if($user && isset($_GET['change'])){
+
             $old_password = $_GET['old_password'];
             if(Hash::check($old_password,$user->password)){
-                $new_password = Hash::make($_GET['password']);
-                $confirm_password = Hash::make($_GET['confirm_password']); 
-                echo("i reach here");
+                $new_password = $_GET['password'];
+                $confirm_password = $_GET['confirm_password']; 
+
                 if($new_password == $confirm_password){
                  $user->password = request('password');   
                  $user->save();
- 
-                 $request->validate([
+                 echo("i reach here");
+                 $request->validate($request,[
+                    'password' => ['required', 'alpha_num', 'min:8', 'confirmed'],
+                 ]);
+          
+            //      $request->validate([
            
-                     'password' => Hash::make($request['password']),      
-              ]);
-              $user ->update($request->all());
+            //          'password' => Hash::make($request['password']),      
+            //   ]);
+
+              $user->update(['password'=>Hash::make($request['password'])]);
+              if($user){
+                echo("i reach here updated");
+              }
               
+                }else{
+                    echo("paswords do not match");
                 }
                 
-         return redirect()->route('change_password')
-                         ->with('success','password changed successfully');
+        //  return redirect()->route('admin.home')
+        //                  ->with('success','password changed successfully');
             }else{
+                echo("bottom");
            
-                return redirect()->route('change_password')
-                ->with('danger','Wrong old password');
+                // return redirect()->route('admin.home')
+                // ->with('danger','Wrong old password');
               
             }
         }

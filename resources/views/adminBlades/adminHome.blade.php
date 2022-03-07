@@ -214,10 +214,15 @@
                                             <td>{{ $item->created_at }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->order_made_by }}</td>
+
+                                            <form action="{{ route('order-actions.destroy',$item->order_id ) }}" method="POST">
+                                                @csrf
+                                                {{ method_field('DELETE') }} 
+
                                             <td><button type="submit" class="btn delete"
                                                     onclick="if (!confirm('order for {{ $item->lastname }} made on {{ $item->created_at }} will be permanently deleted, are you sure?')) { return false }">
                                                     <span><i class="fas fa-trash-alt" aria-hidden="true"></i></button></td>
-
+                                            </form>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -452,8 +457,9 @@
                                 },
 
                                 showArea: true
-                            });
+                            },
                     });
+                });
     </script>
 
 

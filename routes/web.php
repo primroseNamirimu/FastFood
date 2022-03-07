@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderManagement;
 
 
 
@@ -48,6 +49,8 @@ Route::get('/profile', function () {
 })->name('profile');
 
 Route::resource('/admin-actions',adminController::class);
+
+Route::resource('/order-actions',OrderManagement::class);
 
 //route to the crud operations on orders
 
