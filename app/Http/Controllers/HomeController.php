@@ -44,32 +44,32 @@ class HomeController extends Controller
 
     {
 
-        $deletedOrders = order_management::all();
-        foreach($deletedOrders as $op){
-            $user = $op->order_for;
-            $order = $op->order_id;
-        }
-        $userName = User::find($user);
+        // $deletedOrders = order_management::all();
+        // foreach($deletedOrders as $op){
+        //     $user = $op->order_for;
+        //     $order = $op->order_id;
+        // }
+        // $userName = User::find($user);
       
-        $orderContent = DB::table('food')
-        ->join('food_order','food.id','=','food_order.food_id')
-        ->join('orders','orders.id','=','food_order.order_id')
-        ->select('food.name')
-        ->where('order_id',$order)
-        ->get();
+        // $orderContent = DB::table('food')
+        // ->join('food_order','food.id','=','food_order.food_id')
+        // ->join('orders','orders.id','=','food_order.order_id')
+        // ->select('food.name')
+        // ->where('order_id',$order)
+        // ->get();
         // $combined = $userName->merge($orderContent);
          //dd($orderContent);
 
-        $query = DB::table('order_audit_delete')
-        ->join('orders','orders.id','=','order_audit_delete.order_id')
-        ->join('users','users.id','=','orders.user_id')
+        // $query = DB::table('order_audit_delete')
+        // ->join('orders','orders.id','=','order_audit_delete.order_id')
+        // ->join('users','users.id','=','orders.user_id')
         
         
-        ->select('users.username',DB::raw('DATE_FORMAT(order_audit_delete.deletion_time,"%d/%m/Y") as deletion_time'),
-        DB::raw('DATE_FORMAT(order_audit_delete.order_creation_date,"%d/%m/Y") as order_creation_date'))
+        // ->select('users.username',DB::raw('DATE_FORMAT(order_audit_delete.deletion_time,"%d/%m/Y") as deletion_time'),
+        // DB::raw('DATE_FORMAT(order_audit_delete.order_creation_date,"%d/%m/Y") as order_creation_date'))
        
-        ->where('user_id',$user)
-        ->where('order_id',$order)->get();
+        // ->where('user_id',$user)
+        // ->where('order_id',$order)->get();
 
         $userID = Auth::user()->id;
 

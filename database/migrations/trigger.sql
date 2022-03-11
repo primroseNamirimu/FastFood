@@ -29,4 +29,4 @@ CREATE TRIGGER delete_audit BEFORE DELETE ON `orders` FOR EACH ROW
         END;//
         delimiter ;
 
-        CREATE TABLE order_audit_delete (order_for varchar (225) NOT NULL, id bigint AUTO_INCREMENT NOT NULL PRIMARY KEY, deletion_time timestamp NOT NULL, order_creation_date timestamp NOT NULL, deleted_by varchar (225) NOT NULL, order_contents varchar (225) NOT NULL);
+        CREATE TABLE order_audit_delete (order_for varchar (225) NOT NULL, id bigint AUTO_INCREMENT NOT NULL PRIMARY KEY, deletion_time timestamp NOT NULL, order_creation_date timestamp NOT NULL, deleted_by varchar (225) NOT NULL DEFAULT admin,order_id bigint);
