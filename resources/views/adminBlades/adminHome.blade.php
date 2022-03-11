@@ -103,6 +103,44 @@
         <div class="row">
             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
                 <div class="white-box">
+                    <h3 class="box-title">Deleted Orders </h3>
+                    <div class="d-md-flex">
+                        {{-- <ul class="list-inline d-flex ms-auto">
+                                  <li class="ps-3">
+                                      <h5><i class="fa fa-circle me-1 text-info"></i>Mac</h5>
+                                  </li>
+                                  <li class="ps-3">
+                                      <h5><i class="fa fa-circle me-1 text-inverse"></i>Windows</h5>
+                                  </li>
+                              </ul> --}}
+                              <table class="table table-bordered table-hover table-striped mt-4 data-table">
+                                  <thead>
+                                  <th>Order_For</th>
+                                  <th>Made_On</th>
+                                  <th>Deleted on</th>
+                                  <th>Order_id</th>
+                                  </thead>
+                             <tbody>
+                              {{-- @foreach($query as $do)
+                              <tr>
+                                  <td>{{$do->order_for}}
+                                  </td>   
+                                  <td>{{$do->order_creation_date}}
+                                </td>  
+                                <td>{{$do->deletion_time}}
+                                </td>  
+                            <td>{{$do->order_id}}</td>                      
+                                </tr>
+                              @endforeach --}}
+                             </tbody>
+                            </table>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                
+                <div class="white-box">
                     <h3 class="box-title">Monthly expenditure</h3>
                     <div class="d-md-flex">
                         {{-- <ul class="list-inline d-flex ms-auto">
@@ -114,28 +152,8 @@
                                     </li>
                                 </ul> --}}
                     </div>
-                    <div id="ct-visits" style="height: 405px;">
-                        <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
-                                class="chartist-tooltip-value">6</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
-                <div class="white-box">
-                    <h3 class="box-title">Transaction Log</h3>
-                    <div class="d-md-flex">
-                        {{-- <ul class="list-inline d-flex ms-auto">
-                                  <li class="ps-3">
-                                      <h5><i class="fa fa-circle me-1 text-info"></i>Mac</h5>
-                                  </li>
-                                  <li class="ps-3">
-                                      <h5><i class="fa fa-circle me-1 text-inverse"></i>Windows</h5>
-                                  </li>
-                              </ul> --}}
-                    </div>
-                    <div id="ct-visits" style="height: 405px;">
-                        <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
+                    <div id="ct-visits" style="height: 300px;">
+                        <div class="chartist-tooltip"><span
                                 class="chartist-tooltip-value">6</span>
                         </div>
                     </div>
@@ -192,9 +210,7 @@
                                             <td>@php
                                                 
                                                 $self_contrib = intval($item->total - $company_contrib);
-                                                // $self_string = strval($self_contrib);
-                                                // $money_self = number_format($self_string);
-                                                
+                                           
                                                 $self_total += $self_contrib;
                                                 $company_total += $company_contrib;
                                                 $overall_total += intval($item->total);
@@ -241,7 +257,7 @@
                                 </tfoot>
                             </table>
                             </form>
-
+                                
                         </div>
                         {{-- <div id="ct-visits" style="height: 405px;">
                             <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
@@ -418,6 +434,7 @@
         //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
     </script>
     <script>
+     
         $(function() {
                     //ct-visits
                     new Chartist.Line('#ct-visits', {
@@ -425,9 +442,7 @@
                                 'Nov', 'Dec'
                             ],
                             series: [
-                                // ["$query"],
-                                //[17, 55, 2, 6 25, 5, 102, 40]
-                                [200, 500, 200, 600, 200, 500, 200, 400]
+                       {! $money_company !}
                             ]
                         },
 
@@ -441,7 +456,7 @@
                             ],
                             axisY: {
                                 labelInterpolationFnc: function(value) {
-                                    return (value / 1) + '000';
+                                    return (value / 1) + '/=';
                                 },
                                 ticks: {
                                     beginAtZero: true,
@@ -459,6 +474,8 @@
                                 showArea: true
                             },
                     });
+
+
                 });
     </script>
 

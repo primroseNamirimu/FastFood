@@ -8,11 +8,11 @@ $(function () {
 
     //ct-visits
     new Chartist.Line('#ct-visits', {
-        labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August','Sept','Oct','Nov','Dec'],
+        //labels: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August','Sept','Oct','Nov','Dec'],
         series: [
             // []
-             [2, 5, 2, 6, 2, 5, 2, 4],
-            ["<? php [2, 5, 2, 6, 2, 5, 2, 4] ?>;"]
+             [2, 5, 2, 6, 2, 5, 2, 4,9,9,9,9],
+          
         ]
     }, {
         top: 0,
@@ -24,7 +24,7 @@ $(function () {
         ],
         axisY: {
             labelInterpolationFnc: function (value) {
-                return (value / 1) + 'k';
+                return (value / 10) + 'k';
             }
             // labelInterpolationFnc: function (value) {
             //     return (value / 1) + 'k';

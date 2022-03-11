@@ -89,3 +89,15 @@ Route::post('/enable-user', [adminController::class , 'enableUser'])->name('enab
 
 Route::post('/change-password',[adminController::class, 'changePassword'])->name('change-password');
 Route::get('/change-pass',[adminController::class,'changePassword'])->name('change_password'); 
+
+
+////resetting password ////
+  
+
+Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+
+Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
+
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+
+Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');

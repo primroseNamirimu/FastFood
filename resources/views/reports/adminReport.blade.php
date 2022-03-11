@@ -195,7 +195,7 @@
 
                     endDate: moment().startOf('hour').add(32, 'hour'),
                     locale: {
-                        format: 'DD-MM-YYYY hh:mm A'
+                        format: 'YYYY-MM-DD '
                     }
                 }, function(start, end) {
                     var startDate = start.format('YYYY-MM-DD ');
@@ -210,6 +210,16 @@
 
             // ajax for the date range picker
             function getDateRangeRecord(endDate, startDate) {
+                const company_contrib = 2500;
+  
+                const self_total = 0;
+                const company_total = 0;
+                const overall_total = 0;
+                const price = 0;
+                const self_contrib = 0;
+                const money_self = 0;
+                const money_company = 0;
+                const money_overall = 0;
                 $.ajax({
                     data: [],
                     url: "{{ url('/expenditure') }}",
@@ -225,19 +235,32 @@
                     dataType: "json",
                     success: function(response) {
                         const {
-                            data
+                            data,data2
                         } = response;
                         console.log(data);
                         var trows = ''
+                        var tfoot = ''
                         data.forEach(record => {
+                           
                             const {
                                 total,
                                 created_at,
-                                firstname
+                                firstname,
+                                company_contrib =2500,
+                                self_contrib = total-company_contrib,
+                                order_made_by,
+                                name,lastname,self_total
+                                
+                             
                             } = record;
+                            // data2.forEach(totalRecord => {
+                            //     const {
+                            //         self_total = self_total + self_contrib
+                            //     }
+                            // }) = totalRecord;
                             trows +=
-                                `<tr><td>${firstname}</td><td>${total}</td><td>${created_at}</td><td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal">More</button></td></tr>`
-
+                                `<tr><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td></tr>`
+                            //  tfoot +=`<tr><td></td><td></td><td>${self_total}</td><td></td><td></td><td></td><td></td>`
                         });
                         // clear before i repopulate
                         reportDataTable.clear().draw();

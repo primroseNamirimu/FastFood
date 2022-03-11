@@ -2,6 +2,7 @@
 <html dir="ltr" lang="en">
 
 <head>
+    
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
@@ -123,21 +124,22 @@
                                             href="{{ route('admin-actions.show', Auth::user()->id) }}">Profile </a>
 
                                         <a class="dropdown-item"
-                                            {{-- href="{{ route('admin-actions.show', Auth::user()->id) }}">Change Password --}}
-                                            href="#" data-bs-toggle="modal" data-bs-target="#changePasswordmodal">Change Password
-                                    </a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="{{ route('logout') }}" aria-expanded="false"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="fa fa-power-off" aria-hidden="true"></i> <span
-                                                class="hide-menu">Log Out</span>
+                                            @if (Route::has('password.request')) href="{{ route('password.request') }}">
+                                        {{ __('Change Password') }} @endif
+                                            {{-- href="#" data-bs-toggle="modal" data-bs-target="#changePasswordmodal">Change Password --}} </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                                aria-expanded="false"
+                                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                <i class="fa fa-power-off" aria-hidden="true"></i> <span
+                                                    class="hide-menu">Log Out</span>
 
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                            class="d-none">
-                                            @csrf
+                                            </a>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                class="d-none">
+                                                @csrf
 
-                                        </form>
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -157,60 +159,63 @@
             </nav>
         </header>
 
-  
-     <!-- Modal for adding a new item -->
 
-     <div class="modal fade" id="changePasswordmodal" tabindex="-1" role="dialog" aria-labelledby="changePasswordmodalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="changePasswordmodalLabel">Fill the form!</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+        <!-- Modal for changing password-->
+
+        <div class="modal fade" id="changePasswordmodal" tabindex="-1" role="dialog"
+            aria-labelledby="changePasswordmodalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="changePasswordmodalLabel">Fill the form!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- Start Create form  -->
+                        <form class="form-horizontal form-material" method="GET"
+                            action="{{ route('change_password') }}">
+                            @csrf
+
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">Old Password</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input type="text" class="form-control p-0 border-0" name="old_password" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">New Password</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input type="password" class="form-control p-0 border-0" name="password" required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label class="col-md-12 p-0">Confirm Password</label>
+                                <div class="col-md-12 border-bottom p-0">
+                                    <input type="password" class="form-control p-0 border-0" name="confirm_password"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-success" name="change">Change</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- End change password form  -->
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                
-      <!-- Start Create form  -->
-      <form class="form-horizontal form-material" method="GET" action="{{ route('change_password') }}">
-       @csrf
-       
-       <div class="form-group mb-4">
-        <label class="col-md-12 p-0">Old Password</label>
-        <div class="col-md-12 border-bottom p-0">
-            <input type="text" class="form-control p-0 border-0" name="old_password" required > 
         </div>
-    </div>
-        <div class="form-group mb-4">
-            <label class="col-md-12 p-0">New  Password</label>
-            <div class="col-md-12 border-bottom p-0">
-                <input type="password" class="form-control p-0 border-0" name="password" required > 
-            </div>
-        </div>
-        <div class="form-group mb-4">
-            <label class="col-md-12 p-0">Confirm Password</label>
-            <div class="col-md-12 border-bottom p-0">
-                <input type="password" class="form-control p-0 border-0" name="confirm_password" required> 
-            </div>
-        </div>
-        <div class="form-group mb-4">
-            <div class="col-sm-12">
-                <button class="btn btn-success" name="change">Change</button>
-            </div>
-        </div>
-      </form>
-      <!-- End change password form  -->
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-             
-            </div>
-          </div>
-        </div>
-      </div> 
-      
-      <!-- End of change password Modal -->
+
+        <!-- End of change password Modal -->
 
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
