@@ -17,8 +17,9 @@ class Order extends Migration
             $table->id();
             $table->string('made_by');
             $table->index('made_by');
+            $table->string('isChanged')->default("NO");
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-    
+
             $table->timestamps();
         });
     }
