@@ -1,51 +1,13 @@
-@extends('Layout.dashboard')
+@extends('Layout.dashboard2')
 @section('content')
+<div class="row justify-content-between mb-4">
+    <div class="col-xl-3 col-lg-4">
 
+    </div>
 
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            {{-- <div class="container-fluid"> --}}
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <!-- Row -->
-                {{-- <div class="row"> --}}
-                    <!-- Start first frame Column -->
-                    
-                    {{-- <div class="col-lg-4 col-xlg-3 col-md-12"> --}}
-                        {{-- <div class="white-box">
-                            <div class="user-bg"> <img width="100%" alt="user" src="{{ url('plugins/images/large/img1.jpg') }}">
-                                <div class="overlay-box">
-                                    <div class="user-content">
-                                        {{-- <a href="javascript:void(0)"><img src="{{ url('plugins/images/users/genu.jpg') }}"
-                                                class="thumb-lg img-circle" alt="img"></a> --}}
-                                                {{-- <i width="100%" class="fas fa-user" aria-hidden="true"></i>   
-                                        <h4 class="text-white mt-2">{{ $user->username }}</h4>
-                                        <h5 class="text-white mt-2">{{ $user->email }}</h5>
-                                    </div>
-                                </div>
-                            </div> --}} 
-                            {{-- <div class="user-btm-box mt-5 d-md-flex">
-                                <div class="col-md-4 col-sm-4 text-center">
-                                    <h1>258</h1>
-                                </div>
-                                <div class="col-md-4 col-sm-4 text-center">
-                                    <h1>125</h1>
-                                </div>
-                                <div class="col-md-4 col-sm-4 text-center">
-                                    <h1>556</h1>
-                                </div>
-                            </div> --}}
-                        {{-- </div> --}}
-                    {{-- </div>                     --}}
-                    
-                    
-                    <!-- End first frame Column -->
-                    <!-- Start second frame Column -->
-                    {{-- < class="col-lg-8 col-xlg-9 col-md-12"> --}}
+</div>
                         <div class="sals-boxes">
-                        <div class="card">
-                            <div class="card-body">
+
                                 @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <p>{{ $message }}</p>
@@ -55,7 +17,9 @@
                                     <div class="form-group mb-4">
                                         <label class="col-md-12 p-0">Full Name</label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <input type="text" class="form-control p-0 border-0"> {{ $user->firstname }} {{ $user->lastname }}
+                                            <label>
+                                                <input type="text" class="form-control p-0 border-0">
+                                            </label> {{ $user->firstname }} {{ $user->lastname }}
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
@@ -82,19 +46,18 @@
                                             <input type="text" class="form-control p-0 border-0">{{ $user->phone }}
                                         </div>
                                     </div>
-                                    
-                                    
+
+
                                 </form>
                                 <div class="form-group mb-4">
                                     <div class="col-sm-12">
-                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Update Profile</button>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Update Profile</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+
                     <!-- Column -->
-                
+
 
                 <!-- Modal for updating the profile -->
 
@@ -103,12 +66,12 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Fill in the details you wish to change</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            
+
  <!-- Start Update form  -->
  <form class="form-horizontal form-material" method="POST" action="{{ route('admin-actions.update',$user->id) }}">
    @csrf
@@ -116,13 +79,13 @@
     <div class="form-group mb-4">
         <label class="col-md-12 p-0">First Name</label>
         <div class="col-md-12 border-bottom p-0">
-            <input type="text" class="form-control p-0 border-0" name="firstname" value="{{ $user->firstname }}"> 
+            <input type="text" class="form-control p-0 border-0" name="firstname" value="{{ $user->firstname }}">
         </div>
     </div>
     <div class="form-group mb-4">
         <label class="col-md-12 p-0">Last Name</label>
         <div class="col-md-12 border-bottom p-0">
-            <input type="text" class="form-control p-0 border-0" name="lastname" value="{{ $user->lastname }}"> 
+            <input type="text" class="form-control p-0 border-0" name="lastname" value="{{ $user->lastname }}">
         </div>
     </div>
     <div class="form-group mb-4">
@@ -149,7 +112,7 @@
             <input type="text" class="form-control p-0 border-0" name="phone" value="{{ $user->phone }}">
         </div>
     </div>
-  
+
     <div class="form-group mb-4">
         <div class="col-sm-12">
             <button class="btn btn-success" >Update Profile</button>
@@ -157,16 +120,16 @@
     </div>
 </form>
  <!-- End Update form  -->
-          
+
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
         </div>
       </div>
     </div>
-  </div> 
-  
+  </div>
+
   <!-- End of Modal -->
 
 
@@ -187,7 +150,7 @@
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
-          
+
         </div>
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->

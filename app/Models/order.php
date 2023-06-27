@@ -13,10 +13,11 @@ class order extends Model
     protected $fillable = [
         'user_id',
         'made_by',
-        
+        'isChanged'
+
     ];
 
-//defining the inverse relationship that will allow user model to 
+//defining the inverse relationship that will allow user model to
 //acces the order model
 
 public function user(){
@@ -25,7 +26,7 @@ public function user(){
  /**
   * defining the many to mamy relation order hs with food model
   */
-  
+
 public function foods(){
     return $this->belongsToMany(food::class);
 }

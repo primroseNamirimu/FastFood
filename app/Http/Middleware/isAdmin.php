@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -24,11 +24,11 @@ class IsAdmin
         else {
             return redirect(route('login'))->with("You don't have admin access.");
         }
-   
-       
-       
+
+
+
     }
      public function passs(){
-        
+
      }
 }

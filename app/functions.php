@@ -1,5 +1,6 @@
-<? php 
-     function currentMonth_user(){
+<? php
+
+      function currentMonth_user(){
 
         $id = Auth::user()->id;
         $query = DB::table('food_order')
@@ -13,8 +14,8 @@
         ->whereMonth('food_order.created_at',date('m'))->get();
 
          return view('reports.userReport',["query"=>$query]);
-        
-      
-        
-    } 
+
+
+
+    }
     ?>

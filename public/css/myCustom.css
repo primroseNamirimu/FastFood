@@ -1,8 +1,9 @@
 .sals-boxes{
-    width: 95%;
+
     background: #fff;
     padding: 20px 30px;
     margin: 0 20px;
     border-radius: 12px;
+    margin-right: 15px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }

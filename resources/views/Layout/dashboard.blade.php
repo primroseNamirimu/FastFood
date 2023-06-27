@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en">
 
 <head>
-    
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
@@ -294,7 +294,7 @@
                             {{-- <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('order.index') }}"
                                 aria-expanded="false">
-                                <i class='bx bxs-dish' aria-hidden="true"></i> 
+                                <i class='bx bxs-dish' aria-hidden="true"></i>
                                 <span class="hide-menu">Order Now</span>
                             </a>
                         </li> --}}
@@ -360,7 +360,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Dashboard</h4>
                     </div>
-                  
+
                 </div>
                 <!-- /.col-lg-12 -->
             </div> --}}

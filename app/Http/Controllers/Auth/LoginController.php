@@ -52,7 +52,10 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+
         if (Auth::attempt(['email' => $input['email'], 'password' => $input['password']])) {
+//            dd(Auth()->user());
+//            return redirect()->route('admin.home');
             Auth::user()->is_admin;
             if (Auth::user()->is_admin ) {
                 return redirect()->route('admin.home');

@@ -2,20 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\food_order;
 use Illuminate\Http\Request;
 use App\Models\order;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class OrderManagement extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+
     }
 
     /**
@@ -73,16 +71,14 @@ class OrderManagement extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        order::find($id)->delete();
-  
+//        $query = DB::table('food_order')
+//            ->where('food_id','=',$id)
+//            ->delete();
+        $d = DB::table('fod_id')->select('food_order.*')->where("food_id",'=',$id)->get();
+        dd($d);
+
         return redirect()->route('admin.home')
                         ->with('success','order deleted successfully');
     }

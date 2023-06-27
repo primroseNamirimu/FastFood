@@ -1,1596 +1,512 @@
+@extends('Layout.dashboard2')
 
-<!DOCTYPE html>
-<html lang="en">
-
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Drora - Bootstrap Restaurant Admin Dashboard HTML Template</title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="../../assets/plugins/owl.carousel/dist/css/owl.carousel.min.css">
-    <link href="../../assets/plugins/fullcalendar/css/fullcalendar.min.css" rel="stylesheet">
-    <!-- Chartist -->
-    <link rel="stylesheet" href="../../assets/plugins/chartist/css/chartist.min.css">
-    <link href="../css/style.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
-
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
-
-        <!--**********************************
-            Nav header start
-        ***********************************-->
-        <div class="nav-header">
-            <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr">D</b>
-                    <span class="brand-title"><b>Drora</b></span>
-                </a>
-            </div>
-            <div class="nav-control">
-                <div class="hamburger">
-                    <span class="toggle-icon"><i class="icon-menu"></i></span>
-                </div>
-            </div>
-        </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
-
-        <!--**********************************
-            Header start
-        ***********************************-->
-        <div class="header">    
-            <div class="header-content clearfix">
-                
-                <div class="header-left">
-                    <div class="input-group icons">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-transparent border-0" id="basic-addon1"><i class="icon-magnifier"></i></span>
-                        </div>
-                        <input type="search" class="border-0" placeholder="Search Dashboard" aria-label="Search Dashboard">
-                        <div class="drop-down animated flipInX d-md-none">
-                            <form action="#">
-                                <input type="text" class="form-control" placeholder="Search">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="header-right">
-
-                    <ul class="clearfix">
-                        <li class="icons d-none d-md-flex">
-                            <a href="javascript:void(0)" class="window_fullscreen-x">
-                                <i class="icon-frame"></i>
-                            </a>
-                        </li>
-                        <li class="icons">
-                            <a href="javascript:void(0)" class="">
-                                <i class="icon-envelope"></i>
-                                <span class="badge badge-danger">3</span>
-                            </a>
-                            <div class="drop-down animated flipInX">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li class="notification-unread">
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="../../assets/images/avatar/1.jpg" alt="avatar">
-                                                <div class="notification-content">
-                                                    <div class="notification-text">Hey, What's up! You have a good news !!!</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="notification-unread">
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="../../assets/images/avatar/2.jpg" alt="avatar">
-                                                <div class="notification-content">
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Can you do me a favour?</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="../../assets/images/avatar/3.jpg" alt="avatar">
-                                                <div class="notification-content">
-                                                    <div class="notification-text">Hey!</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="../../assets/images/avatar/4.jpg" alt="avatar">
-                                                <div class="notification-content">
-                                                    <div class="notification-text">And what do you do?</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <a class="d-flex justify-content-center bg-primary px-4 text-white" href="email-inbox.html">
-                                        <span>See all messagese </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="icons">
-                            <a href="javascript:void(0)" class="">
-                                <i class="icon-bell"></i>
-                                <span class="badge badge-primary">3</span>
-                            </a>
-                            <div class="drop-down animated flipInX dropdown-notfication">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-calender"></i></span>
-                                                <div class="notification-content">
-                                                    <h5 class="notification-heading">Event Started</h5>
-                                                    <span class="notification-text">One hour ago</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-calender"></i></span>
-                                                <div class="notification-content">
-                                                    <h5 class="notification-heading">Event Started</h5>
-                                                    <span class="notification-text">One hour ago</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-calender"></i></span>
-                                                <div class="notification-content">
-                                                    <h5 class="notification-heading">Event Started</h5>
-                                                    <span class="notification-text">One hour ago</span>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-calender"></i></span>
-                                                <div class="notification-content">
-                                                    <h5 class="notification-heading">Event Started</h5>
-                                                    <span class="notification-text">One hour ago</span> 
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <a class="d-flex justify-content-between bg-primary px-4 text-white" href="javascript:void()">
-                                        <span>All Notifications</span>
-                                        <span><i class="icon-settings"></i></span>
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="icons">
-                            <div class="user-img c-pointer-x">
-                                <span class="activity active"></span>
-                                <img src="../../assets/images/user/1.png" height="40" width="40" alt="avatar">
-                            </div>
-                            <div class="drop-down dropdown-profile animated flipInX">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li><a href="javascript:void()"><i class="icon-user"></i> <span>My Profile</span></a>
-                                        </li>
-                                        <li><a href="javascript:void()"><i class="icon-calender"></i> <span>My Calender</span></a>
-                                        </li>
-                                        <li><a href="javascript:void()"><i class="icon-envelope-open"></i> <span>My Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
-                                        </li>
-                                        <li><a href="javascript:void()"><i class="icon-paper-plane"></i> <span>My Tasks</span><div class="badge badge-pill bg-dark">3</div></a>
-                                        </li>
-                                        <li><a href="javascript:void()"><i class="icon-check"></i> <span>Online</span></a>
-                                        </li>
-                                        <li><a href="javascript:void()"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                        </li>
-                                        <li><a href="javascript:void()"><i class="icon-key"></i> <span>Logout</span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-
-            </div>
-        </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
-
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
-        <div class="nk-sidebar">           
-            <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
-                    <li class="nav-label">Dashboard</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-speedometer"></i><span class="nav-text">Dashboard</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="index.html">Admin Overview</a></li>
-                            <li><a href="index-2.html">Custommer Overview</a></li>
-                            <li><a href="index-3.html">Employee Overview</a></li>
-                            <li><a href="restaurant-menus.html">Menus</a></li>
-                            <li><a href="restaurant-offers.html">Offer</a></li>
-                            <li><a href="restaurant-reservation.html">Reservation</a></li>
-                            <li><a href="restaurant-employees.html">Employees</a></li>
-                            <li><a href="restaurant-custommer.html">Custommer</a></li>
-                            <li><a href="restaurant-order.html">Order</a></li>
-                            <li><a href="restaurant-packages.html">Packages</a></li>
-                            
-                        </ul>
-                    </li>
-                    
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon-layers"></i><span class="nav-text">Layouts</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="layout-blank.html">Blank</a></li>
-                            <li><a href="layout-one-column.html">One Column</a></li>
-                            <li><a href="layout-two-column.html">Two column</a></li>
-                            <li><a href="layout-fixed-header.html">Fixed Header</a></li>
-                            <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
-                            <li><a href="layout-horizontal-nav.html">Horizontal</a></li>
-                            <li><a href="layout-rtl.html">RTL</a></li>
-                            <li><a href="layout-boxed.html">Boxed</a></li>
-                            <li><a href="layout-wide-boxed.html">Wide Boxed</a></li>
-                            <li><a href="layout-wide.html">Wide</a></li>
-                            <li><a href="layout-dark.html">Dark</a></li>
-                            <li><a href="layout-light.html">Light</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Apps</li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon-screen-smartphone"></i><span class="nav-text">Apps</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="email-inbox.html">Mailbox</a></li>
-                            <li><a href="app-profile.html">Profile</a></li>
-                            <li><a href="app-calender.html">Calendar</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="charts.html" aria-expanded="false"><i class="icon-chart"></i> <span class="nav-text">Charts</span></a></li>
-                    <li class="nav-label">UI Components</li>
-                    <li><a href="ui-bootstrap.html" aria-expanded="false"><i class="icon-diamond"></i><span class="nav-text">UI Bootstrap</span></a></li>
-                    <li><a href="components.html" aria-expanded="false"><i class="icon-puzzle"></i><span class="nav-text">Components</span></a></li>
-                    <li><a href="widget-basic.html" aria-expanded="false"><i class="icon-badge"></i><span class="nav-text">Widget</span></a></li>
-                    <li class="nav-label">Forms</li>
-                    <li><a href="forms.html" aria-expanded="false"><i class="icon-settings"></i><span class="nav-text">Forms</span></a></li>
-                    <li class="nav-label">Table</li>
-                    <li><a href="tables.html" aria-expanded="false"><i class="icon-briefcase"></i><span class="nav-text">Table</span></a></li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="icon-globe"></i><span class="nav-text">Pages</span></a>
-                        <ul aria-expanded="false">
-                            <li><a href="page-login.html">Login</a></li>
-                            <li><a href="page-register.html">Register</a></li>
-                            <li><a href="page-user-lock.html">Lock Screen</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Erorr</a>
-                                <ul aria-expanded="false" class="collapse">
-                                    <li><a href="page-error-400.html">Erorr 400</a></li>
-                                    <li><a href="page-error-403.html">Erorr 403</a></li>
-                                    <li><a href="page-error-404.html">Erorr 404</a></li>
-                                    <li><a href="page-error-500.html">Erorr 500</a></li>
-                                    <li><a href="page-error-503.html">Erorr 503</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
-        <div class="content-body">
-
-            <div class="row page-titles mx-0">
-                <div class="col-sm-6 p-md-0">
-                    <div class="breadcrumb-range-picker">
-                        <span><i class="icon-calender"></i></span>
-                        <span class="ml-1">August 08, 2017 - August 08, 2017</span>
-                    </div>
-                </div>
-                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>
-                    </ol>
-                </div>
-            </div>
+<!--            <div class="row page-titles mx-0">-->
+<!--                <div class="col-sm-6 p-md-0">-->
+<!--                    <div class="breadcrumb-range-picker">-->
+<!--                        <span><i class="icon-calender"></i></span>-->
+<!--                        <span class="ml-1">August 08, 2017 - August 08, 2017</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">-->
+<!--                    <ol class="breadcrumb">-->
+<!--                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>-->
+<!--                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>-->
+<!--                    </ol>-->
+<!--                </div>-->
+<!--            </div>-->
             <!-- row -->
+@section('content')
 
-            <div class="container-fluid">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+
+<div class="container-fluid">
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success alert-dismissible fade show" style="width: 50%">
+        <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-close"></span>
+        </button>
+        <strong>Success! </strong> {{$message}}
+    </div>
+    @endif
+
+    @if($message = Session::get('danger'))
+    <div class="alert alert-danger alert-dismissible fade show" style="width: 50%">
+        <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-close"></span>
+        </button>
+        <strong>Success!</strong> {{$message}}
+    </div>
+
+    @endif
                 <div class="row justify-content-between mb-4">
 					<div class="col-xl-3 col-lg-4">
-						<h2 class="page-heading">Hi,Welcome Back!</h2>
-						<p class="mb-0">Your restaurent admin template</p>
+						<h2 class="page-heading">Hi, Welcome Back!</h2>
+						<p class="mb-0">Digital Solutions Food Portal </p>
                     </div>
-                    <div class="col-xl-9 col-xxl-9 col-lg-8 mt-4 mt-lg-0">
-                        <div class="steps">
-                            <ul class="list-unstyled multi-steps">
-                                <li>Ordered</li>
-                                <li>Pending</li>
-                                <li class="is-active">Accept</li>
-                                <li>Delivery</li>
-                                <li>Received</li>
-                            </ul>
-                        </div> 
-                    </div>
-    
                 </div>
                 <div class="row">
                     <div class="col-xl-6 col-xxl-12">
-                        <div class="row">
-                            <div class="col-sm-6 col-xxl-6 col-xl-6">
-                                <div class="card">
-                                    <div class="card-body pb-0">
-                                        <div class="row justify-content-between">
-                                            <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Order</h4>
-                                            </div>
-                                            <div class="col-auto">
-                                                <h2>2,250</h2>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> 6.365% </span>
-                                            <p> Since last month</p>
-                                        </div>
-                                    </div>
-                                    <div class="chart-wrapper">
-                                        <div id="home_chart_widget_1" class="home_chart_widget chart-one"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xxl-6 col-xl-6">
-                                <div class="card">
-                                    <div class="card-body pb-0">
-                                        <div class="row justify-content-between">
-                                            <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Pending</h4>
-                                            </div>
-                                            <div class="col-auto">
-                                                <h2>2,250</h2>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="text-danger"><i class="mdi mdi-arrow-down-bold"></i> 2.65% </span>
-                                            <p> Since last month</p>
-                                        </div>
-                                    </div>
-                                    <div class="chart-wrapper">
-                                        <div id="home_chart_widget_2" class="home_chart_widget chart-two"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xxl-6 col-xl-6">
-                                <div class="card">
-                                    <div class="card-body pb-0">
-                                        <div class="row justify-content-between">
-                                            <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Revenue</h4>
-                                            </div>
-                                            <div class="col-auto">
-                                                <h2>$2,250</h2>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="text-danger"><i class="mdi mdi-arrow-down-bold"></i> 23.65% </span>
-                                            <p> Since last month</p>
-                                        </div>
-                                    </div>
-                                    <div class="chart-wrapper">
-                                        <div id="home_chart_widget_3" class="home_chart_widget chart-three"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-xxl-6 col-xl-6">
-                                <div class="card">
-                                    <div class="card-body pb-0">
-                                        <div class="row justify-content-between">
-                                            <div class="col-auto">
-                                                <h4 class="text-muted mb-3">Expense</h4>
-                                            </div>
-                                            <div class="col-auto">
-                                                <h2>$ 1,475</h2>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="text-success"><i class="mdi mdi-arrow-up-bold"></i> 47.5% </span>
-                                            <p> Since last month</p>
-                                        </div>
-                                    </div>
-                                    <div class="chart-wrapper">
-                                        <div id="home_chart_widget_4" class="home_chart_widget chart-four"></div>
-                                    </div>
-                                </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Monthly OverView</h4>
+
+                                <canvas id="donut"></canvas>
+
                             </div>
                         </div>
                     </div>
 
-                    
+
                     <div class="col-xl-6 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                    <h4 class="card-title mb-4">Earnings</h4>
-                                <canvas id="earnings_bar_chart"></canvas>
+                                <h4 class="card-title mb-4">Expenditure</h4>
+
+                                    <canvas id="myChart"></canvas>
+
                             </div>
-                        </div>
-                    </div>
-                    
-                    
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="top_menu_carousel owl-carousel" id="top_menu_carousel">
-                            <div class="card vertical-card__menu">
-                                <div class="card-header p-0">
-                                    <div class="vertical-card__menu--image">
-                                        <img src="../../assets/images/menu/granny-menu10.jpg" alt="Menu">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vertical-card__menu--desc">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="vertical-card__menu--title">French Crostini</h5>
-                                            <h4>
-                                                <span class="badge badge-primary">$ 54</span>
-                                            </h4>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <p class="mb-0"><span>Ordered:</span> <strong class="text-dark">179</strong></p>
-                                            <p class="mb-0"><span>Revenue:</span>  <strong class="text-dark">$1300</strong></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card vertical-card__menu">
-                                <div class="card-header p-0">
-                                    <div class="vertical-card__menu--image">
-                                        <img src="../../assets/images/menu/granny-menu11.jpg" alt="Menu">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vertical-card__menu--desc">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="vertical-card__menu--title m-0">Fried Egg Sandwich</h5>
-                                            <h4>
-                                                <span class="badge badge-primary">$ 54</span>
-                                            </h4>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <p class="mb-0"><span>Ordered:</span> <strong class="text-dark">179</strong></p>
-                                            <p class="mb-0"><span>Revenue:</span>  <strong class="text-dark">$1300</strong></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card vertical-card__menu">
-                                <div class="card-header p-0">
-                                    <div class="vertical-card__menu--image">
-                                        <img src="../../assets/images/menu/granny-menu12.jpg" alt="Menu">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vertical-card__menu--desc">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="vertical-card__menu--title m-0">Pizza Hot Chilli</h5>
-                                            <h4>
-                                                <span class="badge badge-primary">$ 54</span>
-                                            </h4>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <p class="mb-0"><span>Ordered:</span> <strong class="text-dark">179</strong></p>
-                                            <p class="mb-0"><span>Revenue:</span>  <strong class="text-dark">$1300</strong></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card vertical-card__menu">
-                                <div class="card-header p-0">
-                                    <div class="vertical-card__menu--image">
-                                        <img src="../../assets/images/menu/granny-menu13.jpg" alt="Menu">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vertical-card__menu--desc">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="vertical-card__menu--title m-0">Lemon Yogurt</h5>
-                                            <h4>
-                                                <span class="badge badge-primary">$ 54</span>
-                                            </h4>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <p class="mb-0"><span>Ordered:</span> <strong class="text-dark">179</strong></p>
-                                            <p class="mb-0"><span>Revenue:</span>  <strong class="text-dark">$1300</strong></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card vertical-card__menu">
-                                <div class="card-header p-0">
-                                    <div class="vertical-card__menu--image">
-                                        <img src="../../assets/images/menu/granny-menu14.jpg" alt="Menu">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vertical-card__menu--desc">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="vertical-card__menu--title m-0">Multigrain Hot Cereal</h5>
-                                            <h4>
-                                                <span class="badge badge-primary">$ 54</span>
-                                            </h4>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <p class="mb-0"><span>Ordered:</span> <strong class="text-dark">179</strong></p>
-                                            <p class="mb-0"><span>Revenue:</span>  <strong class="text-dark">$1300</strong></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card vertical-card__menu">
-                                <div class="card-header p-0">
-                                    <div class="vertical-card__menu--image">
-                                        <img src="../../assets/images/menu/granny-menu15.jpg" alt="Menu">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vertical-card__menu--desc">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="vertical-card__menu--title m-0">Branch Special</h5>
-                                            <h4>
-                                                <span class="badge badge-primary">$ 54</span>
-                                            </h4>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <p class="mb-0"><span>Ordered:</span> <strong class="text-dark">179</strong></p>
-                                            <p class="mb-0"><span>Revenue:</span>  <strong class="text-dark">$1300</strong></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card vertical-card__menu">
-                                <div class="card-header p-0">
-                                    <div class="vertical-card__menu--image">
-                                        <img src="../../assets/images/menu/granny-menu16.jpg" alt="Menu">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vertical-card__menu--desc">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="vertical-card__menu--title m-0">Multigrain Hot Cereal</h5>
-                                            <h4>
-                                                <span class="badge badge-primary">$ 54</span>
-                                            </h4>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <p class="mb-0"><span>Ordered:</span> <strong class="text-dark">179</strong></p>
-                                            <p class="mb-0"><span>Revenue:</span>  <strong class="text-dark">$1300</strong></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card vertical-card__menu">
-                                <div class="card-header p-0">
-                                    <div class="vertical-card__menu--image">
-                                        <img src="../../assets/images/menu/granny-menu5.jpg" alt="Menu">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vertical-card__menu--desc">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="vertical-card__menu--title m-0">Fried Egg Sandwich</h5>
-                                            <h4>
-                                                <span class="badge badge-primary">$ 54</span>
-                                            </h4>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <p class="mb-0"><span>Ordered:</span> <strong class="text-dark">179</strong></p>
-                                            <p class="mb-0"><span>Revenue:</span>  <strong class="text-dark">$1300</strong></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card vertical-card__menu">
-                                <div class="card-header p-0">
-                                    <div class="vertical-card__menu--image">
-                                        <img src="../../assets/images/menu/granny-menu6.jpg" alt="Menu">
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vertical-card__menu--desc">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <h5 class="vertical-card__menu--title m-0">Multigrain Hot Cereal</h5>
-                                            <h4>
-                                                <span class="badge badge-primary">$ 54</span>
-                                            </h4>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center mt-2">
-                                            <p class="mb-0"><span>Ordered:</span> <strong class="text-dark">179</strong></p>
-                                            <p class="mb-0"><span>Revenue:</span>  <strong class="text-dark">$1300</strong></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                    <h4 class="card-title">Restaurent Rating</h4>
-                                <div class="custom-tab-1">
-                                    <ul class="nav nav-tabs justify-content-end">
-                                        <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#success1">Graph</a></li>
-                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#info1">Review</a></li>
-                                    </ul>
-                                    <div class="tab-content tab-content-default">
-                                        <div class="tab-pane fade active show" id="success1" role="tabpanel">
-                                            <div class="row justify-content-between">
-                                                <div class="col-md-6">
-                                                    <canvas id="user_rating_graph"></canvas>
-                                                </div>
-                                                <div class="col-md-5">
-                                                    <div>
-                                                        <div class="d-flex justify-content-between">
-                                                            <p>Food</p>
-                                                            <p><b class="text-dark">220 </b> (10%)</p>
-                                                        </div>
-                                                        <div class="progress mt-2" style="height: 9px;">
-                                                            <div class="progress-bar bg-primary" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>                
-                                                    </div>
-                                                    <div class="mt-4">
-                                                        <div class="d-flex justify-content-between">
-                                                            <p>Service</p>
-                                                            <p><b class="text-dark">420</b> (40%)</p>
-                                                        </div>
-                                                        <div class="progress mt-2" style="height: 9px;">
-                                                            <div class="progress-bar bg-info" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>                
-                                                    </div>
-                                                    <div class="mt-4">
-                                                        <div class="d-flex justify-content-between">
-                                                            <p>Waiting Time</p>
-                                                            <p><b class="text-dark">260</b> (30%)</p>
-                                                        </div>
-                                                        <div class="progress mt-2" style="height: 9px;">
-                                                            <div class="progress-bar bg-success" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>                
-                                                    </div>
-                                                    <div class="mt-4">
-                                                        <div class="d-flex justify-content-between">
-                                                            <p>Others</p>
-                                                            <p><b class="text-dark">460</b> (20%)</p>
-                                                        </div>
-                                                        <div class="progress mt-2" style="height: 9px;">
-                                                            <div class="progress-bar bg-dark" style="width: 50%;" role="progressbar"><span class="sr-only">50% Complete</span></div>
-                                                        </div>                
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="info1">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="media">
-                                                        <img src="../../assets/images/avatar/1.jpg" width="35" alt="reviewer">
-                                                        <div class="media-body ml-4">
-                                                            <div class="d-flex justify-content-between">
-                                                                <strong>Antony Jonus</strong>
-                                                                <div class="vertical-card__menu--rating c-pointer">
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star-o"></i></span>
-                                                                </div>
-                                                            </div>
-                                                            <p>
-                                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, voluptatibus!
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="media mt-4">
-                                                        <img src="../../assets/images/avatar/2.jpg" width="35" alt="reviewer">
-                                                        <div class="media-body ml-4">
-                                                            <div class="d-flex justify-content-between">
-                                                                <strong>Antony Jonus</strong>
-                                                                <div class="vertical-card__menu--rating c-pointer">
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star-o"></i></span>
-                                                                </div>
-                                                            </div>
-                                                            <p>
-                                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, voluptatibus!
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="media mt-4">
-                                                        <img src="../../assets/images/avatar/1.jpg" width="35" alt="reviewer">
-                                                        <div class="media-body ml-4">
-                                                            <div class="d-flex justify-content-between">
-                                                                <strong>Antony Jonus</strong>
-                                                                <div class="vertical-card__menu--rating c-pointer">
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star-o"></i></span>
-                                                                </div>
-                                                            </div>
-                                                            <p>
-                                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, voluptatibus!
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="media mt-4">
-                                                        <img src="../../assets/images/avatar/2.jpg" width="35" alt="reviewer">
-                                                        <div class="media-body ml-4">
-                                                            <div class="d-flex justify-content-between">
-                                                                <strong>Antony Jonus</strong>
-                                                                <div class="vertical-card__menu--rating c-pointer">
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star"></i></span>
-                                                                    <span class="icon"><i class="fa fa-star-o"></i></span>
-                                                                </div>
-                                                            </div>
-                                                            <p>
-                                                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem, voluptatibus!
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Visit Hour</h4>
-                                <div class="row mb-3 mt-4">
-                                    <div class="col text-center">
-                                        <p class="mb-2 text-dark">Day</p>
-                                        <h4><span class="text-success mdi mdi-arrow-up-bold"></span> 82.24 %</h4>
-                                    </div>
-                                    <div class="col text-center">
-                                        <p class="mb-2 text-dark">Night</p>
-                                        <h4><span class="text-danger mdi mdi-arrow-down-bold"></span> 12.24 %</h4>
-                                    </div>
-                                </div>
-                                <div class="chart-wrapper">
-                                    <canvas id="visitor_graph"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
-
-                    <div class="col-xl-4 col-lg-5 col-xxl-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Timeline</h4>
-                                <div id="timeline-activity">
-                                    <ul class="timeline mb-0">
-                                        <li>
-                                            <div class="timeline-badge bg-primary"></div>
-                                            <a href="#" class="timeline-panel">
-                                                <span>10 minutes ago</span>
-                                                <h5 class="mt-2">New Order received</h5>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-badge bg-success"></div>
-                                            <a href="#" class="timeline-panel">
-                                                <span>20 minutes ago</span>
-                                                <h5 class="mt-2">5 Orders Delivered</h5>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-badge bg-warning"></div>
-                                            <a href="#" class="timeline-panel">
-                                                <span>30 minutes ago</span>
-                                                <h5 class="mt-2">3 New Tickets</h5>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-badge bg-danger"></div>
-                                            <a href="#" class="timeline-panel">
-                                                <span>15 minutes ago</span>
-                                                <h5 class="mt-2">8 New Reviews</h5>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-badge bg-pink"></div>
-                                            <a href="#" class="timeline-panel">
-                                                <span>15 minutes ago</span>
-                                                <h5 class="mt-2">50 New Facebook likes</h5>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-8 col-lg-7 col-xxl-8">
-                        <div class="card world_map_card">
-                            <div class="card-body">
-                                <h4 class="card-title">Branches</h4>
-                                <div class="row">
-                                    <div class="col-xl-9 col-xxl-12">
-                                        <div class="map">
-                                            <div id="world-datamap"></div>                                    
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-3 col-xxl-12">
-                                        <div class="d-flex justify-content-center h-100 flex-column">
-                                            <ul class="list-group w-100">
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Canada <span class="badge badge-primary">$ 999</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    USA <span class="badge badge-secondary">$ 500</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Saudi Arabia <span class="badge badge-success">$ 900</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Bangladesh <span class="badge badge-info">$ 500</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Russia <span class="badge badge-warning">$ 250</span>
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    Australia <span class="badge badge-danger">$ 700</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4 col-lg-6 col-xxl-6">
-                        <div class="card top_menu_widget">
-                            <div class="card-body">
-                                <h4 class="card-title">Top Menus</h4>
-                                <div class="media border-bottom pt-3 pb-3">
-                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/menu1.png">
-                                    <div class="media-body">
-                                        <h5 class="mb-1 mt-sm-1 mt-0">Fried Egg Sandwich</h5>
-                                        <span>Egg, Sandwich</span>
-                                    </div>
-                                    <h5 class="badge-lighten-primary">$268</h5>
-                                </div>
-                                <div class="media border-bottom pt-3 pb-3">
-                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/menu2.png">
-                                    <div class="media-body">
-                                        <h5 class="mb-1 mt-sm-1 mt-0">French Crostini</h5>
-                                        <span>French, Spicy</span>
-                                    </div>
-                                    <h5 class="badge-lighten-success">$268</h5>
-                                </div>
-                                <div class="media border-bottom pt-3 pb-3">
-                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/menu3.png">
-                                    <div class="media-body">
-                                        <h5 class="mb-1 mt-sm-1 mt-0">Redwine and Colddrinks</h5>
-                                        <span>Drinks, Wine</span>
-                                    </div>
-                                    <h5 class="badge-lighten-info">$268</h5>
-                                </div>
-                                <div class="media border-bottom pt-3 pb-3">
-                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/menu4.png">
-                                    <div class="media-body">
-                                        <h5 class="mb-1 mt-sm-1 mt-0">Multigrain Hot Cereal</h5>
-                                        <span>Hot, Spicy</span>
-                                    </div>
-                                    <h5 class="badge-lighten-warning">$268</h5>
-                                </div>
-                                <div class="media border-bottom pt-3 pb-3">
-                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/menu5.png">
-                                    <div class="media-body">
-                                        <h5 class="mb-1 mt-sm-1 mt-0">Lemon Yogurt Parfait</h5>
-                                        <span>Juice, Cold</span>
-                                    </div>
-                                    <h5 class="badge-lighten-danger">$268</h5>
-                                </div>
-                                <div class="media pt-3 pb-3">
-                                    <img width="50" height="50"  alt="#" class="mr-3" src="../../assets/images/menu/menu6.png">
-                                    <div class="media-body">
-                                        <h5 class="mb-1 mt-sm-1 mt-0">Branch Special</h5>
-                                        <span>Hot, Spicy</span>
-                                    </div>
-                                    <h5 class="badge-lighten-primary">$268</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-xxl-6">
-                        <div class="card">
-                            <div class="card-body px-0">
-                                <h4 class="card-title px-4 mb-3">Todo</h4>
-                                <div class="todo-list">
-                                    <div class="tdl-holder">
-                                        <div class="tdl-content">
-                                            <ul id="todo_list">
-                                                <li><label><input type="checkbox"><i></i><span>Decorate kitchen room</span><a href='#' class="ti-trash"></a></label></li>
-                                                <li><label><input type="checkbox" checked><i></i><span>Deliver Pizza</span><a href='#' class="ti-trash"></a></label></li>
-                                                <li><label><input type="checkbox"><i></i><span>Meeting with McDonalds</span><a href='#' class="ti-trash"></a></label></li>
-                                                <li><label><input type="checkbox" checked><i></i><span>New Branch Opening</span><a href='#' class="ti-trash"></a></label></li>
-                                                <li><label><input type="checkbox"><i></i><span>New feature launching</span><a href='#' class="ti-trash"></a></label></li>
-                                                <li><label><input type="checkbox" checked><i></i><span>Meeting with KFC</span><a href='#' class="ti-trash"></a></label></li>
-                                            </ul>
-                                        </div>
-                                        <div class="px-4">
-                                            <input type="text" class="tdl-new form-control" placeholder="Write new item and hit 'Enter'...">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="col-xl-4 col-xxl-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Ticket</h4>
-                                <div id="ticket">
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-danger">Delivery dealyed</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-warning">Pending</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-danger">Pizza rotten</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-success">Over price</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-primary">Open</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-primary">Want new Menu</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-danger">Want new Menu</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-info">Want new Menu</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-primary">Delivery Delayed</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-primary">Open</span> -->
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-info">My order cencelled</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-success">Closed</span> -->
-                                    </div>
-                                    <div class="media pt-3 pb-3">
-                                        <strong>#45458</strong>
-                                        <div class="media-body ml-3">
-                                            <a href="#">
-                                                <h5 class="text-warning">App not responding</h5>
-                                                <p class="mb-0">Last updated: <span>Apr 19, 2018 (10:05 AM)</span></p>
-                                            </a>
-                                        </div>
-                                        <!-- <span class="badge badge-warning">Pending</span> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-                <div class="row">  
-                    <div class="col-lg-8">    
-                        <div class="card">
-                            <div class="card-body">
-                                <div id="calendar" class="app-fullcalendar"></div>
-                            </div>
-                        </div>
-                        <!-- BEGIN MODAL -->
-                        <div class="modal fade none-border" id="event-modal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title"><strong>Add New Event</strong></h4>
-                                    </div>
-                                    <div class="modal-body"></div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default waves-effect"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-success save-event waves-effect waves-light">Create
-                                            event</button>
-                                            
-                                        <button type="button" class="btn btn-danger delete-event waves-effect waves-light"
-                                            data-dismiss="modal">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal Add Category -->
-                        <div class="modal fade none-border" id="add-category">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title"><strong>Add a category</strong></h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label class="control-label">Category Name</label>
-                                                    <input class="form-control form-white" placeholder="Enter name"
-                                                        type="text" name="category-name">
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="control-label">Choose Category Color</label>
-                                                    <select class="form-control form-white"
-                                                        data-placeholder="Choose a color..." name="category-color">
-                                                        <option value="success">Success</option>
-                                                        <option value="danger">Danger</option>
-                                                        <option value="info">Info</option>
-                                                        <option value="pink">Pink</option>
-                                                        <option value="primary">Primary</option>
-                                                        <option value="warning">Warning</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default waves-effect"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-danger waves-effect waves-light save-category"
-                                            data-dismiss="modal">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xxl-4">
-                        <div class="card performence_score">
-                            <div class="card-body">
-                                <h4 class="card-title">Performence Score</h4>
-                                <div id="activity">
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <img src="../../assets/images/avatar/1.jpg" alt="avatar" class="mr-3">
-                                        <div class="media-body">
-                                            <h5 class="mt-1">Mark Twine</h5>
-                                            <p class="mb-0">Senior Chef</p>
-                                        </div>
-                                        <span class="text-dark"><b>87</b> (100)</span>
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <img src="../../assets/images/avatar/2.jpg" alt="avatar" class="mr-3">
-                                        <div class="media-body">
-                                            <h5 class="mt-1">Spillberg</h5>
-                                            <p class="mb-0">Marketing Manager</p>
-                                        </div>
-                                        <span class="text-dark"><b>85</b> (100)</span>
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <img src="../../assets/images/avatar/3.jpg" alt="avatar" class="mr-3">
-                                        <div class="media-body">
-                                            <h5 class="mt-1">John Doe</h5>
-                                            <p class="mb-0">Senior Waiter</p>
-                                        </div>
-                                        <span class="text-dark"><b>80</b> (100)</span>
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <img src="../../assets/images/avatar/4.jpg" alt="avatar" class="mr-3">
-                                        <div class="media-body">
-                                            <h5 class="mt-1">Alex Martin</h5>
-                                            <p class="mb-0">General Manager</p>
-                                        </div>
-                                        <span class="text-dark"><b>75</b> (100)</span>
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <img src="../../assets/images/avatar/5.jpg" alt="avatar" class="mr-3">
-                                        <div class="media-body">
-                                            <h5 class="mt-1">Brad Hussy</h5>
-                                            <p class="mb-0">Manager</p>
-                                        </div>
-                                        <span class="text-dark"><b>70</b> (100)</span>
-                                    </div>
-                                    <div class="media border-bottom pt-3 pb-3">
-                                        <img src="../../assets/images/avatar/6.jpg" alt="avatar" class="mr-3">
-                                        <div class="media-body">
-                                            <h5 class="mt-1">John Smith</h5>
-                                            <p class="mb-0">Junior Chef</p>
-                                        </div>
-                                        <span class="text-dark"><b>67</b> (100)</span>
-                                    </div>
-                                    <div class="media pt-3 pb-3">
-                                        <img src="../../assets/images/avatar/7.jpg" alt="avatar" class="mr-3">
-                                        <div class="media-body">
-                                            <h5 class="mt-1">John Johnson</h5>
-                                            <p class="mb-0">Delivery Stuff</p>
-                                        </div>
-                                        <span class="text-dark"><b>60</b> (100)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    
-
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Order List</h4>
+                                <div class="row ">
+                                    <div class="col-md-6">
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-addon">
+                    <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="bx bx-calendar bx-sm"
+                                                                                           aria-hidden="true"></i></span>
+                                            </div>
+                                            <label for="date"></label><input type="text" class="form-control" id="date" placeholder="Date"/>
+                                        </div>
+                                        <br/>
+
+                                    </div>
+
+                                    <div class="col-md-6 pull-right">
+                                        <!--            {{-- <a href="{{ route('admin.currentMonthReport') }}"><button class="btn btn-success">RESET</button></a> --}}-->
+                                        <a href="">
+                                            <button class="btn btn-success">RESET</button>
+                                        </a>
+                                    </div>
+                                </div>
                                 <div class="table-responsive">
-                                    <table class="table verticle-middle table-responsive-lg mb-0">
-                                        <thead>
+
+                                        <table class="table verticle-middle table-responsive-lg mb-0" id="table_id">
+                                            <thead>
                                             <tr>
-                                                <th scope="col">ID</th>
-                                                <th scope="col">Order Name</th>
-                                                <th scope="col">Custommer Name</th>
-                                                <th scope="col">Location</th>
-                                                <th scope="col">Delivery time</th>
-                                                <th scope="col">Quantity</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Action</th>
+                                                <th>ORDER ID</th>
+                                                <th>NAME</th>
+
+                                                <th>Company discount</th>
+                                                <th>Individual input</th>
+                                                <th>Total</th>
+                                                <th>Date</th>
+
+                                                <th>Sauce</th>
+                                                <th>Ordered By</th>
+                                                <th>Modified</th>
+                                                <th>Action</th>
+
+
                                             </tr>
-                                        </thead>
-                                        <tbody>
+                                            </thead>
+                                            <tbody>
+                                            @php
+
+                                            $company_contrib = 2500;
+                                            $number_format_companycontrib = number_format($company_contrib);
+                                            $self_total = 0;
+                                            $company_total = 0;
+                                            $overall_total = 0;
+                                            $price = 0;
+                                            $self_contrib = 0;
+                                            $money_self = 0;
+                                            $money_company = 0;
+                                            $money_overall = 0;
+                                            @endphp
+                                            @foreach ($queryadmin as $item)
+                                            <tr data-index="{{ $item->order_id }} data-firstName={{ $item->firstname }}">
+                                                <td>{{ $item->order_id }}</td>
+
+                                                <td> {{ $item->lastname }} {{ $item->firstname }}</td>
+                                                <td>{{ $number_format_companycontrib }}</td>
+                                                <td>@php
+
+                                                    $self_contrib = intval($item->total - $company_contrib);
+
+                                                    $self_total += $self_contrib;
+                                                    $company_total += $company_contrib;
+                                                    $overall_total += intval($item->total);
+
+                                                    //money format for the totals
+                                                    $money_self = number_format($self_total);
+                                                    $money_company = number_format($company_total);
+                                                    $money_overall = number_format($overall_total);
+                                                    $val =  number_format($self_contrib)
+                                                    @endphp
+                                                  {{$val}}
+
+                                                </td>
+                                                <td>@php
+                                                    $num_format = number_format($item->total);
+                                                    @endphp
+                                                    {{ $num_format }}</td>
+                                                <td>{{ $item->created_at }}</td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>{{ $item->order_made_by }}</td>
+
+                                                @if(($item->isChanged) == "YES")
+                                                <td><a style="color: #0a58ca" href="{{ route('viewChangedOrder', $item->order_id ) }}" data-toggle="tooltip"  data-placement="top" title=""
+                                                       data-original-title="Details"aria-hidden="true">{{$item->isChanged}}</a></td>
+                                                @else
+                                                <td>{{$item->isChanged}}</td>
+                                                @endif
+
+
+                                                    <td>
+                                                        <a href="{{ route('deleteOrder',$item->order_id ) }}" ><button type="submit" class="btn delete">
+                                                            <span><i class='bx bx-trash-alt'></i></button></a>
+                                                        <a href="{{ route('editOrder', $item->order_id) }}"><span><i class="icon-note"></i></span></a>
+                                                    </td>
+
+                                            </tr>
+                                            @endforeach
+                                            </tbody>
+                                            <tfoot>
                                             <tr>
-                                                <td>54565</td>
-                                                <td>Fresh Crostini</td>
-                                                <td>Adam Smith</td>
-                                                <td>Gulshan</td>
-                                                <td>10:20</td>
-                                                <td>5</td>
-                                                <td>$34</td>
-                                                <td><span class="badge badge-xs badge-primary">Pending</span>
-                                                </td>
-                                                <td>
-                                                    <span>
-                                                        <a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a>
-                                                        <a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a>
-                                                    </span>
-                                                </td>
+                                                <td></td>
+                                                <td><strong>Total: {{ $money_company }}</strong></td>
+
+                                                <td><strong>Total: {{ $money_self }}</strong></td>
+                                                <td><strong>Total: {{ $money_overall }}</strong></td>
+                                                <td><strong></strong></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
                                             </tr>
-                                            <tr>
-                                                <td>54565</td>
-                                                <td>Multigrain Hot Cereal</td>
-                                                <td>John Doe</td>
-                                                <td>Baridhara</td>
-                                                <td>3:00</td>
-                                                <td>4</td>
-                                                <td>$ 87</td>
-                                                <td><span class="badge badge-xs badge-success">Delivered</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>54235</td>
-                                                <td>French Fry</td>
-                                                <td>Maximillian</td>
-                                                <td>Khilgaon</td>
-                                                <td>2:00</td>
-                                                <td>6</td>
-                                                <td>$ 65</td>
-                                                <td><span class="badge badge-xs badge-dark">Cencelled</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>54587</td>
-                                                <td>Fried Egg Sandwich</td>
-                                                <td>John Johnson</td>
-                                                <td>Gulshan</td>
-                                                <td>11:00</td>
-                                                <td>3</td>
-                                                <td>$ 56</td>
-                                                <td><span class="badge badge-xs badge-primary">Pending</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>54521</td>
-                                                <td>Pizza</td>
-                                                <td>Mike Hussy</td>
-                                                <td>Banani</td>
-                                                <td>12:00</td>
-                                                <td>5</td>
-                                                <td>$ 65</td>
-                                                <td><span class="badge badge-xs badge-warning">Pending</span>
-                                                </td>
-                                                <td><span><a href="javascript:void()" class="mr-4" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="fa fa-pencil color-muted"></i> </a><a href="javascript:void()" data-toggle="tooltip" data-placement="top" title="" data-original-title="Close"><i class="fa fa-close color-danger"></i></a></span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                            </tfoot>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        
-        
-        <!--**********************************
-            Footer start
-        ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p><a href="templatespoint.net">Templates Point</a></p>
-            </div>
-        </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
 
-        
-        <!--**********************************
-            Right sidebar start
-        ***********************************-->
-        <div class="sidebar-right">
-            <a class="sidebar-right-trigger gradient-5-x" href="javascript:void(0)">
-                <span><i class="fa fa-cog fa-spin"></i></span>
-            </a>
-            <div class="sidebar-right-inner">
-                <div class="admin-settings">
-                    <h4>Pick your style</h4>
-                    <div>
-                        <p>Background</p>
-                        <select class="form-control" name="theme_version" id="theme_version">
-                            <option value="light">Light</option>
-                            <option value="dark">Dark</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Layout</p>
-                        <select class="form-control" name="theme_layout" id="theme_layout">
-                            <option value="vertical">Vertical</option>
-                            <option value="horizontal">Horizontal</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Sidebar</p>
-                        <select class="form-control" name="sidebar_style" id="sidebar_style">
-                            <option value="full">Full</option>
-                            <option value="mini">Mini</option>
-                            <option value="compact">Compact</option>
-                            <option value="overlay">Overlay</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Sidebar position</p>
-                        <select class="form-control" name="sidebar_position" id="sidebar_position">
-                            <option value="static">Static</option>
-                            <option value="fixed">Fixed</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Header position</p>
-                        <select class="form-control" name="header_position" id="header_position">
-                            <option value="static">Static</option>
-                            <option value="fixed">Fixed</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Container</p>
-                        <select class="form-control" name="container_layout" id="container_layout">
-                            <option value="wide">Wide</option>
-                            <option value="boxed">Boxed</option>
-                            <option value="wide-boxed">Wide Boxed</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Direction</p>
-                        <select class="form-control" name="theme_direction" id="theme_direction">
-                            <option value="ltr">LTR</option>
-                            <option value="rtl">RTL</option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>Navigation Header</p>
-                        <div>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_1" class="filled-in chk-col-primary" id="nav_header_bg_1">
-                                <label for="nav_header_bg_1"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_2" class="filled-in chk-col-primary" id="nav_header_bg_2">
-                                <label for="nav_header_bg_2"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_3" class="filled-in chk-col-primary" id="nav_header_bg_3">
-                                <label for="nav_header_bg_3"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_4" class="filled-in chk-col-primary" id="nav_header_bg_4">
-                                <label for="nav_header_bg_4"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_5" class="filled-in chk-col-primary" id="nav_header_bg_5">
-                                <label for="nav_header_bg_5"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_6" class="filled-in chk-col-primary" id="nav_header_bg_6">
-                                <label for="nav_header_bg_6"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_7" class="filled-in chk-col-primary" id="nav_header_bg_7">
-                                <label for="nav_header_bg_7"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_8" class="filled-in chk-col-primary" id="nav_header_bg_8">
-                                <label for="nav_header_bg_8"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_9" class="filled-in chk-col-primary" id="nav_header_bg_9">
-                                <label for="nav_header_bg_9"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="navigation_header" value="color_10" class="filled-in chk-col-primary" id="nav_header_bg_10">
-                                <label for="nav_header_bg_10"></label>
-                            </span>
+    <div class="modal fade none-border" id="event-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><strong>Order Log</strong></h4>
+            </div>
+            <div class="modal-body">
+                <!-- Start Create form  -->
+                <form class="form-horizontal form-material" method="POST" action="">
+                    @csrf
+
+                    <div class="form-group mb-4">
+                        <label class="col-md-12 p-0">Original Order</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" class="form-control p-0 border-0" name="name" value="" >
                         </div>
                     </div>
-                    <div>
-                        <p>Header</p>
-                        <div>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_1" class="filled-in chk-col-primary" id="header_bg_1">
-                                <label for="header_bg_1"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_2" class="filled-in chk-col-primary" id="header_bg_2">
-                                <label for="header_bg_2"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_3" class="filled-in chk-col-primary" id="header_bg_3">
-                                <label for="header_bg_3"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_4" class="filled-in chk-col-primary" id="header_bg_4">
-                                <label for="header_bg_4"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_5" class="filled-in chk-col-primary" id="header_bg_5">
-                                <label for="header_bg_5"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_6" class="filled-in chk-col-primary" id="header_bg_6">
-                                <label for="header_bg_6"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_7" class="filled-in chk-col-primary" id="header_bg_7">
-                                <label for="header_bg_7"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_8" class="filled-in chk-col-primary" id="header_bg_8">
-                                <label for="header_bg_8"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_9" class="filled-in chk-col-primary" id="header_bg_9">
-                                <label for="header_bg_9"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="header_bg" value="color_10" class="filled-in chk-col-primary" id="header_bg_10">
-                                <label for="header_bg_10"></label>
-                            </span>
+                    <div class="form-group mb-4">
+                        <label class="col-md-12 p-0">Modified Order</label>
+                        <div class="col-md-12 border-bottom p-0">
+                            <input type="text" class="form-control p-0 border-0" name="price" value="">
                         </div>
                     </div>
-                    <div>
-                        <p>Sidebar</p>
-                        <div>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_1" class="filled-in chk-col-primary" id="sidebar_bg_1">
-                                <label for="sidebar_bg_1"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_2" class="filled-in chk-col-primary" id="sidebar_bg_2">
-                                <label for="sidebar_bg_2"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_3" class="filled-in chk-col-primary" id="sidebar_bg_3">
-                                <label for="sidebar_bg_3"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_4" class="filled-in chk-col-primary" id="sidebar_bg_4">
-                                <label for="sidebar_bg_4"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_5" class="filled-in chk-col-primary" id="sidebar_bg_5">
-                                <label for="sidebar_bg_5"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_6" class="filled-in chk-col-primary" id="sidebar_bg_6">
-                                <label for="sidebar_bg_6"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_7" class="filled-in chk-col-primary" id="sidebar_bg_7">
-                                <label for="sidebar_bg_7"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_8" class="filled-in chk-col-primary" id="sidebar_bg_8">
-                                <label for="sidebar_bg_8"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_9" class="filled-in chk-col-primary" id="sidebar_bg_9">
-                                <label for="sidebar_bg_9"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_10" class="filled-in chk-col-primary" id="sidebar_bg_10">
-                                <label for="sidebar_bg_10"></label>
-                            </span>
-                            <!-- <span>
-                                <input type="radio" name="sidebar_bg" value="color_11" class="filled-in chk-col-primary" id="sidebar_bg_11">
-                                <label for="sidebar_bg_11"></label>
-                            </span> -->
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_12" class="filled-in chk-col-primary" id="sidebar_bg_12">
-                                <label for="sidebar_bg_12"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_13" class="filled-in chk-col-primary" id="sidebar_bg_13">
-                                <label for="sidebar_bg_13"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_14" class="filled-in chk-col-primary" id="sidebar_bg_14">
-                                <label for="sidebar_bg_14"></label>
-                            </span>
-                            <span>
-                                <input type="radio" name="sidebar_bg" value="color_15" class="filled-in chk-col-primary" id="sidebar_bg_15">
-                                <label for="sidebar_bg_15"></label>
-                            </span>
+                    <div class="form-group mb-4">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success" >Create</button>
                         </div>
                     </div>
-                </div>
+                </form>
+                <!-- End Create form  -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
             </div>
         </div>
-        <!--**********************************
-            Right sidebar end
-        ***********************************-->
     </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
+</div>
+            </div>
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="../../assets/plugins/common/common.min.js"></script>
-    <script src="../js/custom.min.js"></script>
-    <script src="../js/settings.js"></script>
-    <script src="../js/quixnav.js"></script>
-    <script src="../js/styleSwitcher.js"></script>
-    
-    <!-- Datamap -->
-    <script src="../../assets/plugins/d3v3/index.js"></script>
-    <script src="../../assets/plugins/topojson/topojson.min.js"></script>
-    <script src="../../assets/plugins/datamaps/datamaps.world.min.js"></script>
-    <!-- Calender -->
-    <script src="../../assets/plugins/jqueryui/js/jquery-ui.min.js"></script>
-    <script src="../../assets/plugins/moment/moment.min.js"></script>
-    <script src="../../assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
-    <!-- ChartJS -->
-    <script src="../../assets/plugins/chart.js/Chart.bundle.min.js"></script>
-    <!-- MorrisJS -->
-    <script src="../../assets/plugins/raphael/raphael.min.js"></script>
-    <script src="../../assets/plugins/morris/morris.min.js"></script>
-    <!-- Owl carousel -->
-    <script src="../../assets/plugins/owl.carousel/dist/js/owl.carousel.min.js"></script>
-    <!-- Chartist -->
-    <script src="../../assets/plugins/chartist/js/chartist.min.js"></script>
-    <script src="../../assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $.noConflict();
+        //DATA TABLES
+        var reportTable = $('#table_id');
+        var reportDataTable = reportTable.DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'excel', 'pdf'
+            ]
+
+        });
+
+        // Date range picker
+        var startDate = "";
+        var endDate = "";
+        $('#date').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('YYYY-MM-DD ') + ' to ' + picker.endDate.format(
+                'YYYY-MM-DD '));
+        });
+
+        $('#date').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
 
 
-    <!-- Init files -->
-    <script src="../js/plugins-init/fullcalendar-init.js"></script>
-    <script src="../js/dashboard/dashboard-1.js"></script>
+        $(function() {
 
-</body>
+            $('#date').daterangepicker({
+                timePicker: false,
+                startDate: moment().startOf('hour'),
 
-</html>
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                locale: {
+                    format: 'DD-MM-YYYY hh:mm A'
+                }
+            }, function(start, end) {
+                var startDate = start.format('YYYY-MM-DD ');
+                var endDate = end.format('YYYY-MM-DD ');
+                console.log(startDate, endDate)
+
+                if (startDate !== "" && endDate !== "") {
+                    getDateRangeRecord(startDate, endDate);
+                }
+            });
+        });
+
+        // ajax for the date range picker
+        function getDateRangeRecord(endDate, startDate) {
+            $.ajax({
+                url: "{{ url('/expenditure') }}",
+                type: 'GET',
+                dataSrc: '',
+                cache: false,
+                data: {
+                    startDate: startDate,
+                    endDate: endDate
+                },
+                dataType: "json",
+                success: function (response) {
+                    const {data} = response;
+                    console.log(data);
+                    let trows = '';
+                    let extraRow = '';
+                    let company_contrib = 2500;
+                    let self_contrib = 0;
+                    let money_company = 0;
+                    let money_self = 0;
+                    let money_overall = 0;
+                    let y = [];
+                    data.forEach(record => {
+                        const {order_id, total, created_at, firstname, lastname, order_made_by, name} = record;
+                        self_contrib = total - company_contrib;
+                        trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td></tr>`
+                        money_self += self_contrib;
+                        money_company += company_contrib;
+
+                        money_overall += (total);
+
+                    });
+
+                    extraRow = `<tr style="color: green"><td></td><td></td><td><strong>Total: ${money_company} </strong></td><td><strong>Total: ${money_self} </strong></td><td><strong>Total:  ${money_overall} </strong></td><td></td> <td></td> <td></td></tr>`;
+
+                    // clear before i repopulate
+                    reportDataTable.clear().draw();
+                    let node = document.getElementById('table_id');
+                    node.deleteTFoot()
+
+                    //repopulate
+                    reportTable.DataTable().rows.add($(trows)).draw();
+                    $("#table_id").append(
+                        $('<tfoot/>').append($(extraRow).clone())
+                    );
+
+                }
+            });
+        }
+
+        //  <!-- Order details button -->
+
+        $(document).on('click', 'button', function() {
+
+            //var data = table.row( $(this).parents('tr') ).data();
+            const orderID = $(this).closest('tr').attr('data-index')
+            const firstname = $(this).closest('tr').attr('data-firstname')
+            if ((orderID !== "")) {
+
+                foodItems(orderID);
+            }
+
+        });
+
+        function foodItems(orderID) {
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/foodItemsAdmin') }}",
+                dataType: "json",
+                data: {
+
+                    orderID: orderID,
+
+                },
+                dataSrc: "",
+                cache: false,
+                success: function(response) {
+                    const {
+                        data
+                    } = response;
+                    console.log(response);
+
+                    let result = response.map(e => e.name);
+                    let good = result.join(" , ")
+                    $(".modal-body").html(good)
+
+                }
+            });
+        }
+        // End of order details button
+
+        function alertH(){
+            const ctx = document.getElementById('myChart');
+            let orders;
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/fetchOrderDetails') }}",
+                dataType: "json",
+                dataSrc: "",
+                cache: false,
+                success: function(response) {
+                    const {
+                        data
+                    } = response;
+                    console.log(response);
+                    new Chart(ctx, {
+                        type: 'bar',
+                        options: {
+
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 2
+                                    }
+                                }],
+                                xAxes: [{
+                                    barPercentage: 0.4,
+                                }]
+                            }
+                        },
+                        data: {
+                            labels: response[0].map(row => row.month),
+                            datasets: [
+                                {
+                                    label: 'Monthly',
+                                    data: response[0].map(row => row.count),
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 159, 64, 0.2)',
+                                        'rgba(255, 205, 86, 0.2)',
+
+                                    ],
+                                    borderColor: [
+                                        'rgb(255, 99, 132)',
+                                        'rgb(255, 159, 64)',
+                                        'rgb(255, 205, 86)',
+
+                                    ],
+
+
+                                }
+                            ]
+
+                        }
+
+                    });
+
+                }
+            });
+
+
+        }
+
+        function donutChart(){
+            const ctx = document.getElementById('donut');
+            let orders;
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/fetchAnalytics') }}",
+                dataType: "json",
+                dataSrc: "",
+                cache: false,
+                success: function(response) {
+                    const {
+                        data
+                    } = response;
+                    console.log(response);
+                    new Chart(ctx, {
+                        type: 'doughnut',
+                        options: {
+
+                        },
+                        data: {
+                            labels: ['Total Orders','Changed Orders','Deleted orders','Expenses'],
+                            datasets: [
+                                {
+                                    data: [response[0].map(row => row.count),  //orders
+                                            response[1].map(row=> row.count),  //changed orders
+                                            response[2].map(row=> row.count),  //deleted Orders
+                                           response[3].map(row=> row.count)],  //expenses
+                                    backgroundColor: [
+
+                                        'rgba(255, 159, 64, 0.2)',
+                                        'rgba(255, 205, 86, 0.2)',
+                                        'rgba(255, 99, 132, 0.2)',
+
+                                    ],
+                                    borderColor: [
+
+                                        'rgb(255, 159, 64)',
+                                        'rgb(255, 205, 86)',
+                                        'rgb(255, 99, 132)',
+
+                                    ],
+
+
+                                }
+                            ]
+
+                        }
+
+                    });
+
+                }
+            });
+
+
+        }
+
+        alertH();
+        donutChart();
+
+
+    });
+</script>
+
+
+@endsection
+
+
+
+

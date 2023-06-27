@@ -28,24 +28,24 @@
             </div>
 
 
-            <table class="table table-bordered table-hover table-striped mt-4" id="table_id">
+            <table class="table table-bordered table-hover table-striped " id="table_id">
                 <thead>
                     <tr>
+                        <th>Order Id</th>
                         <th>NAME</th>
-
-                        <th>Comp input</th>
+                        <th>Food item</th>
+                        <th>Food Cost</th>
+                        <th>Company discount</th>
                         <th>Self input</th>
-                        <th>Total</th>
-                        <th>Date</th>
-
-                        <th>Sauce</th>
                         <th>Ordered By</th>
+                        <th>Date</th>
+                        <th>Order details</th>
 
                     </tr>
                 </thead>
                 <tbody>
                   @php
-                 
+
                     $company_contrib = 2500;
                     $number_format_companycontrib = number_format($company_contrib);
                     $self_total = 0;
@@ -57,19 +57,24 @@
                                 $money_company = 0;
                                 $money_overall = 0;
                   @endphp
-                  
-                    @foreach ($query as $item)
-                        <tr data-index={{ $item->order_id }} data-firstName={{ $item->firstname }}>
 
+                    @foreach ($adminReport as $item)
+                        <tr data-index={{ $item->order_id }} data-email={{ $item->email }}>
+                            <td>{{$item->order_id}}</td>
                             <td> {{ $item->lastname }} {{ $item->firstname }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>@php
+                                $num_format = number_format($item->total);
+                                @endphp
+                                {{ $num_format }}</td>
                             <td>{{ $number_format_companycontrib }}</td>
                             <td>@php
-                                
-                               
+
+
                                 $self_contrib =intval($item->total- $company_contrib);
                                 // $self_string = strval($self_contrib);
                                 // $money_self = number_format($self_string);
-                
+
                                 $self_total  += $self_contrib;
                                 $company_total += $company_contrib;
                                 $overall_total += intval($item->total);
@@ -78,38 +83,30 @@
                                 $money_self = number_format($self_total);
                                 $money_company = number_format($company_total);
                                 $money_overall = number_format($overall_total);
-                                
+
                             @endphp
                                 {{ $self_contrib }}
                             </td>
-                            <td>@php 
-                                $num_format = number_format($item->total);
-                                @endphp
-                                {{ $num_format }}</td>
-                            <td>{{ $item->created_at }}</td>
-                            <td>{{ $item->name }}</td>
+
                             <td>{{$item->order_made_by}}</td>
-
-
-                                {{-- <td>@php Carbon\Carbon::parse($item->created_at->format('F') )}}@endphp</td> --}}
-
-                            {{-- <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" --}}
-                                    {{-- data-bs-target="#exampleModal">More</button></td> --}}
+                            <td>{{ $item->created_at }}</td>
+                            <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">More</button></td>
 
                         </tr>
                     @endforeach
+                </tbody>
                     <tfoot>
                       <tr>
-                      <td></td>
-                      <td><strong>Total: {{ $money_company }}</strong></td></td>
+                      <td></td><td></td><td></td>
+                      <td><strong>Total: {{ $money_overall }}</strong></td></td>
+                      <td><strong>Total: {{ $money_company }}</strong></td>
                       <td><strong>Total: {{ $money_self }}</strong></td>
-                      <td><strong>Total: {{ $money_overall }}</strong></td>
-                      <td><strong></strong></td> <td></td><td></td>
+                      <td><strong></strong></td>
+                          <td></td><td></td>
                       </tr>
                      </tfoot>
-                  
-                    
-                </tbody>
+
             </table>
         </div>
     </div>
@@ -169,6 +166,7 @@
             var reportTable = $('#table_id');
             var reportDataTable = $('#table_id').DataTable({
                 dom: 'Bfrtip',
+                "searching":true,
                 "bPaginate": true,
                 buttons: [
                     'copy', 'excel', 'pdf'
@@ -211,7 +209,7 @@
             // ajax for the date range picker
             function getDateRangeRecord(endDate, startDate) {
                 const company_contrib = 2500;
-  
+
                 const self_total = 0;
                 const company_total = 0;
                 const overall_total = 0;
@@ -221,10 +219,8 @@
                 const money_company = 0;
                 const money_overall = 0;
                 $.ajax({
-                    data: [],
                     url: "{{ url('/expenditure') }}",
                     type: 'GET',
-                    dataSrc: '',
                     cache: false,
                     data: {
                         startDate: startDate,
@@ -235,32 +231,38 @@
                     dataType: "json",
                     success: function(response) {
                         const {
-                            data,data2
+                            data
                         } = response;
+                        let result = response.map(e => e.total);
                         console.log(data);
                         var trows = ''
                         var tfoot = ''
                         data.forEach(record => {
-                           
+
                             const {
+                                order_id,
                                 total,
                                 created_at,
                                 firstname,
                                 company_contrib =2500,
                                 self_contrib = total-company_contrib,
                                 order_made_by,
-                                name,lastname,self_total
-                                
-                             
+                                name,lastname
+
+
                             } = record;
+
+
+                            console.log(result)
                             // data2.forEach(totalRecord => {
                             //     const {
                             //         self_total = self_total + self_contrib
                             //     }
                             // }) = totalRecord;
                             trows +=
-                                `<tr><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td></tr>`
-                            //  tfoot +=`<tr><td></td><td></td><td>${self_total}</td><td></td><td></td><td></td><td></td>`
+                                `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td><td><button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal">More</button></td></tr>`
+                             tfoot +=`<tr><td></td><td></td><td>${record.order_id}</td><td></td><td></td><td></td><td></td>`
                         });
                         // clear before i repopulate
                         reportDataTable.clear().draw();
@@ -274,22 +276,22 @@
 
             $(document).on('click', 'button', function() {
                 const orderID = $(this).closest('tr').attr('data-index')
-                const firstname = $(this).closest('tr').attr('data-firstname')
+                const email = $(this).closest('tr').attr('data-email')
                 if (orderID !== "") {
 
-                    foodItems(orderID, firstname);
+                    foodItems(orderID, email);
                 }
 
             });
 
-            function foodItems(orderID, firstname) {
+            function foodItems(orderID, email) {
                 $.ajax({
                     type: 'GET',
                     url: "{{ url('/fooditems') }}",
                     dataType: "json",
                     data: {
                         orderID: orderID,
-                        firstname: firstname,
+                        email: email,
 
                     },
                     dataSrc: "",
@@ -299,10 +301,10 @@
                             data
                         } = response;
                         console.log(response);
-
                         let result = response.map(e => e.name);
+                        let order_id = response.map(e => e.order_id);
                         let good = result.join(" , ")
-                        $(".modal-body").html(good)
+                        $(".modal-body").html("<b>OrderID: </b>" + order_id[0] + "<br> "  +"<b> Food Items: </b>" + good )
 
                     }
                 });

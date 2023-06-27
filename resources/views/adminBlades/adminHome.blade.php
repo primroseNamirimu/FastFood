@@ -36,7 +36,7 @@
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="white-box analytics-info">
-                    <h3 class="box-title">Total orders this month</h3>
+                    <h3 class="box-title">Current total orders</h3>
                     <ul class="list-inline two-part d-flex align-items-center mb-0">
                         <li>
                             <div id="sparklinedash2"><canvas width="67" height="30"
@@ -57,7 +57,7 @@
                                         //  ->groupBy('order_id')
                                         ->whereMonth('food_order.created_at', date('m'))
                                         ->count();
-                                    
+
                                     echo $query;
                                 @endphp
                             </span></li>
@@ -67,7 +67,7 @@
             </div>
             <div class="col-lg-4 col-md-12">
                 <div class="white-box analytics-info">
-                    <h3 class="box-title">Total cost this month(so far)</h3>
+                    <h3 class="box-title">Current cost</h3>
                     <ul class="list-inline two-part d-flex align-items-center mb-0">
                         <li>
                             <div id="sparklinedash3"><canvas width="67" height="30"
@@ -76,7 +76,7 @@
                         </li>
                         <li class="ms-auto"><span class="counter text-info">
                                 @php
-                                    
+
                                     $query = DB::table('food_order')
                                         ->join('food', 'food.id', '=', 'food_order.food_id')
                                         ->join('orders', 'orders.id', '=', 'food_order.order_id')
@@ -87,7 +87,7 @@
                                         ->value('total');
                                     $num = number_format($query);
                                     echo 'Shs ' . $num;
-                                    
+
                                 @endphp
                             </span>
                         </li>
@@ -124,22 +124,22 @@
                               {{-- @foreach($query as $do)
                               <tr>
                                   <td>{{$do->order_for}}
-                                  </td>   
+                                  </td>
                                   <td>{{$do->order_creation_date}}
-                                </td>  
+                                </td>
                                 <td>{{$do->deletion_time}}
-                                </td>  
-                            <td>{{$do->order_id}}</td>                      
+                                </td>
+                            <td>{{$do->order_id}}</td>
                                 </tr>
                               @endforeach --}}
                              </tbody>
                             </table>
                     </div>
-                   
+
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
-                
+
                 <div class="white-box">
                     <h3 class="box-title">Monthly expenditure</h3>
                     <div class="d-md-flex">
@@ -170,14 +170,14 @@
                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                     <div class="white-box">
                         <h3 class="box-title">Recent orders</h3>
-                        <div class="d-md-flex">
+                        <div class="d-md-fex">
                             <table class="table table-bordered table-hover table-striped mt-4 data-table" id="table_id">
                                 <thead>
                                     <tr>
                                         <th>NAME</th>
 
-                                        <th>Comp input</th>
-                                        <th>Self input</th>
+                                        <th>Company discount</th>
+                                        <th>Individual input</th>
                                         <th>Total</th>
                                         <th>Date</th>
 
@@ -190,7 +190,7 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        
+
                                         $company_contrib = 2500;
                                         $number_format_companycontrib = number_format($company_contrib);
                                         $self_total = 0;
@@ -208,18 +208,18 @@
                                             <td> {{ $item->lastname }} {{ $item->firstname }}</td>
                                             <td>{{ $number_format_companycontrib }}</td>
                                             <td>@php
-                                                
+
                                                 $self_contrib = intval($item->total - $company_contrib);
-                                           
+
                                                 $self_total += $self_contrib;
                                                 $company_total += $company_contrib;
                                                 $overall_total += intval($item->total);
-                                                
+
                                                 //money format for the totals
                                                 $money_self = number_format($self_total);
                                                 $money_company = number_format($company_total);
                                                 $money_overall = number_format($overall_total);
-                                                
+
                                             @endphp
                                                 {{ $self_contrib }}
                                             </td>
@@ -233,7 +233,7 @@
 
                                             <form action="{{ route('order-actions.destroy',$item->order_id ) }}" method="POST">
                                                 @csrf
-                                                {{ method_field('DELETE') }} 
+                                                {{ method_field('DELETE') }}
 
                                             <td><button type="submit" class="btn delete"
                                                     onclick="if (!confirm('order for {{ $item->lastname }} made on {{ $item->created_at }} will be permanently deleted, are you sure?')) { return false }">
@@ -246,7 +246,7 @@
                                     <tr>
                                         <td></td>
                                         <td><strong>Total: {{ $money_company }}</strong></td>
-                                        </td>
+
                                         <td><strong>Total: {{ $money_self }}</strong></td>
                                         <td><strong>Total: {{ $money_overall }}</strong></td>
                                         <td><strong></strong></td>
@@ -256,14 +256,9 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                            </form>
-                                
+
                         </div>
-                        {{-- <div id="ct-visits" style="height: 405px;">
-                            <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
-                                    class="chartist-tooltip-value">6</span>
-                            </div>
-                        </div> --}}
+
                     </div>
                 </div>
             </div>
@@ -434,7 +429,7 @@
         //console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
     </script>
     <script>
-     
+
         $(function() {
                     //ct-visits
                     new Chartist.Line('#ct-visits', {

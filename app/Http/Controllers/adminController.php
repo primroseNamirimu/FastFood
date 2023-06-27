@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-  
+
     public function index()
-    {  
+    {
         $users = DB::select('select * from users where is_disabled = ?', [0]);
         //dd($users);
 
-       
+
         return view ('userBlades.team',["users"=>$users],['user.adminHome',["users"=>$users]]);
     }
 
@@ -27,12 +27,12 @@ class AdminController extends Controller
         return view('userBlades.disabledUsers', ["disabledUsers" => $disabledUsers]);
     }
 
-   
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -44,9 +44,8 @@ class AdminController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
-  
-        //User::create($request->all());
-         User::create([
+
+        $q = User::create([
             'firstname' => $request['firstname'],
             'lastname' =>$request['lastname'],
             'username' => $request['username'],
@@ -54,9 +53,17 @@ class AdminController extends Controller
             'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
         ]);
-   
-        return redirect()->route('admin-actions.index')
-                        ->with('success','User created successfully.');
+
+        if($q){
+            return redirect()->route('admin-actions.index')
+                ->with('success','User created successfully.');
+        }
+        else {
+            return redirect()->route('admin-actions.index')
+                ->with('danger',"Oops.. It's us not you. Something went wrong. Please try again.");
+        }
+
+
 
     }
 
@@ -64,25 +71,25 @@ class AdminController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-   
+
      */
     public function show($id)
     {
         $user= User::find($id);
         return view('userBlades.profile',compact('user'),["user"=>$user]);
-        //dd($users);
     }
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update (Request $request, $id)
     {
-    
+
         $user = User::find($id);
         $user->firstname = request('firstname');
         $user->lastname = request('lastname');
@@ -105,7 +112,7 @@ class AdminController extends Controller
     ->with('success','Profile updated successfully');
   }
   return redirect()->route('admin-actions.show',Auth::user()->id)
-  ->with('success','Profile updated successfully'); 
+  ->with('success','Profile updated successfully');
     }
 
     /**
@@ -134,8 +141,8 @@ class AdminController extends Controller
         ->with('success','User enabled successfully');
        }
 
-  
-       
+
+
     }
 
     public function enableUser($id)
@@ -147,7 +154,7 @@ class AdminController extends Controller
             $enableUser->save();
        }
 
-  
+
         return redirect()->route('admin-actions.index')
                         ->with('success','User enabled successfully');
     }
@@ -162,50 +169,48 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function changePassword(Request $request){
         $id = Auth::user()->id;
         $user = User::find($id);
-    
-     
-  
+
         if($user && isset($_GET['change'])){
 
             $old_password = $_GET['old_password'];
             if(Hash::check($old_password,$user->password)){
                 $new_password = $_GET['password'];
-                $confirm_password = $_GET['confirm_password']; 
+                $confirm_password = $_GET['confirm_password'];
 
                 if($new_password == $confirm_password){
-                 $user->password = request('password');   
+                 $user->password = request('password');
                  $user->save();
                  echo("i reach here");
                  $request->validate($request,[
                     'password' => ['required', 'alpha_num', 'min:8', 'confirmed'],
                  ]);
-          
+
             //      $request->validate([
-           
-            //          'password' => Hash::make($request['password']),      
+
+            //          'password' => Hash::make($request['password']),
             //   ]);
 
               $user->update(['password'=>Hash::make($request['password'])]);
               if($user){
                 echo("i reach here updated");
               }
-              
+
                 }else{
                     echo("paswords do not match");
                 }
-                
+
         //  return redirect()->route('admin.home')
         //                  ->with('success','password changed successfully');
             }else{
                 echo("bottom");
-           
+
                 // return redirect()->route('admin.home')
                 // ->with('danger','Wrong old password');
-              
+
             }
         }
     }
@@ -218,8 +223,8 @@ class AdminController extends Controller
         // foreach ($IDs as $id) {
         //     User::find($id)->delete();
         // }
-       
-  
+
+
         // return redirect()->route('admin-actions.index')
         //                 ->with('success','Users deleted successfully');
     }
