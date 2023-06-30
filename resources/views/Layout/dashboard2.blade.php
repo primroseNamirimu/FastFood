@@ -101,6 +101,7 @@
     <div class="nk-sidebar">
         <div class="nk-nav-scroll">
             <ul class="metismenu" id="menu">
+                @if (Auth::user()->is_admin == 1)
                 <li class="nav-label">ADMIN</li>
                 <li>
                     <a class="has-arrow" href="{{ route('admin.home') }}" aria-expanded="false">
@@ -108,25 +109,38 @@
                     </a>
 
                 </li>
-
-                <li><a class="has-arrow" href="{{ route('admin.prev') }}" aria-expanded="false"><i class="icon-layers"></i><span class="nav-text">Old view</span></a>
+                @else
+                <li class="nav-label">PANEL</li>
+                <li><a class="has-arrow" href="{{ route('userhome') }}" aria-expanded="false"><i class="icon-layers"></i><span class="nav-text">DashBoard</span></a>
 
                 </li>
+                @endif
+                @if (Auth::user()->is_admin == 1)
                 <li class="nav-label">MENU</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="bx bx-dish"></i><span class="nav-text">Menu</span></a>
                     <ul aria-expanded="false">
                         <li><a data-toggle="modal" data-target="#event-modal">Add Item</a></li>
                         <li><a href="{{ route('showMenuItems') }}">Edit Item</a></li>
-
-
                     </ul>
                 </li>
+                @endif
                 <li class="nav-label">ORDERS</li>
                 <li><a href="{{ route('order.index') }}" aria-expanded="false"><i class="icon-diamond"></i><span class="nav-text">Order Now</span></a></li>
                 <li class="nav-label">REPORTS</li>
                 <li><a href="forms.html" aria-expanded="false"><i class="icon-settings"></i><span class="nav-text">Forms</span></a></li>
                 <li class="nav-label">USER INFO</li>
+
+                @if (Auth::user()->is_admin == 1)
                 <li><a href="{{ route('admin-actions.index') }}" aria-expanded="false"><i class="icon-briefcase"></i><span class="nav-text">User Profiles</span></a></li>
+                @else
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                       href="{{ route('admin-actions.show', Auth::user()->id) }}" aria-expanded="false">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span class="hide-menu"> My Profile</span>
+                    </a>
+                </li>
+                @endif
                 <li class="nav-label">LOG OUT</li>
                 <li><a href="{{ route('logout') }}" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-logout"></i><span class="nav-text">Log Out</span></a></li>
 

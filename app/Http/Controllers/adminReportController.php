@@ -62,22 +62,42 @@ class adminReportController extends Controller
 
     public function index(Request $request){
 
+        $user = Auth::user()->is_admin;
          if( $request->ajax()){
              if (!empty($_GET['endDate']) && !empty($_GET['startDate'])) {
                 $end =   $_GET['endDate'];
                 $start   = $_GET['startDate'];
-                $query3 = DB::table('food_order')
-                ->join('food','food.id','=','food_order.food_id')
-                ->join('orders','orders.id','=','food_order.order_id')
-                ->join('users','users.id','=','orders.user_id')
-                ->select('food_order.order_id','food_order.order_made_by', DB::raw('SUM(food.price) as total'),'orders.created_at','users.id','food.name','users.lastname','users.firstname')
-        ->groupBy('order_id','food_order.order_made_by','orders.created_at','users.lastname','users.firstname','users.id','food.name')
-        ->where('food.price','>','0')
-                ->whereBetween('food_order.created_at',[$end,$start]);
+
+                if($user){
+                    $query3 = DB::table('food_order')
+                        ->join('food','food.id','=','food_order.food_id')
+                        ->join('orders','orders.id','=','food_order.order_id')
+                        ->join('users','users.id','=','orders.user_id')
+                        ->select('food_order.order_id','orders.isChanged','food_order.order_made_by', DB::raw('SUM(food.price) as total'),DB::raw('DATE_FORMAT(orders.created_at,"%d-%m-%Y") as created_at'),'users.id','food.name','users.lastname','users.firstname')
+                        ->groupBy('order_id','food_order.order_made_by','orders.created_at','users.lastname','users.firstname','users.id','food.name')
+                        ->where('food.price','>','0')
+                        ->whereBetween('food_order.created_at',[$end,$start]);
+                }
+                else {
+                    $user = Auth::user()->id;
+                    $query3 = DB::table('food_order')
+                        ->join('food','food.id','=','food_order.food_id')
+                        ->join('orders','orders.id','=','food_order.order_id')
+                        ->join('users','users.id','=','orders.user_id')
+                        ->select('food_order.order_id','orders.isChanged','food_order.order_made_by', DB::raw('SUM(food.price) as total'),DB::raw('DATE_FORMAT(orders.created_at,"%d-%m-%Y") as created_at'),'users.id','food.name','users.lastname','users.firstname')
+                        ->groupBy('order_id','food_order.order_made_by','orders.created_at','users.lastname','users.firstname','users.id','food.name')
+                        ->where('food.price','>','0')
+                        ->where('users.id','=',$user)
+                        ->whereBetween('food_order.created_at',[$end,$start]);
+                }
 
 
-                return datatables($query3)->make(true);
-                    }
+                 try {
+                     return datatables($query3)->make(true);
+                 } catch (\Exception $e) {
+
+                 }
+             }
 
         }
         }

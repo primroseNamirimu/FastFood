@@ -12,6 +12,7 @@
                         <form id="order-form" method="POST" action="{{ route('order.store') }}">
 
                             @csrf
+                            @if (Auth::user()->is_admin == 1)
                             <fieldset>
                                 <legend>Making Order for:</legend>
 
@@ -44,10 +45,6 @@
                                 </div>
                             </div>
                                 <div class="dropdown">
-<!--                                   <button class="btn btn-primary" data-bs-toggle="dropdown" type="button" id="dropdownMenuButton"-->
-<!--                                            data-toggle="dropdown" aria-expanded="false">-->
-<!--                                        Staff-->
-<!--                                    </button>-->
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="box" style="display: none">
                                         <small>Select staff to whom the order belongs</small>
@@ -83,6 +80,7 @@
                                     </div>
 
                                 </div>
+                            @endif
 
                             @if ($message = Session::get('success'))
                             <div class="alert alert-success alert-dismissible fade show" style="width: 50%">

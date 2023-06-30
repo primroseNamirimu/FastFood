@@ -16,9 +16,10 @@ class orderChanged extends Notification
      *
      * @return void
      */
-    public function __construct()
+    protected $changedOrder;
+    public function __construct($changedOrder)
     {
-        //
+        $this->changedOrder=$changedOrder;
     }
 
     /**
@@ -29,7 +30,7 @@ class orderChanged extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +56,7 @@ class orderChanged extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'data' =>' Your Order '. $this->changedOrder.' was changed'
         ];
     }
 }

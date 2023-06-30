@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controller;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\ChangedOrdersController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Support\Facades\Auth;
@@ -120,6 +121,8 @@ Route::get('/user-report', [adminReportController::class , 'currentMonth_user'])
 Route::get('/userReport/{id}', [adminReportController::class , 'userReport'])->name('userReportAdmin');
 
 Route::get('/expenditure', [adminReportController::class , 'index'])->name('admin-report');
+
+Route::post('/notify', [ChangedOrdersController::class,'changedOrders'])->name('notify');
 
 
 /*

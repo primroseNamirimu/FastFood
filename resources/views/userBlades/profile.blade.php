@@ -15,33 +15,32 @@
                                         @endif
                                 <form class="form-horizontal form-material" action=" ">
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Full Name</label>
+                                        <label for="example-email" class="col-md-12 p-0"><b>Full Names</b></label>
                                         <div class="col-md-12 border-bottom p-0">
-                                            <label>
-                                                <input type="text" class="form-control p-0 border-0">
-                                            </label> {{ $user->firstname }} {{ $user->lastname }}
+                                            <input readonly type="text" class="form-control p-0 border-0" >{{ $user->lastname }} {{ $user->firstname }}
                                         </div>
                                     </div>
+
                                     <div class="form-group mb-4">
-                                        <label for="example-email" class="col-md-12 p-0">Username</label>
+                                        <label for="example-email" class="col-md-12 p-0"><b>Username</b></label>
                                         <div class="col-md-12 border-bottom p-0">
                                             <input type="email" class="form-control p-0 border-0" name="example-email" id="example-email">{{ $user->username }}
                                         </div>
                                     </div>
                                     <div class="form-group mb-4">
-                                        <label for="example-email" class="col-md-12 p-0">Email</label>
+                                        <label for="example-email" class="col-md-12 p-0"><b>Email</b></label>
                                         <div class="col-md-12 border-bottom p-0">
                                             <input type="email" class="form-control p-0 border-0" name="example-email" id="example-email">{{ $user->email }}
                                         </div>
                                     </div>
                                     {{-- <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Password</label>
+                                        <label class="col-md-12 p-0"><b>Password</b></label>
                                         <div class="col-md-12 border-bottom p-0">
                                             <input type="password" value="password" class="form-control p-0 border-0">
                                         </div>
                                     </div> --}}
                                     <div class="form-group mb-4">
-                                        <label class="col-md-12 p-0">Phone No</label>
+                                        <label class="col-md-12 p-0"><b>Phone No</b></label>
                                         <div class="col-md-12 border-bottom p-0">
                                             <input type="text" class="form-control p-0 border-0">{{ $user->phone }}
                                         </div>

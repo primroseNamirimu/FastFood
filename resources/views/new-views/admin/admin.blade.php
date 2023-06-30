@@ -1,20 +1,5 @@
 @extends('Layout.dashboard2')
 
-<!--            <div class="row page-titles mx-0">-->
-<!--                <div class="col-sm-6 p-md-0">-->
-<!--                    <div class="breadcrumb-range-picker">-->
-<!--                        <span><i class="icon-calender"></i></span>-->
-<!--                        <span class="ml-1">August 08, 2017 - August 08, 2017</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">-->
-<!--                    <ol class="breadcrumb">-->
-<!--                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>-->
-<!--                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Components</a></li>-->
-<!--                    </ol>-->
-<!--                </div>-->
-<!--            </div>-->
-            <!-- row -->
 @section('content')
 
 
@@ -47,7 +32,7 @@
                     <div class="col-xl-6 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Monthly OverView</h4>
+                                <h4 class="card-title mb-4">Monthly Orders</h4>
 
                                 <canvas id="donut"></canvas>
 
@@ -59,7 +44,7 @@
                     <div class="col-xl-6 col-xxl-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Expenditure</h4>
+                                <h4 class="card-title mb-4">Orders</h4>
 
                                     <canvas id="myChart"></canvas>
 
@@ -78,7 +63,7 @@
 
                                         <div class="input-group mb-3">
                                             <div class="input-group-addon">
-                    <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="bx bx-calendar bx-sm"
+                               <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="bx bx-calendar bx-sm"
                                                                                            aria-hidden="true"></i></span>
                                             </div>
                                             <label for="date"></label><input type="text" class="form-control" id="date" placeholder="Date"/>
@@ -101,18 +86,14 @@
                                             <tr>
                                                 <th>ORDER ID</th>
                                                 <th>NAME</th>
-
                                                 <th>Company discount</th>
                                                 <th>Individual input</th>
                                                 <th>Total</th>
                                                 <th>Date</th>
-
                                                 <th>Sauce</th>
                                                 <th>Ordered By</th>
                                                 <th>Modified</th>
                                                 <th>Action</th>
-
-
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -180,14 +161,17 @@
                                             <tfoot>
                                             <tr>
                                                 <td></td>
+                                                <td></td>
                                                 <td><strong>Total: {{ $money_company }}</strong></td>
 
                                                 <td><strong>Total: {{ $money_self }}</strong></td>
                                                 <td><strong>Total: {{ $money_overall }}</strong></td>
-                                                <td><strong></strong></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                <td></td>
+                                                <td></td>
+
                                             </tr>
                                             </tfoot>
                                     </table>
@@ -308,9 +292,13 @@
                     let money_overall = 0;
                     let y = [];
                     data.forEach(record => {
-                        const {order_id, total, created_at, firstname, lastname, order_made_by, name} = record;
+                        const {order_id, total, created_at, firstname, lastname, order_made_by, name,isChanged} = record;
                         self_contrib = total - company_contrib;
-                        trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td></tr>`
+                        trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td><td>${isChanged}</td>    <td>
+                                                        <a href="{{ route('deleteOrder',$item->order_id ) }}" ><button type="submit" class="btn delete">
+                                                            <span><i class='bx bx-trash-alt'></i></button></a>
+                                                        <a href="{{ route('editOrder', $item->order_id) }}"><span><i class="icon-note"></i></span></a>
+                                                    </td></tr>`
                         money_self += self_contrib;
                         money_company += company_contrib;
 
@@ -318,7 +306,7 @@
 
                     });
 
-                    extraRow = `<tr style="color: green"><td></td><td></td><td><strong>Total: ${money_company} </strong></td><td><strong>Total: ${money_self} </strong></td><td><strong>Total:  ${money_overall} </strong></td><td></td> <td></td> <td></td></tr>`;
+                    extraRow = `<td><td></td><td></td><td style="color: green"><strong>Total: ${money_company} </strong></td><td style="color: green"><strong>Total: ${money_self} </strong></td><td style="color: green"><strong>Total:  ${money_overall} </strong></td><td> <td></td> <td></td><td></td><td></td></tr>`;
 
                     // clear before i repopulate
                     reportDataTable.clear().draw();
@@ -326,6 +314,9 @@
                     node.deleteTFoot()
 
                     //repopulate
+                    let reportTable = $('#table_id');
+                    node.setAttribute('class','table verticle-middle table-responsive-lg mb-0')
+                    console.log(node.getAttribute())
                     reportTable.DataTable().rows.add($(trows)).draw();
                     $("#table_id").append(
                         $('<tfoot/>').append($(extraRow).clone())
@@ -412,7 +403,7 @@
                             datasets: [
                                 {
                                     label: 'Monthly',
-                                    data: response[0].map(row => row.count),
+                                    data: response[0].map(row => row.total),
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 0.2)',
                                         'rgba(255, 159, 64, 0.2)',
@@ -454,20 +445,23 @@
                     const {
                         data
                     } = response;
-                    console.log(response);
+                    // let total = response[3]
+                    // console.log(total)
+                    // console.log(response);
                     new Chart(ctx, {
                         type: 'doughnut',
                         options: {
 
                         },
                         data: {
-                            labels: ['Total Orders','Changed Orders','Deleted orders','Expenses'],
+                            labels: ['Total Orders','Changed Orders','Deleted orders'],
                             datasets: [
                                 {
                                     data: [response[0].map(row => row.count),  //orders
                                             response[1].map(row=> row.count),  //changed orders
                                             response[2].map(row=> row.count),  //deleted Orders
-                                           response[3].map(row=> row.count)],  //expenses
+                                           // response[3].map(row=> row.total)
+                                    ],  //expenses
                                     backgroundColor: [
 
                                         'rgba(255, 159, 64, 0.2)',
