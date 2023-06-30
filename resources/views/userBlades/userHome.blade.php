@@ -32,7 +32,7 @@
         <div class="col-xl-6 col-xxl-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title mb-4">Monthly OverView</h4>
+                    <h4 class="card-title mb-4">Monthly Orders Overview</h4>
 
                     <canvas id="donut"></canvas>
 
@@ -325,7 +325,6 @@
 
         $(document).on('click', 'button', function() {
 
-            //var data = table.row( $(this).parents('tr') ).data();
             const orderID = $(this).closest('tr').attr('data-index')
             const firstname = $(this).closest('tr').attr('data-firstname')
             if ((orderID !== "")) {
@@ -362,10 +361,8 @@
         }
         // End of order details button
 
-        function alertH(){
+        function displayOrderDetails(){
             const ctx = document.getElementById('myChart');
-            let orders;
-
             $.ajax({
                 type: 'GET',
                 url: "{{ url('/fetchOrderDetails') }}",
@@ -376,7 +373,6 @@
                     const {
                         data
                     } = response;
-                    console.log(response);
                     const labels =  response[0].map(row => row.month)
                     const c = [{c:1000}]
                     new Chart(ctx, {
@@ -452,7 +448,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: "{{ url('/fetchAnalytics') }}",
+                url: "{{ url('/fetchUserAnalytics') }}",
                 dataType: "json",
                 dataSrc: "",
                 cache: false,
@@ -461,21 +457,20 @@
                         data
                     } = response;
 
-                    // console.log(response);
+                    console.log(response);
+
                     new Chart(ctx, {
                         type: 'doughnut',
                         options: {
 
                         },
                         data: {
-                            labels: ['Total Orders','Changed Orders','Deleted orders'],
+                            labels: response.map(row => row.food),
                             datasets: [
                                 {
-                                    data: [response[0].map(row => row.count),  //orders
-                                        response[1].map(row=> row.count),  //changed orders
-                                        response[2].map(row=> row.count),  //deleted Orders
-                                        // response[3].map(row=> row.total)
-                                    ],  //expenses
+                                    data: response.map(row => row.count),
+
+
                                     backgroundColor: [
 
                                         'rgba(255, 159, 64, 0.2)',
@@ -505,7 +500,7 @@
 
         }
 
-        alertH();
+        displayOrderDetails();
         donutChart();
 
 

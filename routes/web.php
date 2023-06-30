@@ -106,6 +106,7 @@ Route::post('/enable-user', [adminController::class , 'enableUser'])->name('enab
 Route::get('/profile', function () {
     return view('userBlades/profile');
 })->name('profile');
+Route::get('/fetchUserAnalytics',[HomeController::class,'fetchUserAnalytics'])->name('userAnalytics');
 
 
 /*

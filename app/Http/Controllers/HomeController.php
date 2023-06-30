@@ -101,6 +101,7 @@ class HomeController extends Controller
     public function fetchAnalytics(Request $request){
 
         $all_results = [];
+        $user = Auth::user()->is_admin;
 
         if ( $request->ajax()){
 
@@ -133,7 +134,6 @@ class HomeController extends Controller
                                  GROUP BY YEAR(deleted_on), MONTHNAME(deleted_on)
                                             ORDER BY YEAR(deleted_on), MONTHNAME(deleted_on) DESC');
 
-//            dd($deleted_count);
             array_push($all_results,$order_count,$changed_count,$deleted_count,$arr);
 
             return response()->json($all_results, 200);
@@ -163,5 +163,31 @@ public function userHome(){
 
     return view('userBlades.userHome', ["queryuser" => $queryuser]);
 }
+    public function fetchUserAnalytics(Request $request){
+
+        $all_results = [];
+        $user = Auth::user()->is_admin;
+
+        if ( $request->ajax()){
+
+//            dd($total);
+
+            $result = DB::select("SELECT YEAR(orders.created_at) AS year, MONTHNAME(orders.created_at) AS month,food.name as food,SUM(food.price) as total, COUNT(*) AS count FROM food_order
+                                                                          INNER JOIN food ON food.id = food_order.food_id
+                                                       INNER JOIN orders ON orders.id = food_order.order_id
+                                                       INNER JOIN users ON users.id=orders.user_id WHERE user_id = 1
+                                                        GROUP BY YEAR(orders.created_at), MONTHNAME(orders.created_at), food.name
+                                                        ORDER BY YEAR(orders.created_at), MONTHNAME(orders.created_at) DESC");
+
+
+
+
+//            array_push($all_results,$order_count,$changed_count,$deleted_count,$arr);
+
+            return response()->json($result, 200);
+
+        }
+
+    }
 
 }
