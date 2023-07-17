@@ -295,9 +295,9 @@
                         const {order_id, total, created_at, firstname, lastname, order_made_by, name,isChanged} = record;
                         self_contrib = total - company_contrib;
                         trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td><td>${isChanged}</td>    <td>
-                                                        <a href="{{ route('deleteOrder',$item->order_id ) }}" ><button type="submit" class="btn delete">
+                                                        <a href="{{ route('deleteOrder',$item->order_id ?? 0 ) }}" ><button type="submit" class="btn delete">
                                                             <span><i class='bx bx-trash-alt'></i></button></a>
-                                                        <a href="{{ route('editOrder', $item->order_id) }}"><span><i class="icon-note"></i></span></a>
+                                                        <a href="{{ route('editOrder', $item->order_id ?? 0) }}"><span><i class="icon-note"></i></span></a>
                                                     </td></tr>`
                         money_self += self_contrib;
                         money_company += company_contrib;
@@ -447,7 +447,7 @@
                     } = response;
                     // let total = response[3]
                     // console.log(total)
-                    // console.log(response);
+                    console.log(response);
                     new Chart(ctx, {
                         type: 'doughnut',
                         options: {

@@ -292,11 +292,13 @@
                     data.forEach(record => {
                         const {order_id, total, created_at, firstname, lastname, order_made_by, name,isChanged} = record;
                         self_contrib = total - company_contrib;
-                        trows += `<tr><td>${order_id}</td><td>${lastname} ${firstname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td><td>${isChanged}</td>    <td>
-                                                        <a href="{{ route('deleteOrder',$item->order_id ) }}" ><button type="submit" class="btn delete">
+                        trows += `<tr><td>${order_id}</td><td>${lastname} ${firstname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td><td>${isChanged}</td>
+                        <td>
+                                                        <a href="{{ route('deleteOrder',$item->order_id ?? 0 ) }}" ><button type="submit" class="btn delete">
                                                             <span><i class='bx bx-trash-alt'></i></button></a>
-                                                        <a href="{{ route('editOrder', $item->order_id) }}"><span><i class="icon-note"></i></span></a>
-                                                    </td></tr>`
+                                                        <a href="{{ route('editOrder', $item->order_id ?? 0) }}"><span><i class="icon-note"></i></span></a>
+                                                    </td>
+                                                    </tr>`
                         money_self += self_contrib;
                         money_company += company_contrib;
                         money_overall += (total);
@@ -476,6 +478,8 @@
                                         'rgba(255, 159, 64, 0.2)',
                                         'rgba(255, 205, 86, 0.2)',
                                         'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 55, 155,0.2)',
+
 
                                     ],
                                     borderColor: [
@@ -483,6 +487,7 @@
                                         'rgb(255, 159, 64)',
                                         'rgb(255, 205, 86)',
                                         'rgb(255, 99, 132)',
+                                        'rgba(255, 55, 155)',
 
                                     ],
 

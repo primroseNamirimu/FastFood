@@ -24,14 +24,12 @@ class HomeController extends Controller
     public function index()
     {
 
+        auth::logout();
         if (Auth::check()) {
-            auth::logout();
             return redirect()->route('login');
-        //  ->with('success','Succesfuly registered, You can login now');
 
         }
         else {
-            auth::logout();
             return view('auth.login');
         }
 
@@ -55,10 +53,10 @@ class HomeController extends Controller
 
             ->where('food.price','>','0')
 
-            ->whereMonth('food_order.created_at', date('m'))
+//            ->whereMonth('food_order.created_at', date('m'))
                 ->orderBy('orders.created_at','desc')
 
-            ->limit(10)->get();
+           ->get();
 
 //            dd($queryadmin);
         return view('new-views.admin.admin', ["queryadmin" => $queryadmin]);
@@ -69,7 +67,7 @@ class HomeController extends Controller
     public function fetchOrders(Request $request){
         $userID = Auth::user()->is_admin;
         $all_results = [];
-        $other = [3,4,5,6];
+
 
         if ( $request->ajax()){
             if($userID) {
@@ -89,7 +87,7 @@ class HomeController extends Controller
             }
 
 
-            array_push($all_results,$result,$other);
+            $all_results[] = $result;
 
             return response()->json($all_results, 200);
 
@@ -116,7 +114,7 @@ class HomeController extends Controller
             ->orderBy('orders.created_at','desc')
             ->get();
 
-           $arr = $total->toArray();
+//           $arr = $total->toArray();
 
             $order_count = DB::select(' SELECT YEAR(created_at) AS year, MONTHNAME(created_at) AS month, COUNT(*) AS count
                                 FROM orders  WHERE YEAR(created_at)  = YEAR(now()) AND MONTHNAME(created_at) = MONTHNAME(now())
@@ -134,7 +132,7 @@ class HomeController extends Controller
                                  GROUP BY YEAR(deleted_on), MONTHNAME(deleted_on)
                                             ORDER BY YEAR(deleted_on), MONTHNAME(deleted_on) DESC');
 
-            array_push($all_results,$order_count,$changed_count,$deleted_count,$arr);
+            array_push($all_results,$order_count,$changed_count,$deleted_count,$total);
 
             return response()->json($all_results, 200);
 
@@ -155,34 +153,27 @@ public function userHome(){
         ->where('users.id', $userID)
         ->where('food.price','>','0')
 
-        ->whereMonth('food_order.created_at', date('m'))
+//        ->whereMonth('food_order.created_at', date('m'))
         ->orderBy('orders.created_at','desc')
-
-        ->limit(10)->get();
+        ->get();
 
 
     return view('userBlades.userHome', ["queryuser" => $queryuser]);
 }
     public function fetchUserAnalytics(Request $request){
 
-        $all_results = [];
-        $user = Auth::user()->is_admin;
+        $user = Auth::user()->id;
 
         if ( $request->ajax()){
-
-//            dd($total);
 
             $result = DB::select("SELECT YEAR(orders.created_at) AS year, MONTHNAME(orders.created_at) AS month,food.name as food,SUM(food.price) as total, COUNT(*) AS count FROM food_order
                                                                           INNER JOIN food ON food.id = food_order.food_id
                                                        INNER JOIN orders ON orders.id = food_order.order_id
-                                                       INNER JOIN users ON users.id=orders.user_id WHERE user_id = 1
+                                                       INNER JOIN users ON users.id=orders.user_id WHERE user_id = $user
+                                                        AND YEAR(orders.created_at) = YEAR(now()) AND MONTHNAME(orders.created_at) = MONTHNAME(now())
                                                         GROUP BY YEAR(orders.created_at), MONTHNAME(orders.created_at), food.name
                                                         ORDER BY YEAR(orders.created_at), MONTHNAME(orders.created_at) DESC");
 
-
-
-
-//            array_push($all_results,$order_count,$changed_count,$deleted_count,$arr);
 
             return response()->json($result, 200);
 

@@ -42,13 +42,14 @@ Route::get('/admin', [HomeController::class, 'admin'])->name('admin.home')->midd
 Route::get('/adminprev', [HomeController::class, 'prev'])->name('admin.prev')->middleware('is_admin');
 
 Route::resource('/admin-actions',adminController::class);
+Route::post('/change-password/{id}',[adminController::class,'updatePassword'])->name('updatePassword');
 
 //Route::get('/admin', function () {
 //    return view('adminBlades/adminHome');
 //})->name('admin');
 
 Route::get('/',function(){
-    return view('auth.login');
+    return view('auth.login')->name('login');
 });
 
 
@@ -106,6 +107,7 @@ Route::post('/enable-user', [adminController::class , 'enableUser'])->name('enab
 Route::get('/profile', function () {
     return view('userBlades/profile');
 })->name('profile');
+Route::get('/updatePassword/{id}',[adminController::class,'showPasswordPage'])->name('updateUserPassword');
 Route::get('/fetchUserAnalytics',[HomeController::class,'fetchUserAnalytics'])->name('userAnalytics');
 
 

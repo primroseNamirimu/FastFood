@@ -1,51 +1,51 @@
-/*
+/*!*!**!*/
 
-Table of Sass Contents
+/*!*Table of Sass Contents*!*/
 
-1. Abstracts
-    _bs-custom.scss
-    _inheritance.scss
-    _maps.scss
-    _mixin.scss
-    _variable.scss
+/*!*1. Abstracts*!*/
+/*!*    _bs-custom.scss*!*/
+/*!*    _inheritance.scss*!*/
+/*!*    _maps.scss*!*/
+/*!*    _mixin.scss*!*/
+/*!*    _variable.scss*!*/
 
-2. bootstrap
-    -Here goes all official bootstrap scss files
+/*!*2. bootstrap*!*/
+/*!*    -Here goes all official bootstrap scss files*!*/
 
-3. Global/Base
-    _color.scss
-    _custom-grid.scss
-    _fonts.scss
-    _helper.scss
-    _reset.scss
+/*!*3. Global/Base*!*/
+/*!*    _color.scss*!*/
+/*!*    _custom-grid.scss*!*/
+/*!*    _fonts.scss*!*/
+/*!*    _helper.scss*!*/
+/*!*    _reset.scss*!*/
 
-4. layout
-    +footer
-    +header
-    +rtl
-    +sidebar
-    +tables
-    +theme
-    +version-dark
+/*!*4. layout*!*/
+/*!*    +footer*!*/
+/*!*    +header*!*/
+/*!*    +rtl*!*/
+/*!*    +sidebar*!*/
+/*!*    +tables*!*/
+/*!*    +theme*!*/
+/*!*    +version-dark*!*/
 
-5. Conponents
-    +app
-    +charts
-    +forms
-    +map
-    +uc
-    +ui
-    +widget
+/*!*5. Conponents*!*/
+/*!*    +app*!*/
+/*!*    +charts*!*/
+/*!*    +forms*!*/
+/*!*    +map*!*/
+/*!*    +uc*!*/
+/*!*    +ui*!*/
+/*!*    +widget*!*/
 
-6. Page
-    _index-1.scss
-    _page-error.scss
-    _page-register.scss
-    _page-signin.scss
-    _page-user-lock.scss
-    _page-user-lock.scss
-top_menu_carousel
-*/
+/*!*6. Page*!*/
+/*!*    _index-1.scss*!*/
+/*!*    _page-error.scss*!*/
+/*!*    _page-register.scss*!*/
+/*!*    _page-signin.scss*!*/
+/*!*    _page-user-lock.scss*!*/
+/*!*    _page-user-lock.scss*!*/
+/*!*top_menu_carousel*!*/
+/*!**!*!*/
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700");
 @import url(../icons/fontawesome/css/fontawesome.css);
 @import url(../icons/simple-line-icons/css/simple-line-icons.css);
@@ -105,12 +105,7 @@ top_menu_carousel
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important; }
 
-/*!
- * Bootstrap v4.2.1 (https://getbootstrap.com/)
- * Copyright 2011-2018 The Bootstrap Authors
- * Copyright 2011-2018 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+
 :root {
   --blue: blue;
   --indigo: #727cf5;
@@ -333,9 +328,9 @@ button::-moz-focus-inner,
   border-style: none; }
 
 input[type="radio"],
-input[type="checkbox"] {
-  box-sizing: border-box;
-  padding: 0; }
+/*input[type="checkbox"] {*/
+/*  box-sizing: border-box;*/
+/*  padding: 0; }*/
 
 input[type="date"],
 input[type="time"],
@@ -2625,12 +2620,12 @@ input[type="button"].btn-block {
 .btn-group-toggle > .btn-group > .btn {
   margin-bottom: 0; }
   .btn-group-toggle > .btn input[type="radio"],
-  .btn-group-toggle > .btn input[type="checkbox"],
+  /*.btn-group-toggle > .btn input[type="checkbox"],*/
   .btn-group-toggle > .btn-group > .btn input[type="radio"],
-  .btn-group-toggle > .btn-group > .btn input[type="checkbox"] {
-    position: absolute;
-    clip: rect(0, 0, 0, 0);
-    pointer-events: none; }
+  /*.btn-group-toggle > .btn-group > .btn input[type="checkbox"] {*/
+  /*  position: absolute;*/
+  /*  clip: rect(0, 0, 0, 0);*/
+  /*  pointer-events: none; }*/
 
 .input-group {
   position: relative;
@@ -2725,8 +2720,8 @@ input[type="button"].btn-block {
   border: 1px solid #ced4da;
   border-radius: 0.25rem; }
   .input-group-text input[type="radio"],
-  .input-group-text input[type="checkbox"] {
-    margin-top: 0; }
+  /*.input-group-text input[type="checkbox"] {*/
+  /*  margin-top: 0; }*/
 
 .input-group-lg > .form-control:not(textarea),
 .input-group-lg > .custom-select {
@@ -2794,10 +2789,10 @@ input[type="button"].btn-block {
   position: absolute;
   z-index: -1;
   opacity: 0; }
-  .custom-control-input:checked ~ .custom-control-label::before {
-    color: #fff;
-    border-color: #727cf5;
-    background-color: #727cf5; }
+  /*.custom-control-input:checked ~ .custom-control-label::before {*/
+  /*  color: #fff;*/
+  /*  border-color: #727cf5;*/
+  /*  background-color: #727cf5; }*/
   .custom-control-input:focus ~ .custom-control-label::before {
     box-shadow: 0 0 0 0.2rem rgba(114, 124, 245, 0.25); }
   .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
@@ -2838,24 +2833,24 @@ input[type="button"].btn-block {
     background-position: center center;
     background-size: 50% 50%; }
 
-.custom-checkbox .custom-control-label::before {
-  border-radius: 0.25rem; }
+/*.custom-checkbox .custom-control-label::before {*/
+/*  border-radius: 0.25rem; }*/
 
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e"); }
+/*.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {*/
+/*  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e"); }*/
 
-.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
-  border-color: #727cf5;
-  background-color: #727cf5; }
+/*.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {*/
+/*  border-color: #727cf5;*/
+/*  background-color: #727cf5; }*/
 
-.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3e%3cpath stroke='%23fff' d='M0 2h4'/%3e%3c/svg%3e"); }
+/*.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {*/
+/*  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3e%3cpath stroke='%23fff' d='M0 2h4'/%3e%3c/svg%3e"); }*/
 
-.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(114, 124, 245, 0.5); }
+/*.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {*/
+/*  background-color: rgba(114, 124, 245, 0.5); }*/
 
-.custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
-  background-color: rgba(114, 124, 245, 0.5); }
+/*.custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {*/
+/*  background-color: rgba(114, 124, 245, 0.5); }*/
 
 .custom-radio .custom-control-label::before {
   border-radius: 50%; }
@@ -8743,9 +8738,7 @@ svg.pulse-svg {
   .rtl .dropdown-menu {
     right: 0;
     text-align: right; }
-  .rtl .checkbox label {
-    padding-right: 1.25rem;
-    padding-left: inherit; }
+
   .rtl .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
     border-radius: 0 0.25rem 0.25rem 0; }
   .rtl .btn-group > .btn:last-child:not(:first-child),
@@ -8798,10 +8791,6 @@ svg.pulse-svg {
     border-radius: .25rem 0 0 .25rem; }
   .rtl .radio input,
   .rtl .radio-inline,
-  .rtl .checkbox input,
-  .rtl .checkbox-inline input {
-    margin-right: -1.25rem;
-    margin-left: inherit; }
   .rtl .list-group {
     padding-right: 0;
     padding-left: 40px; }
@@ -12934,9 +12923,6 @@ table.dataTable.no-footer {
   [data-theme-version="dark"] .tdl-holder input[type="text"]::placeholder {
     color: #8790a6; }
 
-[data-theme-version="dark"] .tdl-holder input[type="checkbox"] + i {
-  background-color: #222840;
-  border-color: #000; }
 
 [data-theme-version="dark"] .tdl-holder li {
   background-color: #131633;
@@ -13120,8 +13106,6 @@ table.dataTable.no-footer {
   background-color: #222840;
   border-color: #000; }
 
-[data-theme-version="dark"] .card-gateway .card-body .custom-checkbox {
-  color: #8790a6; }
 
 [data-theme-version="dark"] .wallet-card .wallet-address .input-group-prepend button,
 [data-theme-version="dark"] .wallet-card .wallet-address .input-group-append button {
@@ -13181,9 +13165,7 @@ table.dataTable.no-footer {
       background-color: #282f4b;
       color: #8790a6; }
 
-[data-theme-version="dark"] input[type="checkbox"]::after {
-  background-color: #222840;
-  border-color: #000; }
+
 
 [data-theme-version="dark"] .custom-select {
   border-color: #000; }
@@ -14195,28 +14177,27 @@ svg text {
     border: 1px solid #727cf5;
     color: #fff; }
 
-input[type="checkbox"]:after {
-  line-height: 1.5em;
-  content: '';
-  display: block;
-  width: 1.2rem;
-  height: 1.2rem;
-  margin-top: -3px;
-  margin-left: -3px;
-  border: 1px solid #e3eaef;
-  border-radius: 0px;
-  background: #fff;
-  line-height: 1.3; }
+/*input[type="checkbox"]:after {*/
+/*  content: '';*/
+/*  display: block;*/
+/*  width: 1.2rem;*/
+/*  height: 1.2rem;*/
+/*  margin-top: -3px;*/
+/*  margin-left: -3px;*/
+/*  border: 1px solid #e3eaef;*/
+/*  border-radius: 0;*/
+/*  background: #fff;*/
+/*  line-height: 1.3; }*/
 
-input[type="checkbox"]:checked:after {
-  width: 1.2rem;
-  height: 1.2rem;
-  display: block;
-  content: "\f00c";
-  font-family: 'FontAwesome';
-  color: #727cf5;
-  font-weight: 100;
-  text-align: center; }
+/*input[type="checkbox"]:checked:after {*/
+/*  width: 1.2rem;*/
+/*  height: 1.2rem;*/
+/*  display: block;*/
+/*  content: "\f00c";*/
+/*  font-family: 'FontAwesome';*/
+/*  color: #727cf5;*/
+/*  font-weight: 100;*/
+/*  text-align: center; }*/
 
 .form-check-label {
   margin-left: 5px; }

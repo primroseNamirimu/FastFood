@@ -123,7 +123,7 @@
                                 @foreach ($menuTable as $menu)
 
 
-                                <tr data-foodPrice="{{ $menu->price }}" data-foodID={{ $menu->id }}>
+                                <tr data-foodPrice="{{ $menu->price }}" data-foodID="{{ $menu->id }}">
 
 
                                     <td> {{ $menu->name }}</td>
@@ -134,7 +134,10 @@
                                     </td>
                                     <td>
                                         <input type="hidden" name="checkbox[]" class="check" value="0">
-                                        <input type="checkbox" class="check" name="checkbox[]" value="{{ $menu->price }} ">
+                                        <label>
+                                            <input type="checkbox" class="check" name="checkbox[]" value="{{ $menu->price }} ">
+                                        </label>
+                                    </td>
 
                                 </tr>
 

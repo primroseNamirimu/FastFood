@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Food Portal</title>
     <!-- Favicon icon -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url('assets/images/favicon.png')}}">
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="{{ url('assets/plugins/owl.carousel/dist/css/owl.carousel.min.css')}}">
@@ -34,7 +34,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- date range picker js-->
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
@@ -54,9 +54,9 @@
 <!--*******************
     Preloader start
 ********************-->
-<div id="preloader">
-    <div class="loader"></div>
-</div>
+<!--<div id="preloader">-->
+<!--    <div class="loader"></div>-->
+<!--</div>-->
 <!--*******************
     Preloader end
 ********************-->
@@ -126,8 +126,8 @@
                 @endif
                 <li class="nav-label">ORDERS</li>
                 <li><a href="{{ route('order.index') }}" aria-expanded="false"><i class="icon-diamond"></i><span class="nav-text">Order Now</span></a></li>
-                <li class="nav-label">REPORTS</li>
-                <li><a href="forms.html" aria-expanded="false"><i class="icon-settings"></i><span class="nav-text">Forms</span></a></li>
+<!--                <li class="nav-label">REPORTS</li>-->
+<!--                <li><a href="forms.html" aria-expanded="false"><i class="icon-settings"></i><span class="nav-text">Forms</span></a></li>-->
                 <li class="nav-label">USER INFO</li>
 
                 @if (Auth::user()->is_admin == 1)
@@ -302,130 +302,20 @@
                                     <i class="icon-frame"></i>
                                 </a>
                             </li>
-                            <li class="icons">
-                                <a href="javascript:void(0)" class="">
-                                    <i class="icon-envelope"></i>
-                                    <span class="badge badge-danger">3</span>
-                                </a>
-                                <div class="drop-down animated flipInX">
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li class="notification-unread">
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="../../assets/images/avatar/1.jpg" alt="avatar">
-                                                    <div class="notification-content">
-                                                        <div class="notification-text">Hey, What's up! You have a good news !!!</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="notification-unread">
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="../../assets/images/avatar/2.jpg" alt="avatar">
-                                                    <div class="notification-content">
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                        <div class="notification-text">Can you do me a favour?</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="../../assets/images/avatar/3.jpg" alt="avatar">
-                                                    <div class="notification-content">
-                                                        <div class="notification-text">Hey!</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <img class="float-left mr-3 avatar-img" src="../../assets/images/avatar/4.jpg" alt="avatar">
-                                                    <div class="notification-content">
-                                                        <div class="notification-text">And what do you do?</div>
-                                                        <div class="notification-timestamp">08 Hours ago</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <a class="d-flex justify-content-center bg-primary px-4 text-white" href="email-inbox.html">
-                                            <span>See all messagese </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="icons">
-                                <a href="javascript:void(0)" class="">
-                                    <i class="icon-bell"></i>
-                                    <span class="badge badge-primary">3</span>
-                                </a>
-                                <div class="drop-down animated flipInX dropdown-notfication">
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-calender"></i></span>
-                                                    <div class="notification-content">
-                                                        <h5 class="notification-heading">Event Started</h5>
-                                                        <span class="notification-text">One hour ago</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-calender"></i></span>
-                                                    <div class="notification-content">
-                                                        <h5 class="notification-heading">Event Started</h5>
-                                                        <span class="notification-text">One hour ago</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-calender"></i></span>
-                                                    <div class="notification-content">
-                                                        <h5 class="notification-heading">Event Started</h5>
-                                                        <span class="notification-text">One hour ago</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void()">
-                                                    <span class="mr-3 avatar-icon bg-danger-lighten-2"><i class="icon-calender"></i></span>
-                                                    <div class="notification-content">
-                                                        <h5 class="notification-heading">Event Started</h5>
-                                                        <span class="notification-text">One hour ago</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <a class="d-flex justify-content-between bg-primary px-4 text-white" href="javascript:void()">
-                                            <span>All Notifications</span>
-                                            <span><i class="icon-settings"></i></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </li>
+
                             <li class="icons">
                                 <div class="user-img c-pointer-x">
                                     <span class="activity active"></span>
-                                    <img src="../../assets/images/user/1.png" height="40" width="40" alt="avatar">
+                                    <img src="../../assets/images/user/blank_pic.webp" height="40" width="40" alt="avatar">
                                 </div>
                                 <div class="drop-down dropdown-profile animated flipInX">
                                     <div class="dropdown-content-body">
                                         <ul>
-                                            <li><a href="javascript:void()"><i class="icon-user"></i> <span>My Profile</span></a>
+                                            <li><a href="{{ route('admin-actions.show', Auth::user()->id) }}"><i class="icon-user"></i> <span>My Profile</span></a>
                                             </li>
-                                            <li><a href="javascript:void()"><i class="icon-calender"></i> <span>My Calender</span></a>
-                                            </li>
-                                            <li><a href="javascript:void()"><i class="icon-envelope-open"></i> <span>My Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
-                                            </li>
-                                            <li><a href="javascript:void()"><i class="icon-paper-plane"></i> <span>My Tasks</span><div class="badge badge-pill bg-dark">3</div></a>
-                                            </li>
-                                            <li><a href="javascript:void()"><i class="icon-check"></i> <span>Online</span></a>
-                                            </li>
-                                            <li><a href="javascript:void()"><i class="icon-lock"></i> <span>Lock Screen</span></a>
-                                            </li>
-                                            <li><a href="javascript:void()"><i class="icon-key"></i> <span>Logout</span></a>
+
+
+                                            <li><a href="{{ route('logout') }}" aria-expanded="false" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-key"></i> <span>Logout</span></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -447,7 +337,7 @@
             </footer>
         </div>
     </div>
-</div>
+
 <!--**********************************
     Scripts
 ***********************************-->
@@ -478,9 +368,9 @@
 
 
 <!-- Init files -->
-<script src="{{ url('new-style/js/plugins-init/fullcalendar-init.js')}}"></script>
-<script src="{{ url('new-style/js/dashboard/dashboard-1.js')}}"></script>
-<script src="{{ url('new-style/js/charts.js')}}"></script>
+<!--<script src="{{ url('new-style/js/plugins-init/fullcalendar-init.js')}}"></script>-->
+<!--<script src="{{ url('new-style/js/dashboard/dashboard-1.js')}}"></script>-->
+<!--<script src="{{ url('new-style/js/charts.js')}}"></script>-->
 
 </body>
 

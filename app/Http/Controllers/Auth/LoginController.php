@@ -65,9 +65,16 @@ class LoginController extends Controller
         }
         else {
 
-            return back()->with('fail', 'Wrong credentials, try again!');
+            return back()->with('danger', 'Wrong credentials, try again!');
 
         }
+
+    }
+
+    public function logout(Request $request)
+    {
+        auth::logout();
+        return redirect()->route('login')->with('info', 'You logged out');
 
     }
 }

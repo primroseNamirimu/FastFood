@@ -16,18 +16,33 @@
 
                 <div class="signin-form">
                     <h2 class="form-title">Log in</h2>
-     
+
                     <form method="POST" action="{{ route('login') }}">
-                       @if(Session::has('fail'))
-                        <div class="alert alert-danger">{{Session::get('fail')}}
-                    </div>
-                    @endif
-			 @csrf
-                      
+
+                        @if ($message = Session::get('info'))
+                        <div class="alert alert-success alert-dismissible fade show" style="width: 100%">
+                            <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span
+                                    class="mdi mdi-close"></span>
+                            </button>
+                            <strong>Alert! </strong> {{$message}}
+                        </div>
+                        @endif
+
+                        @if($message = Session::get('danger'))
+                        <div class="alert alert-danger fade show" style="width: 100%">
+                            <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span
+                                    class="mdi mdi-close"></span>
+                            </button>
+                            <strong>Error!</strong> {{$message}}
+                        </div>
+
+                        @endif
+                        @csrf
+
                         <div class="form-group">
                             <label for="email"><i class="zmdi zmdi-email"></i></label>
 
-                           
+
                                 <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Your email" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -35,13 +50,13 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            
-                        </div> 
+
+                        </div>
 
                         <div class="form-group">
                             <label for="password"><i class="zmdi zmdi-lock"></i></label>
 
-                        
+
                                 <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" placeholder="Your Password" required autocomplete="current-password">
 
                                 @error('password')
@@ -49,7 +64,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                           
+
                         </div>
 
                         <div class="form-group row">

@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Auth;
 
 class adminReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function currentMonth(){
 
         $query = DB::table('food_order')
