@@ -214,6 +214,9 @@
   </div>
 </div>
 <!-- End of Disabled Users Modal -->
+
+    <span style="float: right"><button class="btn btn-success" onclick="history.back()"><i class="icon-arrow-left-circle"></i> Go Back</button></span>
+
       </div>
 
       <script>

@@ -8451,6 +8451,15 @@ Color Mixins
   font-weight: 400;
   line-height: 1.25;
   color: #333; }
+.notification-subheading{
+    font-size: 0.825rem;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 0.1875rem;
+    line-height: 1.25;
+    color: #3E3F42;
+}
 
 .notification-unread {
   background: white; }

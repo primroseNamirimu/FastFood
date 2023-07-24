@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ChangedOrders;
+use App\Models\notification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\food;
@@ -115,7 +116,7 @@ class OrderController extends Controller
                 $userID = Auth::user()->id;
                 $first = Auth::user()->firstname;
                 $lastname = Auth::user()->lastname;
-                $madeBy = $first . " " . $lastname;
+                $madeBy = $lastname . " " . $first;
                 $orderDetailsRecord = $this->getOrderDetailsRecord($userID, $madeBy, $food_IDS);
 
 
@@ -175,8 +176,10 @@ class OrderController extends Controller
 
     public function updateOrder(Request $request, $id)
     {
-
-        $user = Auth::user()->is_admin;
+        $user_id = Auth::user()->id;
+        $lastname = Auth::user()->lastname;
+        $firstname = Auth::user()->firstname;
+        $user_name = $lastname . '' . $firstname;
 
         $changed_by = $request['changed_by'];
         $reason = $request['reason'];
@@ -190,7 +193,9 @@ class OrderController extends Controller
         DB::table("food_order")->where('order_id', '=', $id)->update(['food_id' => $f, 'reason' => $reason, 'changed_by' => $changed_by]);
 
         DB::table("orders")->where('id', '=', $id)->update(['isChanged' => "YES"]);
-        if ($user) {
+        notification::create(['title' => "Order Changed", 'event' => $reason,'user' => $user_name, 'user_id'=>$user_id]);
+
+        if ($user_id==1) {
 
             return redirect()->route('admin.home')->with('success', 'Order Changed successfully');
         } else {
@@ -209,6 +214,10 @@ class OrderController extends Controller
      */
     public function update(Request $request, int $id)
     {
+        $user_id = Auth::user()->id;
+        $lastname = Auth::user()->lastname;
+        $firstname = Auth::user()->firstname;
+        $user_name = $lastname . '' . $firstname;
 
         $foodItem = food::find($id);
         $foodItem->price = request('price');
@@ -222,17 +231,21 @@ class OrderController extends Controller
 
 
         $foodItem->update($request->all());
+        notification::create(['title' => "Menu updated", 'event' => "Menu Item has been updated",'user' => $user_name,'user_id'=>$user_id]);
 
         return redirect()->route('showMenuItems')->with('success', $foodItem->name . ' updated successfully');
     }
 
     public function changedOrder($id)
     {
-//        $changedOrder =  DB::select('select * from changed_orders where order_id=?', [$id]);
         $changedOrder = DB::table('changed_orders')->join('food', 'food.id', '=', 'changed_orders.original_food_id')->join('orders', 'orders.id', '=', 'changed_orders.order_id')->join('users', 'users.id', '=', 'orders.user_id')->select('changed_orders.*', 'food.name', 'users.lastname')->where('changed_orders.order_id', '=', $id)->get();
-        $modified = DB::table('food')->select('name')->where('id', '=', $changedOrder[0]->new_food_id)->get();
+        if($changedOrder->count() > 0){
 
-        return view('new-views.auditChangedOrder', ["changedOrder" => $changedOrder, "modified" => $modified]);
+            $modified = DB::table('food')->select('name')->where('id', '=', $changedOrder[0]->new_food_id)->get();
+            return view('new-views.auditChangedOrder', ["changedOrder" => $changedOrder, "modified" => $modified]);
+
+        }
+
     }
 
     public function deleteOrder($id)

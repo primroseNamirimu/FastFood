@@ -31,9 +31,10 @@
                 <th>Original Order</th>
                 <th>Created At</th>
                 <th>Modified Order</th>
+                <th>Modified On</th>
                 <th>Changed By</th>
                 <th>Reason</th>
-                <th>Modified On</th>
+
 
             </tr>
             </thead>
@@ -42,15 +43,16 @@
             @foreach ($changedOrder as $item)
             <tr>
                 <td>{{ $item->order_id }}</td>
-                <td>{{ $item->lastname }}</td>
+                <td>{{ $item->order_for }} </td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->order_created_at }}</td>
                 @foreach($modified as $i)
                 <td> {{$i->name}} </td>
                 @endforeach
+                <td>{{ $item->created_at }}</td>
                 <td>{{ $item->changed_by }}</td>
                 <td>{{ $item->reason }}</td>
-                <td>{{ $item->created_at }}</td>
+
 
 
 
@@ -172,7 +174,8 @@
   </div>
 </div>
 <!-- End of Disabled Users Modal -->
-      </div>
+    <button class="btn btn-success" onclick="history.back()">Go Back</button>
+</div>
 
       <script>
         $(document).ready(function(){
@@ -213,7 +216,7 @@
     var totalChecked = document.querySelectorAll('input[name="checkbox[]"]:checked').length;
 
     // When total options equals to total checked option
-    if(totalCheckbox == totalChecked) {
+    if(totalCheckbox === totalChecked) {
        document.getElementsByName("showhide")[0].checked=true;
     } else {
        document.getElementsByName("showhide")[0].checked=false;

@@ -62,8 +62,12 @@
         <div class="form-group mb-4">
             <div class="col-sm-12">
                 <button class="btn btn-success">Update Password</button>
+                <span style="float: right"><button class="btn btn-success" onclick="history.back()"><i class="icon-arrow-left-circle"></i> Go Back</button></span>
+
             </div>
+
         </div>
+
     </form>
 </div>
 

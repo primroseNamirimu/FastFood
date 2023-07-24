@@ -119,7 +119,7 @@
                 <li class="nav-label">MENU</li>
                 <li><a class="has-arrow" href="javascript:void()" aria-expanded="false"><i class="bx bx-dish"></i><span class="nav-text">Menu</span></a>
                     <ul aria-expanded="false">
-                        <li><a data-toggle="modal" data-target="#event-modal">Add Item</a></li>
+                        <li><a data-toggle="modal" data-target="#notify">Add Item</a></li>
                         <li><a href="{{ route('showMenuItems') }}">Edit Item</a></li>
                     </ul>
                 </li>
@@ -241,7 +241,7 @@
         </div>
     </div>
     <!-- Modal Add Category -->
-    <div class="modal fade none-border" id="add-category">
+    <div class="modal fade none-border" id="notify">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -301,6 +301,59 @@
                                 <a href="javascript:void(0)" class="window_fullscreen-x">
                                     <i class="icon-frame"></i>
                                 </a>
+                            </li>
+
+                            <li class="icons">
+                                <a href="javascript:read()" class="">
+                                    <i class="icon-bell"></i>
+                                    <span class="badge badge-success">
+                                        @php
+                                        $isAdmin = Auth::user()->id;
+                                        if($isAdmin == 1){
+
+                                        $val = DB::table('notifications')->where('is_read','=',0)->count();
+
+                                        }
+                                        else {
+
+                                        $val = DB::table('notifications')->where('user_id', '=', Auth::user()->id)->where('is_read','=',0)->count();
+
+                                        }
+                                         $values = DB::table('notifications')->where('user_id', '=', Auth::user()->id)->where('is_read','=',0)->get();
+                                        @endphp
+                                        {{$val}}
+                                    </span>
+                                </a>
+                                <div class="drop-down animated flipInX dropdown-notfication">
+                                    <div class="dropdown-content-body">
+                                        <ul>
+                                            @foreach($values as $data)
+                                            <li>
+                                                    <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-calender"></i></span>
+                                                    <div class="notification-content">
+                                                            <h5 class="notification-heading">{{$data->title}}</h5>
+                                                        @php
+                                                        $start = new DateTime($data->created_at);
+                                                        $now = new DateTime();
+                                                        $interval = $now->diff($start);
+                                                        $final = $interval->format('%h hours %i minutes');
+
+                                                        @endphp
+                                                        <span class="notification-subheading">{{$data->event}} </span><br>
+                                                        <span class="notification-text">{{$final}} ago</span>
+                                                    </div>
+
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                        <div class="d-flex justify-content-between bg-primary px-4 text-white" >
+                                            <span>All Notifications</i></span>
+                                           <a data-toggle="modal" data-target="#notify"><span style="color: white">Mark all as read</span></a>
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             </li>
 
                             <li class="icons">
@@ -366,11 +419,26 @@
 <script src="{{ url('assets/plugins/chartist/js/chartist.min.js')}}"></script>
 <script src="{{ url('assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js')}}"></script>
 
+<script>
+    function read(){
+        $.ajax({
+            type: 'GET',
+            url: "{{ url('/readNotifications') }}",
+            dataType: "json",
+            dataSrc: "",
+            cache: false,
+            success: function(response) {
+                const {
+                    data
+                } = response;
 
-<!-- Init files -->
-<!--<script src="{{ url('new-style/js/plugins-init/fullcalendar-init.js')}}"></script>-->
-<!--<script src="{{ url('new-style/js/dashboard/dashboard-1.js')}}"></script>-->
-<!--<script src="{{ url('new-style/js/charts.js')}}"></script>-->
+                console.log(response);
+
+
+            }
+        });
+    }
+</script>
 
 </body>
 

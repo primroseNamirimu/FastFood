@@ -24,7 +24,7 @@
                             <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span
                                     class="mdi mdi-close"></span>
                             </button>
-                            <strong>Alert! </strong> {{$message}}
+                            <strong>Hello! </strong> {{$message}}
                         </div>
                         @endif
 

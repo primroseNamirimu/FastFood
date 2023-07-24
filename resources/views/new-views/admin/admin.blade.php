@@ -369,7 +369,6 @@
 
         function alertH(){
             const ctx = document.getElementById('myChart');
-            let orders;
 
             $.ajax({
                 type: 'GET',

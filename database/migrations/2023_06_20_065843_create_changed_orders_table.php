@@ -18,11 +18,11 @@ class CreateChangedOrdersTable extends Migration
             $table->id();
             $table->timestamps();
             $table->integer('order_id');
-            $table->integer('food_id');
+            $table->integer('original_food_id');
+            $table->integer('new_food_id');
             $table->string('order_for');
             $table->string('reason',500);
             $table->date('order_created_at');
-            $table->date('deleted_on');
             $table->string('changed_by');
         });
     }

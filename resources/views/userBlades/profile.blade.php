@@ -66,39 +66,15 @@
 
     <div class="form-group mb-4">
         <div class="col-sm-12">
-           <a href="{{ route('updateUserPassword',$user->id)}}"><button class="btn btn-success">Change Password</button></a>
+            <a href="{{ route('updateUserPassword',$user->id)}}">
+                <button class="btn btn-success">Change Password</button>
+            </a>
+            <span style="float: right"><button class="btn btn-success" onclick="history.back()"><i class="icon-arrow-left-circle"></i> Go Back</button></span>
+
         </div>
     </div>
-</div>
-<!-- ============================================================== -->
-</div>
-<!-- ============================================================== -->
-<!-- End Container fluid  -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
 
 </div>
-<!-- ============================================================== -->
-<!-- End Page wrapper  -->
-<!-- ============================================================== -->
-</div>
-<!-- ============================================================== -->
-<!-- End Wrapper -->
-<!-- ============================================================== -->
-<!-- ============================================================== -->
-<!-- All Jquery -->
-<!-- ============================================================== -->
-{{--
-<script src="{{ url('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<!-- Bootstrap tether Core JavaScript -->
-<script src="{{ url('bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ url('js/app-style-switcher.js') }}"></script>
-<!--Wave Effects -->
-<script src="{{ url('js/waves.js') }}"></script>
-<!--Menu sidebar -->
-<script src="{{ url('js/sidebarmenu.js') }}"></script>
-<!--Custom JavaScript -->
-<script src="{{ url('js/custom.js') }}"></script> --}}
 
 <script>
     function oldPass() {
