@@ -44,13 +44,7 @@ Route::get('/adminprev', [HomeController::class, 'prev'])->name('admin.prev')->m
 Route::resource('/admin-actions',adminController::class);
 Route::post('/change-password/{id}',[adminController::class,'updatePassword'])->name('updatePassword');
 
-//Route::get('/admin', function () {
-//    return view('adminBlades/adminHome');
-//})->name('admin');
-
-Route::get('/',function(){
-    return view('auth.login')->name('login');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 
 /*
