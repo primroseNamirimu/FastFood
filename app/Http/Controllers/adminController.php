@@ -131,7 +131,6 @@ class AdminController extends Controller
 
                 if ($update) {
                     auth::logout();
-//                    if (Auth::check()) {
                         return redirect()->route('login')->with('success', 'Your password has been changed.Log in with new password');
 
                 }
@@ -139,9 +138,6 @@ class AdminController extends Controller
                     return redirect()->route('admin-actions.show', Auth::user()->id)->with('danger', 'Password Not updated successfully');
 
                 }
-
-
-
         }
 
     }
@@ -212,68 +208,4 @@ class AdminController extends Controller
         return redirect()->route('admin-actions.index')->with('success', 'User enabled successfully');
     }
 
-    //changing password functionality
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Request $request
-     * @param int $id
-     * @return Response
-     */
-
-    public function changePassword(Request $request)
-    {
-        $id = Auth::user()->id;
-        $user = User::find($id);
-
-        if ($user && isset($_GET['change'])) {
-
-            $old_password = $_GET['old_password'];
-            if (Hash::check($old_password, $user->password)) {
-                $new_password = $_GET['password'];
-                $confirm_password = $_GET['confirm_password'];
-
-                if ($new_password == $confirm_password) {
-                    $user->password = request('password');
-                    $user->save();
-                    echo("i reach here");
-                    $request->validate((array)$request, ['password' => ['required', 'alpha_num', 'min:8', 'confirmed'],]);
-
-
-                    $user->update(['password' => Hash::make($request['password'])]);
-                    if ($user) {
-                        echo("i reach here updated");
-                    }
-
-                } else {
-                    echo("paswords do not match");
-                }
-
-                //  return redirect()->route('admin.home')
-                //                  ->with('success','password changed successfully');
-            } else {
-                echo("bottom");
-
-                // return redirect()->route('admin.home')
-                // ->with('danger','Wrong old password');
-
-            }
-        }
-    }
-
-
-    public function destroyMultiple($id)
-    {
-        // $IDs = [];
-        // $IDs->request($id);
-        // foreach ($IDs as $id) {
-        //     User::find($id)->delete();
-        // }
-
-
-        // return redirect()->route('admin-actions.index')
-        //                 ->with('success','Users deleted successfully');
-    }
 }

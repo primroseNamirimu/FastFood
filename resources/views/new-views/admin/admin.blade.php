@@ -73,7 +73,6 @@
                                     </div>
 
                                     <div class="col-md-6 pull-right">
-                                        <!--            {{-- <a href="{{ route('admin.currentMonthReport') }}"><button class="btn btn-success">RESET</button></a> --}}-->
                                         <a href="">
                                             <button class="btn btn-success">RESET</button>
                                         </a>
@@ -292,9 +291,9 @@
                     let money_overall = 0;
                     let y = [];
                     data.forEach(record => {
-                        const {order_id, total, created_at, firstname, lastname, order_made_by, name,isChanged} = record;
+                        const {order_id, total, created_at, firstname, lastname, made_by, name,isChanged} = record;
                         self_contrib = total - company_contrib;
-                        trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td><td>${isChanged}</td>    <td>
+                        trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${made_by}</td><td>${isChanged}</td>    <td>
                                                         <a href="{{ route('deleteOrder',$item->order_id ?? 0 ) }}" ><button type="submit" class="btn delete">
                                                             <span><i class='bx bx-trash-alt'></i></button></a>
                                                         <a href="{{ route('editOrder', $item->order_id ?? 0) }}"><span><i class="icon-note"></i></span></a>
@@ -315,12 +314,11 @@
 
                     //repopulate
                     let reportTable = $('#table_id');
-                    node.setAttribute('class','table verticle-middle table-responsive-lg mb-0')
-                    console.log(node.getAttribute())
                     reportTable.DataTable().rows.add($(trows)).draw();
                     $("#table_id").append(
                         $('<tfoot/>').append($(extraRow).clone())
                     );
+
 
                 }
             });
@@ -389,7 +387,7 @@
                                 yAxes: [{
                                     ticks: {
                                         beginAtZero: true,
-                                        stepSize: 2
+                                        stepSize: 10
                                     }
                                 }],
                                 xAxes: [{

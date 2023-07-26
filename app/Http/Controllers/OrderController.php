@@ -49,23 +49,14 @@ class OrderController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create(Request $request)
-    {
-        //
-
-    }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $total = $_POST['total'];
         $food_IDS = $_POST['food_ids'];
@@ -73,12 +64,11 @@ class OrderController extends Controller
         if (Auth::user()->is_admin == 1) {
 
             $checked = $_POST['isForStaff'];
-
-            //if empty, then user was admin making an order for themselves
+            $orderOwnerID = $_POST['staff_id'];
+            $orderOwner = $_POST['staff_name'];
 
             $userID = Auth::user()->id;
-            $staff_Name = Auth::user()->username;
-
+            $admin_Name = Auth::user()->lastname . " " . Auth::user()->firstname;
 
             if ($total == null) {
 
@@ -86,27 +76,39 @@ class OrderController extends Controller
 
             } else {
 
-                $ordered_by_id = Auth::user()->lastname . " " . Auth::user()->firstname;
+                if ($checked == "isForStaff") {
+                    $orderDetailsRecord = $this->getOrderDetailsRecord($orderOwnerID, $admin_Name, $food_IDS);
 
-                $orderDetailsRecord = $this->getOrderDetailsRecord($userID, $ordered_by_id, $food_IDS);
+                    if ($orderDetailsRecord) {
+                        $array = json_decode($food_IDS, true);
+                        $number = intval($array[0]);
+                        $details = DB::table('food')->select('name')->where('id', '=', $number)->get();
+                        foreach ($details as $data) {
+                            $name = $data->name;
+                            notification::create(['title' => "Order successful", 'event' => $admin_Name . " made order " . $name . " on your behalf", 'user' => $orderOwner, 'user_id' => $orderOwnerID]);
+                        }
 
-                if ($orderDetailsRecord) {
-                    if ($checked == "isForStaff") {
-
-                        return redirect()->route('order.index')->with('success', 'Order on behalf of ' . $staff_Name . ' was successfully recorded');
+                        return redirect()->route('order.index')->with('success', 'Order on behalf of ' . $orderOwner . ' was successfully recorded');
 
                     } else {
-                        return redirect()->route('order.index')->with('success', 'Order for ' . $staff_Name . ' was successfully recorded');
-
+                        return redirect()->route('order.index')->with('danger', 'Something went wrong');
                     }
 
                 } else {
-                    return redirect()->route('order.index')->with('danger', 'Something went wrong');
+
+                    $orderDetailsRecord = $this->getOrderDetailsRecord($userID, $admin_Name, $food_IDS);
+                    if ($orderDetailsRecord) {
+
+                        return redirect()->route('order.index')->with('success', 'Order for ' . $admin_Name . ' was successfully recorded');
+
+                    } else {
+                        return redirect()->route('order.index')->with('danger', 'Something went wrong');
+
+                    }
                 }
             }
 
-        }
-        else {
+        } else {
 
             if ($total == null) {
 
@@ -118,7 +120,6 @@ class OrderController extends Controller
                 $lastname = Auth::user()->lastname;
                 $madeBy = $lastname . " " . $first;
                 $orderDetailsRecord = $this->getOrderDetailsRecord($userID, $madeBy, $food_IDS);
-
 
                 if ($orderDetailsRecord) {
                     return redirect()->route('order.index')->with('success', 'Your Order was successfully recorded');
@@ -150,7 +151,11 @@ class OrderController extends Controller
 
             $orderDetailsRecord = food_order::create(['order_id' => $lastId, 'food_id' => $value, 'order_made_by' => $lastMadeBy]);
         }
-        return $orderDetailsRecord;
+        if (!empty($orderDetailsRecord)) {
+            return $orderDetailsRecord;
+        } else {
+            return redirect()->route('order.index')->with('danger', 'Something went wrong');
+        }
     }
 
     public function showMenuItems()
@@ -193,9 +198,9 @@ class OrderController extends Controller
         DB::table("food_order")->where('order_id', '=', $id)->update(['food_id' => $f, 'reason' => $reason, 'changed_by' => $changed_by]);
 
         DB::table("orders")->where('id', '=', $id)->update(['isChanged' => "YES"]);
-        notification::create(['title' => "Order Changed", 'event' => $reason,'user' => $user_name, 'user_id'=>$user_id]);
+        notification::create(['title' => "Order Changed", 'event' => $reason, 'user' => $user_name, 'user_id' => $user_id]);
 
-        if ($user_id==1) {
+        if ($user_id == 1) {
 
             return redirect()->route('admin.home')->with('success', 'Order Changed successfully');
         } else {
@@ -231,7 +236,7 @@ class OrderController extends Controller
 
 
         $foodItem->update($request->all());
-        notification::create(['title' => "Menu updated", 'event' => "Menu Item has been updated",'user' => $user_name,'user_id'=>$user_id]);
+        notification::create(['title' => "Menu updated", 'event' => "Menu Item has been updated", 'user' => $user_name, 'user_id' => $user_id]);
 
         return redirect()->route('showMenuItems')->with('success', $foodItem->name . ' updated successfully');
     }
@@ -239,7 +244,7 @@ class OrderController extends Controller
     public function changedOrder($id)
     {
         $changedOrder = DB::table('changed_orders')->join('food', 'food.id', '=', 'changed_orders.original_food_id')->join('orders', 'orders.id', '=', 'changed_orders.order_id')->join('users', 'users.id', '=', 'orders.user_id')->select('changed_orders.*', 'food.name', 'users.lastname')->where('changed_orders.order_id', '=', $id)->get();
-        if($changedOrder->count() > 0){
+        if ($changedOrder->count() > 0) {
 
             $modified = DB::table('food')->select('name')->where('id', '=', $changedOrder[0]->new_food_id)->get();
             return view('new-views.auditChangedOrder', ["changedOrder" => $changedOrder, "modified" => $modified]);
@@ -250,7 +255,9 @@ class OrderController extends Controller
 
     public function deleteOrder($id)
     {
-        $deleteOrder = DB::table('food_order')->join('food', 'food.id', '=', 'food_order.food_id')->join('orders', 'orders.id', '=', 'food_order.order_id')->join('users', 'users.id', '=', 'orders.user_id')->select('food_order.*', 'food.name', 'users.lastname', 'users.firstname')->where('food_order.order_id', '=', $id)->get();
+
+
+        $deleteOrder = DB::table('food_order')->join('food', 'food.id', '=', 'food_order.food_id')->join('orders', 'orders.id', '=', 'food_order.order_id')->join('users', 'users.id', '=', 'orders.user_id')->select('food_order.*', 'food.name', 'users.lastname', 'users.firstname', 'orders.user_id')->where('food_order.order_id', '=', $id)->get();
         $modified = DB::table('food')->select('name')->where('id', '=', $deleteOrder[0]->food_id)->get();
 
         return view('new-views.deleteOrder', ["deleteOrder" => $deleteOrder, "modified" => $modified]);
@@ -269,14 +276,29 @@ class OrderController extends Controller
         return redirect()->route('order.index')->with('success', 'Food item deleted successfully');
     }
 
-    public function delete($id)
+    public function delete(Request $request, $id)
     {
+        $reason = $request['reason'];
+        $changed_by = $request['changed_by'];
+        $user_name = $request['name'];
+        $user_id = $request['user_id'];
+        $is_admin = Auth::user()->is_admin;
+        $affected = DB::table('food_order')->where('order_id', '=', $id)->update(['reason' => $reason, 'changed_by' => $changed_by]);
+
         $query = DB::table('food_order')->where('order_id', '=', $id)->delete();
 
         if ($query) {
-            return redirect()->route('admin.home')->with('success', 'order deleted successfully');
+            notification::create(['title' => "Order Deleted", 'event' => "Order for ".$user_name ." has been Deleted", 'user' => $user_name, 'user_id' => $user_id]);
+            if ($is_admin) {
+                return redirect()->route('admin.home')->with('success', 'order deleted successfully');
+
+            } else {
+                return redirect()->route('userhome')->with('success', "Order deleted successfully");
+
+            }
         } else {
-            return redirect()->route('admin.home')->with('danger', "Oops!! It's not you, it's us. Something went wrong. Please Try again");
+            return back('danger', "Oops!! It's not you, it's us. Something went wrong. Please Try again");
+
         }
 
 

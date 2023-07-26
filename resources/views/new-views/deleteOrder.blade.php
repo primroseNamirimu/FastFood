@@ -32,7 +32,12 @@
                 <label>
                     <input type="text" class="form-control p-0 border-0" name="name" value="{{ $item->lastname }} {{ $item->firstname }}">
                 </label>
+                <label>
+                    <input type="hidden" class="form-control p-0 border-0" name="user_id" value="{{ $item->user_id}}">
+                </label>
+
             </div>
+
         </div>
 
         <div class="form-group mb-4">
@@ -46,7 +51,7 @@
             </div>
         </div>
             <div class="form-group mb-4">
-                <label class="col-md-12 p-0">Created On:</label>
+                <label class="col-md-12 p-0">Made On:</label>
                 <div class="col-md-12 border-bottom p-0">
 
                     <label>
@@ -56,7 +61,7 @@
             </div>
 
         <div class="form-group mb-4">
-            <label class="col-md-12 p-0">Created By:</label>
+            <label class="col-md-12 p-0">Ordered By:</label>
             <div class="col-md-12 border-bottom p-0">
 
                 <label>
@@ -68,10 +73,8 @@
         <div class="form-group mb-4">
             <label class="col-md-12 p-0">Reason For Deleting:</label>
             <div class="col-md-12 border-bottom p-0">
-
                 <label>
                     <input type="text" class="form-control p-0 border-0" name="reason" value="">
-
                 </label>
             </div>
         </div>
@@ -80,7 +83,7 @@
             <div class="col-md-12 border-bottom p-0">
 
                 <label>
-                    <input readonly type="text" class="form-control p-0 border-0" name="changed_by" value="&nbsp; {{Auth::user()->lastname }} {{Auth::user()->firstname }}">
+                    <input readonly type="text" class="form-control p-0 border-0" name="changed_by" value="&nbsp;{{Auth::user()->lastname }} {{Auth::user()->firstname }}">
                 </label>
                 <label>
                     <input readonly type="hidden" class="form-control p-0 border-0" name="changed_by_id" value="&nbsp; {{Auth::user()->id }} ">

@@ -65,7 +65,7 @@
                                                     <td>
                                                         <label>
                                                             <input type="radio" class="radio" name="staff_names[]"
-                                                                   value="{{ $users->firstname }} {{ $users->lastname}}">
+                                                                   value="{{ $users->lastname}} {{ $users->firstname }}">
                                                         </label></td>
 
                                                     <td><a class="dropdown-item" href="#">{{$users->lastname}} {{ $users->firstname}}</a>
@@ -160,6 +160,9 @@
                             </table>
                         </form>
                     </div>
+                    <br>
+                    <span style="float: right"><button class="btn btn-success" onclick="history.back()"><i class="icon-arrow-left-circle"></i> Go Back</button></span>
+
                 </div>
             </div>
         </div>
@@ -299,6 +302,11 @@
             if ('$(input[type=radio]:checked)') {
                 // notify.style.display = 'block'
                 para.innerHTML = 'You are making an order on behalf of ' + username
+                let r = $("#staff_id").val(userid)
+                console.log(r)
+
+                $("#staff_name").val(username)
+                // $("#isForStaff").val("isForStaff")
 
                 // alert("You are making an order for " + username)
                 box.style.display = 'none';
@@ -316,7 +324,8 @@
             //if the order belongs to other staff member, and not to the admin themselves
             if(checked){
 
-                $("#staff_id").val(userid)
+               let r = $("#staff_id").val(userid)
+                console.log(r)
 
                 $("#staff_name").val(username)
                 $("#isForStaff").val("isForStaff")

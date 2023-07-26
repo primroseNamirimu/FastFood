@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\order;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,10 +39,10 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
 
-    public function admin()
+    public function admin(): Renderable
 
     {
             $queryadmin = DB::table('food_order')
@@ -53,12 +54,10 @@ class HomeController extends Controller
 
             ->where('food.price','>','0')
 
-//            ->whereMonth('food_order.created_at', date('m'))
-                ->orderBy('orders.created_at','desc')
+                ->orderBy('order_id','desc')
 
            ->get();
 
-//            dd($queryadmin);
         return view('new-views.admin.admin', ["queryadmin" => $queryadmin]);
 
 }

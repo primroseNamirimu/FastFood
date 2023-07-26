@@ -121,6 +121,17 @@ Route::get('/expenditure', [adminReportController::class , 'index'])->name('admi
 
 Route::post('/notify', [ChangedOrdersController::class,'changedOrders'])->name('notify');
 
+/*
+|--------------------------------------------------------------------------
+| Notifications
+|--------------------------------------------------------------------------
+|
+*/
+
+Route::post('/readNotifications', [ChangedOrdersController::class,'changedOrders'])->name('notify');
+
+
+
 
 /*
 |--------------------------------------------------------------------------
