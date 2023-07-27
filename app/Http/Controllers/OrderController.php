@@ -173,7 +173,7 @@ class OrderController extends Controller
 
     public function edit($id)
     {
-        $orderDetails = DB::table('food_order')->join('food', 'food.id', '=', 'food_order.food_id')->join('orders', 'orders.id', '=', 'food_order.order_id')->join('users', 'users.id', '=', 'orders.user_id')->select('food_order.order_id', 'orders.isChanged', 'food.id', DB::raw('SUM(food.price) as total'), DB::raw('DATE_FORMAT(orders.created_at,"%d/%m/%Y") as created_at'), 'users.lastname', 'food.name', 'users.firstname', 'food_order.order_made_by')->groupBy('order_id', 'orders.created_at', 'users.lastname', 'food_order.order_made_by', 'users.firstname', 'food.name')->where('orders.id', '=', $id)->get();
+        $orderDetails = DB::table('food_order')->join('food', 'food.id', '=', 'food_order.food_id')->join('orders', 'orders.id', '=', 'food_order.order_id')->join('users', 'users.id', '=', 'orders.user_id')->select('food_order.order_id', 'orders.isChanged', 'food.id', DB::raw('SUM(food.price) as total'), DB::raw('DATE_FORMAT(orders.created_at,"%d/%m/%Y") as created_at'), 'users.lastname', 'food.name', 'users.firstname','orders.user_id', 'food_order.order_made_by')->groupBy('order_id', 'orders.created_at', 'users.lastname', 'food_order.order_made_by', 'users.firstname', 'food.name')->where('orders.id', '=', $id)->get();
         $foodItems = DB::table('food')->select('*')->get();
 //        dd($foodItems);
         return view('new-views.editOrder', compact('orderDetails'), ["orderDetails" => $orderDetails, "foodItems" => $foodItems]);
@@ -181,10 +181,11 @@ class OrderController extends Controller
 
     public function updateOrder(Request $request, $id)
     {
-        $user_id = Auth::user()->id;
-        $lastname = Auth::user()->lastname;
-        $firstname = Auth::user()->firstname;
-        $user_name = $lastname . '' . $firstname;
+
+        $user_name = $request['name'];
+        $user_id = $request['user_id'];
+
+        $is_admin = Auth::user()->is_admin;
 
         $changed_by = $request['changed_by'];
         $reason = $request['reason'];
@@ -198,9 +199,9 @@ class OrderController extends Controller
         DB::table("food_order")->where('order_id', '=', $id)->update(['food_id' => $f, 'reason' => $reason, 'changed_by' => $changed_by]);
 
         DB::table("orders")->where('id', '=', $id)->update(['isChanged' => "YES"]);
-        notification::create(['title' => "Order Changed", 'event' => $reason, 'user' => $user_name, 'user_id' => $user_id]);
+        notification::create(['title' => "Order Changed", 'event' => 'Order for '.$user_name.' has been changed by '. $changed_by , 'user' => $user_name, 'user_id' => $user_id]);
 
-        if ($user_id == 1) {
+        if ($is_admin == 1) {
 
             return redirect()->route('admin.home')->with('success', 'Order Changed successfully');
         } else {
@@ -255,8 +256,6 @@ class OrderController extends Controller
 
     public function deleteOrder($id)
     {
-
-
         $deleteOrder = DB::table('food_order')->join('food', 'food.id', '=', 'food_order.food_id')->join('orders', 'orders.id', '=', 'food_order.order_id')->join('users', 'users.id', '=', 'orders.user_id')->select('food_order.*', 'food.name', 'users.lastname', 'users.firstname', 'orders.user_id')->where('food_order.order_id', '=', $id)->get();
         $modified = DB::table('food')->select('name')->where('id', '=', $deleteOrder[0]->food_id)->get();
 

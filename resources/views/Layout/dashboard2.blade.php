@@ -306,7 +306,7 @@
                             <li class="icons">
                                 <a href="javascript:read()" class="">
                                     <i class="icon-bell"></i>
-                                    <span class="badge badge-success">
+                                    <span class="badge badge-success" id="notify_count">
                                         @php
                                         $isAdmin = Auth::user()->is_admin;
                                         if($isAdmin == 1){
@@ -422,6 +422,7 @@
 <script src="{{ url('assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js')}}"></script>
 
 <script>
+
     function read(){
         $.ajax({
             type: 'GET',
@@ -434,7 +435,12 @@
                     data
                 } = response;
 
-                console.log(response);
+               console.log(response)
+                let countField = document.getElementById('notify_count');
+               console.log(countField)
+               if(response === 'success'){
+                   countField.textContent = '0'
+               }
 
 
             }

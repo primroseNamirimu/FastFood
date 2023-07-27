@@ -45,6 +45,7 @@ class HomeController extends Controller
     public function admin(): Renderable
 
     {
+
             $queryadmin = DB::table('food_order')
             ->join('food', 'food.id', '=', 'food_order.food_id')
             ->join('orders', 'orders.id', '=', 'food_order.order_id')

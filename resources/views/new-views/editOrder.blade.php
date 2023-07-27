@@ -32,6 +32,9 @@
                 <label>
                     <input type="text" class="form-control p-0 border-0" name="name" value="{{ $item->lastname }} {{ $item->firstname }}">
                 </label>
+                <label>
+                    <input type="hidden" class="form-control p-0 border-0" name="user_id" value="{{ $item->user_id}}">
+                </label>
             </div>
         </div>
 

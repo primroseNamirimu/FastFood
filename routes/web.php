@@ -2,6 +2,7 @@
 namespace App\Http\Controller;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\ChangedOrdersController;
+use App\Http\Controllers\Notifications;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use Illuminate\Support\Facades\Auth;
@@ -128,7 +129,7 @@ Route::post('/notify', [ChangedOrdersController::class,'changedOrders'])->name('
 |
 */
 
-Route::post('/readNotifications', [ChangedOrdersController::class,'changedOrders'])->name('notify');
+Route::get('/readNotifications', [Notifications::class,'notify'])->name('mark-as-read');
 
 
 
