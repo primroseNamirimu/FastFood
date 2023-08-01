@@ -37,11 +37,11 @@ CREATE TRIGGER orders_delete_trigger
     FOR EACH ROW
 BEGIN
     INSERT INTO audit_deletes (order_id, food_id, reason, order_created_at, deleted_by, deleted_on)
-    VALUES  (order_id = OLD.order_id,
-             food_id =OLD.food_id,
-                 reason = OLD.reason,
-                 order_created_at = OLD.created_at,
-                 deleted_by =OLD.changed_by,
-                 deleted_on = NOW());
+    VALUES  (OLD.order_id,
+             OLD.food_id,
+           OLD.reason,
+             OLD.created_at,
+             OLD.changed_by,
+            NOW());
 END;//
 delimiter ;

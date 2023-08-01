@@ -12,6 +12,7 @@ class Notifications extends Controller
             $updated = 0;
       $notifications =    DB::table('notifications')->where('is_read','=','0')
           ->whereDay('created_at', now()->day)
+
           ->update(['is_read'=>1]);
 
       if($notifications > 0){

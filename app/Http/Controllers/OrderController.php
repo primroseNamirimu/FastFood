@@ -32,7 +32,7 @@ class OrderController extends Controller
         return view('adminBlades.order', ['menuTable' => $menuTable], ['users' => $users]);
     }
 
-    public function createMenuItem(Request $request)
+    public function createMenuItem(Request $request): RedirectResponse
     {
         $request->validate(['name' => 'required', 'string', 'max:255', 'unique:food', 'price' => 'required', 'numeric',]);
         $name = $request['name'];
@@ -80,13 +80,7 @@ class OrderController extends Controller
                     $orderDetailsRecord = $this->getOrderDetailsRecord($orderOwnerID, $admin_Name, $food_IDS);
 
                     if ($orderDetailsRecord) {
-                        $array = json_decode($food_IDS, true);
-                        $number = intval($array[0]);
-                        $details = DB::table('food')->select('name')->where('id', '=', $number)->get();
-                        foreach ($details as $data) {
-                            $name = $data->name;
-                            notification::create(['title' => "Order successful", 'event' => $admin_Name . " made order " . $name . " on your behalf", 'user' => $orderOwner, 'user_id' => $orderOwnerID]);
-                        }
+                        $this->notificationDetails($food_IDS, $admin_Name, $orderOwner, $orderOwnerID);
 
                         return redirect()->route('order.index')->with('success', 'Order on behalf of ' . $orderOwner . ' was successfully recorded');
 
@@ -98,6 +92,8 @@ class OrderController extends Controller
 
                     $orderDetailsRecord = $this->getOrderDetailsRecord($userID, $admin_Name, $food_IDS);
                     if ($orderDetailsRecord) {
+                        $this->notificationDetails($food_IDS, $admin_Name, $admin_Name, $userID);
+
 
                         return redirect()->route('order.index')->with('success', 'Order for ' . $admin_Name . ' was successfully recorded');
 
@@ -173,9 +169,8 @@ class OrderController extends Controller
 
     public function edit($id)
     {
-        $orderDetails = DB::table('food_order')->join('food', 'food.id', '=', 'food_order.food_id')->join('orders', 'orders.id', '=', 'food_order.order_id')->join('users', 'users.id', '=', 'orders.user_id')->select('food_order.order_id', 'orders.isChanged', 'food.id', DB::raw('SUM(food.price) as total'), DB::raw('DATE_FORMAT(orders.created_at,"%d/%m/%Y") as created_at'), 'users.lastname', 'food.name', 'users.firstname','orders.user_id', 'food_order.order_made_by')->groupBy('order_id', 'orders.created_at', 'users.lastname', 'food_order.order_made_by', 'users.firstname', 'food.name')->where('orders.id', '=', $id)->get();
+        $orderDetails = DB::table('food_order')->join('food', 'food.id', '=', 'food_order.food_id')->join('orders', 'orders.id', '=', 'food_order.order_id')->join('users', 'users.id', '=', 'orders.user_id')->select('food_order.order_id', 'orders.isChanged', 'food.id', DB::raw('SUM(food.price) as total'), DB::raw('DATE_FORMAT(orders.created_at,"%d/%m/%Y") as created_at'), 'users.lastname', 'food.name', 'users.firstname', 'orders.user_id', 'food_order.order_made_by')->groupBy('order_id', 'orders.created_at', 'users.lastname', 'food_order.order_made_by', 'users.firstname', 'food.name')->where('orders.id', '=', $id)->get();
         $foodItems = DB::table('food')->select('*')->get();
-//        dd($foodItems);
         return view('new-views.editOrder', compact('orderDetails'), ["orderDetails" => $orderDetails, "foodItems" => $foodItems]);
     }
 
@@ -193,13 +188,18 @@ class OrderController extends Controller
         $f = 0;
         $new_food_id = DB::table('food')->select('id')->where('name', '=', $food_name)->get();
         foreach ($new_food_id as $item) {
+
             $f = $item->id;
         }
 
-        DB::table("food_order")->where('order_id', '=', $id)->update(['food_id' => $f, 'reason' => $reason, 'changed_by' => $changed_by]);
+       $update =  DB::table("food_order")->where('order_id', '=', $id)->update(['food_id' => $f, 'reason' => $reason, 'changed_by' => $changed_by]);
 
-        DB::table("orders")->where('id', '=', $id)->update(['isChanged' => "YES"]);
-        notification::create(['title' => "Order Changed", 'event' => 'Order for '.$user_name.' has been changed by '. $changed_by , 'user' => $user_name, 'user_id' => $user_id]);
+        if($update > 0){
+
+            DB::table("orders")->where('id', '=', $id)->update(['isChanged' => "YES"]);
+
+        }
+        notification::create(['title' => "Order Changed", 'event' => 'Order for ' . $user_name . ' has been changed by ' . $changed_by, 'user' => $user_name, 'user_id' => $user_id]);
 
         if ($is_admin == 1) {
 
@@ -232,9 +232,6 @@ class OrderController extends Controller
         $request->validate(['name' => 'required', 'string', 'max:255', 'unique:food', 'price' => 'required', 'numeric',
 
         ]);
-
-        $foodItem->save();
-
 
         $foodItem->update($request->all());
         notification::create(['title' => "Menu updated", 'event' => "Menu Item has been updated", 'user' => $user_name, 'user_id' => $user_id]);
@@ -287,7 +284,7 @@ class OrderController extends Controller
         $query = DB::table('food_order')->where('order_id', '=', $id)->delete();
 
         if ($query) {
-            notification::create(['title' => "Order Deleted", 'event' => "Order for ".$user_name ." has been Deleted", 'user' => $user_name, 'user_id' => $user_id]);
+            notification::create(['title' => "Order Deleted", 'event' => "Order for " . $user_name . " has been Deleted", 'user' => $user_name, 'user_id' => $user_id]);
             if ($is_admin) {
                 return redirect()->route('admin.home')->with('success', 'order deleted successfully');
 
@@ -301,5 +298,23 @@ class OrderController extends Controller
         }
 
 
+    }
+
+    /**
+     * @param $food_IDS
+     * @param string $admin_Name
+     * @param $orderOwner
+     * @param $orderOwnerID
+     * @return void
+     */
+    public function notificationDetails($food_IDS, string $admin_Name, $orderOwner, $orderOwnerID): void
+    {
+        $array = json_decode($food_IDS, true);
+        $number = intval($array[0]);
+        $details = DB::table('food')->select('name')->where('id', '=', $number)->get();
+        foreach ($details as $data) {
+            $name = $data->name;
+            notification::create(['title' => "Order successful", 'event' => $admin_Name . " made order of" . $name . " ,for " .$orderOwner , 'user' => $orderOwner, 'user_id' => $orderOwnerID]);
+        }
     }
 }

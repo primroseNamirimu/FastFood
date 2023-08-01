@@ -57,8 +57,8 @@
                             <label for="password"><i class="zmdi zmdi-lock"></i></label>
 
 
-                                <input id="password" type="password" class="@error('password') is-invalid @enderror" name="password" placeholder="Your Password" required autocomplete="current-password">
-
+                                <input id="show-pass" type="password" class="@error('password') is-invalid @enderror" name="password" placeholder="Your Password" required autocomplete="current-password">
+                            <span style="float: right"><input type="checkbox" onclick="showPassword()">Show Password </span>
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -98,4 +98,16 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    function showPassword() {
+        let x = document.getElementById("show-pass");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
 @endsection

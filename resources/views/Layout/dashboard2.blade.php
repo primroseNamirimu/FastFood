@@ -312,14 +312,14 @@
                                         if($isAdmin == 1){
 
                                         $val = DB::table('notifications')->where('is_read','=',0)->whereDay('created_at', now()->day)->count();
-                                         $values = DB::table('notifications')->where('is_read','=',0)->whereDay('created_at', now()->day)->orderBy('id','desc')->limit(5)->get();
+                                         $values = DB::table('notifications')->whereDay('created_at', now()->day)->orderBy('id','desc')->limit(5)->get();
 
 
                                         }
                                         else {
 
                                         $val = DB::table('notifications')->where('user_id', '=', Auth::user()->id)->where('is_read','=',0)->whereDay('created_at', now()->day)->count();
-                                         $values = DB::table('notifications')->where('user_id', '=', Auth::user()->id)->where('is_read','=',0)->whereDay('created_at', now()->day)->orderBy('id','desc')->limit(5)->get();
+                                         $values = DB::table('notifications')->where('user_id', '=', Auth::user()->id)->whereDay('created_at', now()->day)->orderBy('id','desc')->limit(5)->get();
 
                                         }
                                         @endphp
@@ -327,8 +327,8 @@
                                     </span>
                                 </a>
                                 <div class="drop-down animated flipInX dropdown-notfication">
-                                    <div class="dropdown-content-body">
-                                        <ul>
+                                    <div class="dropdown-content-body" id="notify-body">
+                                        <ul style="display: block" id="notify_list">
                                             @foreach($values as $data)
                                             <li>
                                                     <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-calender"></i></span>
@@ -349,8 +349,8 @@
                                             @endforeach
                                         </ul>
                                         <div class="d-flex justify-content-between bg-primary px-4 text-white" >
-                                            <span>All Notifications</i></span>
-                                           <a href="javascript:read()"><span style="color: white">Mark all as read</span></a>
+                                            <a href="javascript:unclear()" ><span style="color: white">All Notifications</i></span></a>
+                                           <a href="javascript:clear()"><span style="color: white">Clear</span></a>
                                         </div>
 
 
@@ -445,6 +445,16 @@
 
             }
         });
+    }
+
+    function clear(){
+        let contentField = document.getElementById('notify_list');
+        contentField.style.display = 'none';
+    }
+    function unclear(){
+        let contentField = document.getElementById('notify_list');
+        contentField.style.display = 'block';
+
     }
 </script>
 
