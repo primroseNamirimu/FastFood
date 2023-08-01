@@ -14,5 +14,7 @@ class food_order extends Model
         'food_id',
         'order_id',
         'order_made_by',
+        'reason',
+        'Changed_by',
     ];
 }

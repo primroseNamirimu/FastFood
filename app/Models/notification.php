@@ -16,6 +16,9 @@ class notification extends Model
         'user',
         'is_read',
         'title',
-        'user_id'
+        'user_id',
+        'read_by',
+
+
     ];
 }
