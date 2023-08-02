@@ -152,7 +152,9 @@
                                 <br/>
                                 <tr>
                                     <td colspan="4">
-                                        <button type="submit" class="btn btn-success btn-lg order-btn" id="order-btn">Order Now</button>
+                                        <span style="float: left"><button class="btn btn-success" onclick="history.back()"><i class="icon-arrow-left-circle"></i> Go Back</button></span>
+                                        
+                                        <button type="submit" style="float:right;" class="btn btn-success btn-lg order-btn" id="order-btn">Order Now</button>
                                     </td>
                                 </tr>
 
@@ -161,7 +163,6 @@
                         </form>
                     </div>
                     <br>
-                    <span style="float: right"><button class="btn btn-success" onclick="history.back()"><i class="icon-arrow-left-circle"></i> Go Back</button></span>
 
                 </div>
             </div>

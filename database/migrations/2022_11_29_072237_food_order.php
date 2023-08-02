@@ -16,7 +16,7 @@ class FoodOrder extends Migration
         Schema::create('food_order', function (Blueprint $table) {
             $table->id();
             $table->string('order_made_by');
-            $table->index('order_made_by');
+            $table->string('Changed_by');
             $table->foreignId('food_id')->constrained()
             ->onDelete('cascade')
             ->onUpdate('cascade');

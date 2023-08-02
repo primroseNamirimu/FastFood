@@ -13,7 +13,7 @@ class order extends Model
     protected $fillable = [
         'user_id',
         'made_by',
-        'isChanged'
+        'is_changed'
 
     ];
 

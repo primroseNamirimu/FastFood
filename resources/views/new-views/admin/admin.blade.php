@@ -18,7 +18,16 @@
     <div class="alert alert-danger alert-dismissible fade show" style="width: 50%">
         <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-close"></span>
         </button>
-        <strong>Success!</strong> {{$message}}
+        <strong>Error!</strong> {{$message}}
+    </div>
+
+    @endif
+
+    @if($message = Session::get('warning'))
+    <div class="alert alert-warning alert-dismissible fade show" style="width: 50%">
+        <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-close"></span>
+        </button>
+        <strong>Warning!</strong> {{$message}}
     </div>
 
     @endif
@@ -140,11 +149,11 @@
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->order_made_by }}</td>
 
-                                                @if(($item->isChanged) == "YES")
+                                                @if(($item->is_changed) == "YES")
                                                 <td><a style="color: #0a58ca" href="{{ route('viewChangedOrder', $item->order_id ) }}" data-toggle="tooltip"  data-placement="top" title=""
-                                                       data-original-title="Details"aria-hidden="true">{{$item->isChanged}}</a></td>
+                                                       data-original-title="Details"aria-hidden="true">{{$item->is_changed}}</a></td>
                                                 @else
-                                                <td>{{$item->isChanged}}</td>
+                                                <td>{{$item->is_changed}}</td>
                                                 @endif
 
 
@@ -291,9 +300,9 @@
                     let money_overall = 0;
                     let y = [];
                     data.forEach(record => {
-                        const {order_id, total, created_at, firstname, lastname, made_by, name,isChanged} = record;
+                        const {order_id, total, created_at, firstname, lastname, made_by, name,is_changed} = record;
                         self_contrib = total - company_contrib;
-                        trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${made_by}</td><td>${isChanged}</td>    <td>
+                        trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${made_by}</td><td>${is_changed}</td>    <td>
                                                         <a href="{{ route('deleteOrder',$item->order_id ?? 0 ) }}" ><button type="submit" class="btn delete">
                                                             <span><i class='bx bx-trash-alt'></i></button></a>
                                                         <a href="{{ route('editOrder', $item->order_id ?? 0) }}"><span><i class="icon-note"></i></span></a>

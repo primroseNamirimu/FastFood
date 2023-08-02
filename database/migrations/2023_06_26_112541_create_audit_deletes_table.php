@@ -18,7 +18,6 @@ class CreateAuditDeletesTable extends Migration
             $table->timestamps();
             $table->integer('order_id');
             $table->integer('food_id');
-            $table->string('order_for');
             $table->string('reason',500);
             $table->date('order_created_at');
             $table->string('deleted_by');

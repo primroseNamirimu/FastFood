@@ -18,7 +18,7 @@ class CreateNotificationsTable extends Migration
             $table->timestamps();
             $table->string('event',500);
             $table->string('user');
-            $table->integer('ís_read')->default('0');
+            $table->integer('is_read')->default('0');
             $table->string('title',150);
             $table->integer('user_id');
 

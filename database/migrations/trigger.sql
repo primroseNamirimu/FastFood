@@ -30,8 +30,8 @@ CREATE TRIGGER orders_delete_trigger
     BEGIN INSERT
           INTO order_audit_delete (order_id, order_for, reason, food_id, order_created_at,deleted_by,deleted_on)
           VALUES (OLD.order_id, ,reason, OLD.food_id, OLD.created_at,deleted_by,NOW()); END;
-//
 
+delimiter //
 CREATE TRIGGER orders_delete_trigger
     AFTER DELETE ON food_order
     FOR EACH ROW
