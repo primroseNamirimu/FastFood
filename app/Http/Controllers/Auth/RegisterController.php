@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
@@ -30,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    //protected $redirectTo = RouteServiceProvider::HOME;
+
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
@@ -47,18 +50,18 @@ class RegisterController extends Controller
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
-        return Validator::make($data, [
+       return Validator::make($data, [
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255','unique:users'],
             'phone' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'alpha_num', 'min:8', 'confirmed'],
+            'password' => ['required', 'min:8', 'confirmed'],
         ]);
+
     }
 
     /**
@@ -77,6 +80,34 @@ class RegisterController extends Controller
                      'email' => $data['email'],
                      'password' => Hash::make($data['password']),
                  ]);
-       
+
+
+    }
+
+//    public function register(Request $request)
+//    {
+//
+//        $validator = $this->validator($request->all());
+//
+//        if ($validator->fails()) {
+////            dd("failed");
+//            return redirect()->route('register')
+//                ->withErrors($validator);
+//        }
+//
+//        event(new Registered($user = $this->create($request->all())));
+//
+//        $this->guard()->login($user);
+//
+//        if ($response = $this->registered($request, $user)) {
+//            return $response;
+//        }
+//
+//    }
+    protected function registered(Request $request, $user): RedirectResponse
+    {
+
+            return redirect()->route('login')->with('success', 'Hooray!! Registration successful. You can log in now.');
+
     }
 }

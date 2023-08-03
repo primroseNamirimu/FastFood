@@ -196,8 +196,10 @@ class OrderController extends Controller
 
             $f = $item->id;
         }
-        $is_modified = DB::table("orders")->where('id','=',$id)->where('is_changed','=','YES')->get();
-       if(empty($is_modified)) {
+        $is_modified = DB::table("orders")->where('id','=',$id)->where('is_changed','=','YES')->count();
+//dd($is_modified);
+
+        if($is_modified == 0) {
 
        $update =  DB::table("food_order")->where('order_id', '=', $id)->update(['food_id' => $f, 'reason' => $reason, 'changed_by' => $changed_by]);
 
@@ -215,7 +217,8 @@ class OrderController extends Controller
             return redirect()->route('userhome')->with('success', 'Order Changed successfully');
 
         }
-       } else {
+       }
+       else {
            if ($is_admin == 1) {
 
             return redirect()->route('admin.home')->with('danger', 'Can not edit order more than once');

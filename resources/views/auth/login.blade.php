@@ -1,17 +1,17 @@
-{{-- @extends('layouts.app2') --}}
+
 @extends('layouts.app2')
 
 @section('content')
 <link href="{{ url('css/form.css') }}" rel="stylesheet">
+
 <div class="main">
     <!-- Sing in  Form -->
     <section class="sign-in">
         <div class="container">
             <div class="signin-content">
                 <div class="signin-image">
-                    {{-- <figure><img src="public/images/signin-image.jpg" alt="food image"></figure> --}}
                     <figure><img src="{{ url('plugins/images/signin-image.jpg') }}" alt="food image"></figure>
-                    <a href="{{ route('register') }}" class="signup-image-link">Create an account</a>
+
                 </div>
 
                 <div class="signin-form">
@@ -58,7 +58,15 @@
 
 
                                 <input id="show-pass" type="password" class="@error('password') is-invalid @enderror" name="password" placeholder="Your Password" required autocomplete="current-password">
-                            <span style="float: right"><input type="checkbox" onclick="showPassword()">Show Password </span>
+   <!--                         <span style="float: right"><label>
+<input type="checkbox" onclick="showPassword()">
+</label>Show Password </span>-->
+                           <span style="float: right;"> <a  style="color: black" href="javascript:showPassword()" >Show Password</a></span>
+                            @if (Route::has('password.request'))
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                {{ __('Forgot Password?') }}
+                            </a>
+                            @endif
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -67,42 +75,28 @@
 
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit"  style="width: 100%" class="btn btn-success">
                                     {{ __('Login') }}
                                 </button>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
+                             <h5 style="margin-top: 10px">No Account? <a href="{{ route('register') }}" >Create an account</a>
+                             </h5>
+
+
+
                     </form>
                 </div>
             </div>
         </div>
+    </section>
     </div>
-</div>
+
 
 <script>
 
     function showPassword() {
         let x = document.getElementById("show-pass");
+        console.log(x)
         if (x.type === "password") {
             x.type = "text";
         } else {

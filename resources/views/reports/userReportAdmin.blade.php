@@ -22,19 +22,19 @@
                 <button class="btn btn-success">RESET</button>
             </a>
         </div>
-    </div>
+
 
     <table class="table table-bordered table-hover table-striped mt-4" id="table_id">
         <thead>
         <tr>
             <th>ORDER ID</th>
             <th>NAME</th>
-
+            <th>Sauce</th>
             <th>Company Contribution</th>
             <th>Self contribution</th>
             <th>Total</th>
             <th>DATE</th>
-            <th>Sauce</th>
+            <th>Modified</th>
             <th>ordered By</th>
 
         </tr>
@@ -56,11 +56,12 @@
         @endphp
         @foreach ($query as $item)
 
+
         <tr data-index="{{ $item->order_id }} data-firstName={{ $item->firstname }}">
             <td>{{ $item->order_id}}</td>
 
             <td> {{ $item->lastname }} {{ $item->firstname }}</td>
-
+            <td>{{ $item->name }}</td>
             <td>{{ $number_format_companycontrib }}</td>
             <td>@php
 
@@ -87,21 +88,9 @@
                 {{ $num_format }}
             </td>
             <td>{{ $item->created_at }}</td>
-            <td>{{ $item->name }}</td>
+            <td>{{ $item->is_changed }}</td>
             <td>{{$item->order_made_by}}</td>
-            {{--
-            <td>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Launch demo modal
-                </button>
-            </td>
-            --}}
-            {{--
-            <td>
-                <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">More
-                </button>
-            </td>
-            --}}
+
         </tr>
         @endforeach
 
@@ -109,6 +98,7 @@
 
         <tfoot>
         <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td><strong>Total: {{ $money_company }}</strong></td>
@@ -123,134 +113,11 @@
 
     </table>
 
-
-</div>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Food items on the order are:</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-            </div>
-        </div>
+    <span style="float: right"><button class="btn btn-success" onclick="history.back()"><i class="icon-arrow-left-circle"></i> Go Back</button></span>
     </div>
 </div>
 
-<!-- Modal -->
 
-<div class="modal fade" id="exampleModalwrong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Food items on the order are:</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-            {{--
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button class="btn btn-primary" id="wrong-btn" data-bs-target="#exampleModalToggle2"
-                        data-bs-toggle="modal" data-bs-dismiss="modal">Wrong Order
-                </button>
-
-            </div>
-            --}}
-        </div>
-    </div>
-</div>
-<!-- Wrong order Modal -->
-<div class="modal fade" id="exampleModalToggle2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Enter the order you received</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-bdy">
-                <div class="sals-boxes">
-
-                    <!-- Start Update form  -->
-                    <form class="form-horizontal form-material" method="POST" action="">
-                        @csrf
-                        {{-- {{ method_field('PATCH') }} --}}
-                        <div class="form-group mb-4">
-                            <label class="col-md-12 p-0">Item Name</label>
-                            <div class="col-md-12 border-bottom p-0">
-                                <input type="text" class="form-control p-0 border-0" name="name"
-                                       placeholder="Enter food item">
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label class="col-md-12 p-0">Item Name</label>
-                            <div class="col-md-12 border-bottom p-0">
-                                <input type="text" class="form-control p-0 border-0" name="name"
-                                       placeholder="Enter food item">
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label class="col-md-12 p-0">Item Name</label>
-                            <div class="col-md-12 border-bottom p-0">
-                                <input type="text" class="form-control p-0 border-0" name="name"
-                                       placeholder="Enter food item">
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label class="col-md-12 p-0">Item Name</label>
-                            <div class="col-md-12 border-bottom p-0">
-                                <input type="text" class="form-control p-0 border-0" name="name"
-                                       placeholder="Enter food item">
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label class="col-md-12 p-0">Item Name</label>
-                            <div class="col-md-12 border-bottom p-0">
-                                <input type="text" class="form-control p-0 border-0" name="name"
-                                       placeholder="Enter food item">
-                            </div>
-                        </div>
-                        <div class="form-group mb-4">
-                            <div class="col-sm-12">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    Update Menu Details
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- End update form  -->
-
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">close</button>
-
-
-            </div>
-        </div>
-    </div>
-</div>
-<!-- End Wrong order Modal -->
-
-<!-- End of Modal -->
 
 <script>
     $(document).ready(function () {
@@ -288,21 +155,31 @@
             }, function (start, end) {
                 let startDate = start.format('YYYY-MM-DD ');
                 let endDate = end.format('YYYY-MM-DD ');
+                let currentUrl = window.location.href;
+
+                // Split the URL using '/' as a separator
+                let urlParts = currentUrl.split('/');
+
+                // Get the last part of the URL which is the user id value
+                let user_id = urlParts[urlParts.length - 1];
 
                 if (startDate !== "" && endDate !== "") {
-                    getDateRangeRecord(startDate, endDate);
+                    getDateRangeRecord(startDate, endDate, user_id);
                 }
             });
         });
 
         // ajax for the date range picker
-        function getDateRangeRecord(endDate, startDate) {
+        function getDateRangeRecord(endDate, startDate,user_id) {
+            console.log(endDate,startDate,user_id)
+
             $.ajax({
                 url: "{{ url('/expenditure') }}",
                 type: 'GET',
                 dataSrc: '',
                 cache: false,
                 data: {
+                    user_id: user_id,
                     startDate: startDate,
                     endDate: endDate
                 },
@@ -319,9 +196,9 @@
                     let money_overall = 0;
                     let y = [];
                     data.forEach(record => {
-                        const {order_id, total, created_at, firstname, lastname, order_made_by, name} = record;
+                        const {order_id, total, created_at, firstname, lastname, made_by, name,is_changed} = record;
                         self_contrib = total - company_contrib;
-                        trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${name}</td><td>${order_made_by}</td></tr>`
+                        trows += `<tr><td>${order_id}</td><td>${firstname} ${lastname}</td><td>${name}</td><td>${company_contrib}</td><td>${self_contrib}</td><td>${total}</td><td>${created_at}</td><td>${is_changed}</td><td>${made_by}</td></tr>`
                         money_self += self_contrib;
                         money_company += company_contrib;
 
@@ -329,7 +206,7 @@
 
                     });
 
-                    extraRow = `<tr style="color: green"><td></td><td></td><td><strong>Total: ${money_company} </strong></td><td><strong>Total: ${money_self} </strong></td><td><strong>Total:  ${money_overall} </strong></td><td></td> <td></td> <td></td></tr>`;
+                    extraRow = `<tr style="color: green"><td></td><td></td><td></td><td><strong>Total: ${money_company} </strong></td><td><strong>Total: ${money_self} </strong></td><td><strong>Total:  ${money_overall} </strong></td><td></td> <td></td> <td></td></tr>`;
 
                     // clear before i repopulate
                     reportDataTable.clear().draw();
