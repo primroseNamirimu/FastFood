@@ -37,6 +37,15 @@
                         </div>
 
                         @endif
+                        @if($message = Session::get('success'))
+                        <div class="alert alert-danger fade show" style="width: 100%">
+                            <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span
+                                    class="mdi mdi-close"></span>
+                            </button>
+                            <strong>Success!</strong> {{$message}}
+                        </div>
+
+                        @endif
                         @csrf
 
                         <div class="form-group">
@@ -63,10 +72,10 @@
 </label>Show Password </span>-->
                            <span style="float: right;"> <a  style="color: black" href="javascript:showPassword()" >Show Password</a></span>
                             @if (Route::has('password.request'))
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                {{ __('Forgot Password?') }}
-                            </a>
-                            @endif
+<!--                            <a class="btn btn-link" href="{{ route('password.request') }}">-->
+<!--                                {{ __('Forgot Password?') }}-->
+<!--                            </a>-->
+<!--                            @endif-->
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -79,7 +88,9 @@
                                     {{ __('Login') }}
                                 </button>
 
-                             <h5 style="margin-top: 10px">No Account? <a href="{{ route('register') }}" >Create an account</a>
+                        <br>
+
+                             <h5 style="margin-top: 10px">No account? <a href="{{ route('register') }}" > Signup</a>
                              </h5>
 
 

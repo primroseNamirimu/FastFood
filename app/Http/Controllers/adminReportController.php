@@ -34,7 +34,7 @@ class AdminReportController extends Controller
             ->join('orders', 'orders.id', '=', 'food_order.order_id')
             ->join('users', 'users.id', '=', 'orders.user_id')
             ->select('food_order.order_id','orders.is_changed', DB::raw('SUM(food.price) as total'),DB::raw('DATE_FORMAT(orders.created_at,"%d-%m-%Y") as created_at'),'users.lastname','food.name','users.firstname','food_order.order_made_by','users.id')
-            ->groupBy('order_id','orders.created_at','users.lastname','food_order.order_made_by','users.firstname','food.name','orders.is_changed')
+            ->groupBy('order_id','orders.created_at','users.id','users.lastname','food_order.order_made_by','users.firstname','food.name','orders.is_changed')
 
             ->where('users.id', $userID)
             ->where('food.price','>','0')

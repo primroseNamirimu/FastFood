@@ -34,7 +34,14 @@ class RegisterController extends Controller
      * @var string
      */
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+//    protected $redirectTo = RouteServiceProvider::HOME;
+//    protected $redirectTo = $this->registered();
+    protected function registered(Request $request, $user): RedirectResponse
+    {
+  return back()->with('success','successful');
+//        return redirect()->route('login')->with('success', 'Hooray!! Registration successful. You can log in now.');
+
+    }
 
     /**
      * Create a new controller instance.
@@ -80,8 +87,6 @@ class RegisterController extends Controller
                      'email' => $data['email'],
                      'password' => Hash::make($data['password']),
                  ]);
-
-
     }
 
 //    public function register(Request $request)
@@ -104,10 +109,5 @@ class RegisterController extends Controller
 //        }
 //
 //    }
-    protected function registered(Request $request, $user): RedirectResponse
-    {
 
-            return redirect()->route('login')->with('success', 'Hooray!! Registration successful. You can log in now.');
-
-    }
 }

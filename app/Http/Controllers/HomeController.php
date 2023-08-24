@@ -101,20 +101,7 @@ class HomeController extends Controller
         $all_results = [];
         $user = Auth::user()->is_admin;
 
-        if ( $request->ajax()){
-
-            $total = DB::table('food_order')
-            ->join('food', 'food.id', '=', 'food_order.food_id')
-            ->join('orders', 'orders.id', '=', 'food_order.order_id')
-            ->join('users', 'users.id', '=', 'orders.user_id')
-            ->select( DB::raw('SUM(food.price) as total'))
-            ->where('food.price','>','0')
-                ->whereYear('food_order.created_at','=',now())
-                ->whereMonth('food_order.created_at','=',now())
-            ->orderBy('orders.created_at','desc')
-            ->get();
-
-//           $arr = $total->toArray();
+        if ($request->ajax()){
 
             $order_count = DB::select(' SELECT YEAR(created_at) AS year, MONTHNAME(created_at) AS month, COUNT(*) AS count
                                 FROM orders  WHERE YEAR(created_at)  = YEAR(now()) AND MONTHNAME(created_at) = MONTHNAME(now())
@@ -132,7 +119,7 @@ class HomeController extends Controller
                                  GROUP BY YEAR(deleted_on), MONTHNAME(deleted_on)
                                             ORDER BY YEAR(deleted_on), MONTHNAME(deleted_on) DESC');
 
-            array_push($all_results,$order_count,$changed_count,$deleted_count,$total);
+            array_push($all_results,$order_count,$changed_count,$deleted_count);
 
             return response()->json($all_results, 200);
 
